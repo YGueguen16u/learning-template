@@ -9,8 +9,14 @@
     <li><a href="#strings">Strings (str)</a></li>
     <li><a href="#booleans">Booleans (bool)</a></li>
     <li><a href="#casting">Type Casting</a></li>
-    <li><a href="#summary">Summary Table</a></li>
-    <li><a href="#complement">Complement</a></li>
+    <li><a href="#complement">Complement</a>
+    <ul>
+      <li><a href="#numbers">1. Should numbers be quoted?</a></li>
+      <li><a href="#built-in-types">2. Built-in Types</a></li>
+      <li><a href="#dynamic-typing">3. Dynamic Typing</a></li>
+      <li><a href="#type-comparisons">4. Type Comparisons</a></li>
+    </ul> 
+    </li>
   </ul>
 </div>
 
@@ -159,85 +165,103 @@ type(False)  # <class 'bool'>
 
 <h2 id="casting">Type Casting (Changing Type)</h2>
 
-<p>Examples of casting between types:</p>
+| **From**     | **To**       | **Code & Result**            |
+| ------------ | ------------ | ---------------------------- |
+| int → float  | float(2)     | 2.0                          |
+| float → int  | int(1.9)     | 1 _(info loss!)_             |
+| str → int    | int("4")     | 4 _(only if numeric string)_ |
+| int → str    | str(3)       | "3"                          |
+| bool → int   | int(True)    | 1                            |
+| int → bool   | bool(0)      | False                        |
+| bool → float | float(False) | 0.0                          |
 
-<ul>
-  <li><code>float(2)</code> → 2.0</li>
-  <li><code>int(1.9)</code> → 1 <em>(info loss!)</em></li>
-  <li><code>int("4")</code> → 4 <em>(works only if string is numeric)</em></li>
-  <li><code>str(3)</code> → "3"</li>
-  <li><code>int(True)</code> → 1</li>
-  <li><code>bool(0)</code> → False</li>
-  <li><code>float(False)</code> → 0.0</li>
-</ul>
+**Invalid example:**
 
-<h4>Invalid Examples</h4>
-<pre><code>
-int("abc")             # ValueError
-int("1 or 2 people")   # ValueError
-</code></pre>
+```python
+int("abc")    # ❌ ValueError: invalid literal for int()
+int('1 or 2 people') # ❌ ValueError: invalid literal for int()
+```
 
-<hr>
-
-<h2 id="summary">Summary Table</h2>
-
-<ul>
-  <li><strong>42</strong> → int → Whole number</li>
-  <li><strong>3.14</strong> → float → Real number</li>
-  <li><strong>"hello"</strong> → str → Text</li>
-  <li><strong>True</strong> → bool → Logical value</li>
-  <li><strong>int("123")</strong> → int → If string is numeric</li>
-</ul>
-
-<hr>
 
 <h2 id="complement">Complement</h2>
 
-<h3>1. Should numbers be quoted?</h3>
-<p>Yes, it changes everything. <code>"42"</code> is a string, <code>42</code> is an integer.</p>
-<p>Also, precision affects memory: float16, float32, float64...</p>
+<h3 id="numbers">1. Should numbers be quoted?</h3>
+
+Yes, it changes everything. `"42"` is a string, `42` is an integer.
+
+Also, precision affects memory: 
+- float16
+- float32
+- float64
 
 <ul>
   <li><a href="https://pythonspeed.com/articles/float64-float32-precision/">Precision and float sizes</a></li>
   <li><a href="https://www.kaggle.com/code/arjanso/reducing-dataframe-memory-size-by-65">Reduce DataFrame memory usage</a></li>
 </ul>
 
-<h3>2. Built-in Types</h3>
+<h3 id="built-in-types">2. Built-in Types</h3>
 
-<p>Python comes with built-in types such as:</p>
 
-<ul>
-  <li><strong>Numbers:</strong> int, float, complex, bool</li>
-  <li><strong>Text:</strong> str</li>
-  <li><strong>Sequences:</strong> list, tuple, range</li>
-  <li><strong>Mapping:</strong> dict</li>
-  <li><strong>Sets:</strong> set</li>
-</ul>
+- Built-in data types are data types that are built into the Python interpreter
+- It means they are pre-defined in python and can be used directly into the program
 
-<h3>3. Dynamic Typing</h3>
+**Available built-in types in python**
 
-<p>Python is dynamically typed: the type of a variable can change at runtime.</p>
+For a comprehensive view of python available built-in types, check [python 3.9 standard library documentation](https://docs.python.org/3.9/library/stdtypes.html)
 
-<pre><code>
+This list contains only the most common built-in types.
+
+| Group      | type    | constructor | instance    |
+| ---------- | ------- | ----------- | ----------- |
+| None       | object  | None        | None        |
+| Numbers    | int     | int()       | 2           |
+|            | long    | long()      | 2.896547..  |
+|            | float   | float()     | 2.8         |
+|            | complex | complex()   | 1j          |
+|            | bool    | bool()      | True, False |
+| Characters | str     | str()       | 'a'         |
+| Sequences  | list    | list()      | [1, 2]      |
+|            | tuple   | tuple()     | (1,2)       |
+|            | range   | range()     | range(2)    |
+| Mapping    | dict    | dict()      | {'A': 2}    |
+| Sets       | set     | set()       | {1, 2, 3}   |
+
+<h3 id="dynamic-typing">3. Dynamic Typing</h3>
+
+- Python is a dynamically typed langage: Python interpreter does type checking only as code runs.
+
+- The type of a variable is allowed to change over its lifetime.
+
+- A variable can be initiated with a type and turned into another type
+
+- For instance, a variable defined as "2.5" can be turned into 2.5 using the _float()_ function
+
+- The type of some other built-in objects are allowed to change over time
+
+- For instance, a list can be turned into a tuple or a set
+
+```python
 b = "2.5"
-print(type(b), b)  # <class 'str'>
+print(type(b), b)
 b = float(b)
-print(type(b), b)  # <class 'float'>
-</code></pre>
+print(type(b), b)
 
-<pre><code>
-tuple([1, 2])  # Convert list to tuple
-set([1, 2])    # Convert list to set
-</code></pre>
+# a list converted into tuple then set
+tuple([1,2])
+set([1,2])
+```
 
-<h3>4. Type Comparisons</h3>
 
-<pre><code>
-type("hello" == "world")  # bool
-</code></pre>
+<h3 id="type-comparisons">4. Type Comparisons</h3>
 
-<pre><code>
-print(type(2.5) == type(3.5))      # True
-print(type(3) == type(4.5))        # False
-print(type(5.5) == type("5.5"))    # False
-</code></pre>
+**What does type("hello" == "world") return?**
+```python
+type("hello" == "world") # bool
+```
+
+
+```python
+print(type(2.5)==type(3.5))
+print(type(3)==type(4.5))
+print(type(5.5)==type("5.5"))
+```
