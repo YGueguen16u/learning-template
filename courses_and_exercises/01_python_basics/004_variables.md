@@ -10,6 +10,7 @@
     <li><a href="#another-way-to-write-x-x-1">Another way to write x = x + 1</a></li>   
     <li><a href="#keywords">Keywords</a></li>
     <li><a href="#multiple-assignation">Multiple assignation</a></li>
+    <li><a href="#exercises">Exercises</a></li>
   </ul>
 </div>
 
@@ -186,6 +187,22 @@ Assign several variables in one line
 ```python
 e, f, g = 2.5, 2, 'hello'
 print(e, f, g)
+
+# List unpacking
+a, b, c = [1, 2, 3]
+print(a, b, c) # output: 1 2 3
+
+# Tuple unpacking
+x, y, z = (4, 5, 6)
+print(x, y, z) # output: 4 5 6
+
+# String unpacking
+s1, s2 = "ab"
+print(s1, s2) # output: a b
+
+# Dict unpacking
+k1, k2 = {"a": 1, "b": 2}
+print(k1, k2) # output: a b
 ```
 
 
@@ -269,7 +286,7 @@ Instructions:
 
 ```python
 date = "2024/12/25"
-day = date[-2:]
+day = ? # fill this in
 month = ?  # fill this in
 year = ?   # fill this in
 ```
@@ -286,7 +303,6 @@ print(f"Year: {year}")
 print(f"Month: {month}")
 print(f"Day: {day}")
 ```
-
 
 
 
