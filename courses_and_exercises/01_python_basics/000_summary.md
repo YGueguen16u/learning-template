@@ -15,6 +15,7 @@
         </ul>
     VII. <a href="./007_tuples.md">Tuples</a><br>
     VIII. <a href="./008_sets.md">Sets</a><br>
+    IX. <a href="./009_dictionaries.md">Dictionaries</a><br>
 </div>
 
 <hr>

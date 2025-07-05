@@ -98,13 +98,23 @@ print(set_6)
 
 <h3 id="pop">Pop</h3>
 
-- Remove and return an arbitrary element from the set.
+- Remove and return an arbitrary element from the set. Raises a KeyError if the set is empty.
 
 ```python
 set_6 = {1, 2, 3, 4, 5, "hello"}
 popped_value = set_6.pop()
 print(set_6)
 print(popped_value)
+```
+
+<h3 id="discard">Discard</h3>
+
+- Remove a specified element from the set if it is present. Ignores the element if it is not present.
+
+```python
+set_6 = {1, 2, 3, 4, 5, "hello"}
+set_6.discard("hello")
+print(set_6)
 ```
 
 <h3 id="verify-elt-in-set">Verify if an element is in the set</h3>
@@ -115,6 +125,17 @@ print(popped_value)
 set_6 = {1, 2, 3, 4, 5, "hello"}
 print("hello" in set_6)
 print("world" in set_6)
+```
+
+<h3 id="update">Update</h3>
+
+- Update the set with the union of itself and an iterable or another set.
+
+```python
+set_6 = {1, 2, 3, 4, 5}
+list_7 = [4, 5, 6, 7, 8]
+set_6.update(list_7)
+print(set_6) # {1, 2, 3, 4, 5, 6, 7, 8}
 ```
 
 <h3 id="union">Union</h3>
@@ -257,6 +278,7 @@ Use this real-world example to practice all set operations covered so far.
         - `db_products` from `[1001, 1002, 1003, 1004, 1005, 1005]`
         - `scanned_products` from `[1004, 1005, 1006, 1007]`
         - `to_remove` from `[1002, 1003]`
+        - `to_discard` from `[1002, 1003]`
     - Confirm their types and print the unique elements for each.
 
 Here is a new question that groups all three properties — uniqueness, unhashable elements, and unordered nature — into a single, realistic and practical task, consistent with the style of your current set exercise:
@@ -289,6 +311,8 @@ Then:
 
 5. **Remove a Product from the Database**
     - Remove product `1001` from the database.
+    - Remove product `1002` from the database using `discard`.
+    - What is the difference between 2 methods?
 
 6. **Pop a Random Product**
     - Pop a random product from `db_products` and store it in `removed_id`.
@@ -362,6 +386,14 @@ print("products_db", products_db)
 # 5. Remove Product
 products_db.remove(1001)
 print("products_db", products_db)
+products_db.discard(1002)
+print("products_db", products_db)
+
+"""
+remove : raise an error if the element is not in the set
+discard : does not raise an error if the element is not in the set
+pop : remove and return an arbitrary element from the set. Raises a KeyError if the set is empty
+"""
 
 # 6. Pop Random Product
 removed_id = products_db.pop()
