@@ -159,6 +159,97 @@ matches = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
 print("Matches:", matches) # Matches: 'hi, world!'
 ```
 
+
+<h2 id="lookaround">Lookaround (Lookahead & Lookbehind)</h2>
+
+**Lookarounds** allow you to check for patterns that come **before** or **after** a match, **without including** them in the match itself.
+
+They are useful when you want to **match something only if it's surrounded by a certain context**.
+
+
+#### **Types of Lookaround**
+
+| Syntax        | Type                  | Meaning                                  |
+|---------------|-----------------------|------------------------------------------|
+| `(?=...)`     | Positive lookahead     | Must be followed by `...`               |
+| `(?!...)`     | Negative lookahead     | Must **not** be followed by `...`       |
+| `(?<=...)`    | Positive lookbehind    | Must be preceded by `...`               |
+| `(?<!...)`    | Negative lookbehind    | Must **not** be preceded by `...`       |
+
+---
+
+#### **Example 1: Words following a `#` symbol**
+
+```python
+import re
+
+text = "Today I feel #grateful and #motivated!"
+pattern = r"(?<=#)\w+"
+print(re.findall(pattern, text))
+# Output: ['grateful', 'motivated']
+``` 
+
+#### **Example 2: Vowels between consonants**
+
+```python
+import re
+
+s = "rabcdeefgyYhFjkIoomnpOeorteeeeet"
+pattern = r"(?<=[^aeiouAEIOU])([aeiouAEIOU]{2,})(?=[^aeiouAEIOU])"
+print(re.findall(pattern, s))
+# Output: ['ee', 'Ioo', 'Oeo', 'eeeee']
+```
+**Goal of This Code**
+
+We want to **find and extract all substrings** that:
+
+1. Contain **only vowels** (`a, e, i, o, u` in upper or lower case),
+2. Are **at least two vowels long**,
+3. Are **surrounded by consonants** on both sides (i.e., the character before and after the vowel sequence must not be a vowel).
+
+**How It Works**
+
+Let’s break down the regular expression:
+
+- `(?<=[^aeiouAEIOU])`
+
+  * This is a **positive lookbehind**.
+  * It checks that **before the vowel sequence**, there is **a non-vowel character** (i.e., a consonant).
+  * It does **not** include that character in the match.
+
+- `([aeiouAEIOU]{2,})`
+
+  * This is the **main pattern we want to extract**.
+  * It matches **2 or more consecutive vowels**.
+
+- `(?=[^aeiouAEIOU])`
+
+  * This is a **positive lookahead**.
+  * It checks that **after the vowel sequence**, there is **a non-vowel character** (i.e., another consonant).
+
+**Example with This Input**
+
+```python
+s = "rabcdeefgyYhFjkIoomnpOeorteeeeet"
+```
+
+In this string, the following substrings match the pattern:
+
+* `'ee'` — between `'d'` and `'f'`
+* `'Ioo'` — between `'k'` and `'m'`
+* `'Oeo'` — between `'p'` and `'r'`
+* `'eeeee'` — between `'t'` and `'t'`
+
+**Output**
+
+```python
+['ee', 'Ioo', 'Oeo', 'eeeee']
+```
+
+
+> 💡 **Tip:** Lookarounds act like invisible guards — they check the surrounding pattern but don’t include it in the result.
+
+
 <h2 id="exercises">Exercises</h2>
 
 <h3>Exercise 1</h3>
