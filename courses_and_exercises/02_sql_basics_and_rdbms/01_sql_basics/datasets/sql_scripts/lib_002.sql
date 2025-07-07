@@ -16,16 +16,16 @@ CREATE TABLE employees (
 
 -- Insert 50 sample employees with varied data
 INSERT INTO employees VALUES
-(1, 'John', 'Smith', 'john.smith@company.com', '2020-01-15', 65000.00, 'IT', 'New York', 35, 15.00, 8.5),
+(1, 'John', 'Smith', 'john.smith@company.com', '2020-01-15', 65000.00, NULL, 'New York', 35, 15.00, 8.5),
 (2, 'Emma', 'Johnson', 'emma.j@company.com', '2019-03-20', 72000.00, 'Sales', 'Chicago', 29, 20.00, 9.2),
-(3, 'Michael', 'Brown', 'michael.b@company.com', '2021-06-10', 55000.00, 'HR', 'Los Angeles', 42, 10.00, 7.8),
+(3, 'Michael', 'Brown', 'michael.b@company.com', '2021-06-10', 55000.00, NULL, 'Los Angeles', 42, 10.00, 7.8),
 (4, 'Sarah', 'Davis', 'sarah.d@company.com', '2018-11-30', 68000.00, 'Marketing', 'Boston', 31, 18.00, 8.9),
-(5, 'James', 'Wilson', 'james.w@company.com', '2022-02-15', 59000.00, 'IT', 'Seattle', 27, 12.00, 7.5),
+(5, 'James', 'Wilson', 'james.w@company.com', '2022-02-15', 59000.00, NULL, 'Seattle', 27, 12.00, 7.5),
 (6, 'Lisa', 'Anderson', 'lisa.a@company.com', '2020-09-01', 71000.00, 'Sales', 'Miami', 33, 22.00, 9.0),
 (7, 'Robert', 'Taylor', 'robert.t@company.com', '2019-07-25', 63000.00, 'HR', 'Chicago', 38, 11.00, 8.1),
-(8, 'Emily', 'Thomas', 'emily.t@company.com', '2021-04-12', 67000.00, 'Marketing', 'New York', 30, 17.00, 8.7),
+(8, 'Emily', 'Thomas', 'emily.t@company.com', '2021-04-12', 67000.00, NULL, 'New York', 30, 17.00, 8.7),
 (9, 'William', 'Moore', 'william.m@company.com', '2018-08-05', 75000.00, 'IT', 'San Francisco', 45, 16.00, 9.3),
-(10, 'Jennifer', 'Jackson', 'jennifer.j@company.com', '2022-01-20', 58000.00, 'Sales', 'Houston', 28, 19.00, 7.9),
+(10, 'Jennifer', 'Jackson', 'jennifer.j@company.com', '2022-01-20', 58000.00, NULL, 'Houston', 28, 19.00, 7.9),
 (11, 'David', 'White', 'david.w@company.com', '2020-03-15', 69000.00, 'HR', 'Boston', 36, 13.00, 8.4),
 (12, 'Maria', 'Martinez', 'maria.m@company.com', '2019-12-10', 64000.00, 'Marketing', 'Los Angeles', 32, 21.00, 8.8),
 (13, 'Richard', 'Lee', 'richard.l@company.com', '2021-08-22', 61000.00, 'IT', 'Seattle', 41, 14.00, 7.7),
