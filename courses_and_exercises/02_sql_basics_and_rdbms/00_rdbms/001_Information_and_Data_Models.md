@@ -74,13 +74,13 @@ Example: In a library system, entities such as Book, Author, and Borrower each b
 
 To ensure adaptability and robustness in database systems, several foundational concepts are emphasized:
 
-1. Logical Data Independence
+1. **Logical Data Independence**
 	- Refers to the capacity to alter the logical schema (e.g., adding new fields or modifying data types) without affecting user applications or views.
 
-2. Physical Data Independence
+2. **Physical Data Independence**
 	- Allows changes to internal storage mechanisms (e.g., indexing methods, data block organization) without disrupting the external schema or application code.
 
-3. Physical Storage Independence
+3. **Physical Storage Independence**
 	- Involves relocating or reorganizing physical data (e.g., across different disk partitions or storage media) without affecting how users or applications access the data.
 
 These forms of data independence ensure long-term maintainability, scalability, and reduced system disruption during evolution.

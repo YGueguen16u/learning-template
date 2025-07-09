@@ -68,7 +68,9 @@ Relational databases store structured data in interrelated tables. These systems
 Examples include:
 - Microsoft SQL Server
 - Oracle Database
-- MySQL
+- MySQL / MariaDb
+- PostgreSQL
+- SQLite
 
 Relational databases are commonly employed in Online Transaction Processing (OLTP) systems, supporting day-to-day business operations such as:
 - Customer transactions

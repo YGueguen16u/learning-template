@@ -68,13 +68,13 @@ Condition operations are used to filter rows of a table based on a condition.
 
 The operators of comparison are used to compare values, the following list shows them : 
 
-- = : equal
-- != : not equal
-- < : less than
-- > : greater than
-- <= : less than or equal to
-- >= : greater than or equal to
-- <> : not equal
+- `=` : equal
+- `!=` : not equal
+- `<` : less than
+- `>` : greater than
+- `<=` : less than or equal to
+- `>=` : greater than or equal to
+- `<>` : not equal
 
 **Examples**
 
@@ -179,7 +179,7 @@ WHERE age <= 28;
 |BenGarcia  |ahmed       |28 
 |BenGarcia  |ahmed       |28 
 
-You can constate the difference beteween < and <=, the number 28 is included in the result of the second query, the result displays far more rows than the first query with a simple <.
+You can constate the difference beteween `<` and `<=`, the number 28 is included in the result of the second query, the result displays far more rows than the first query with a simple `<`.
 
 
 ```sql
@@ -206,10 +206,12 @@ WHERE department <> 'IT';
 
 The logical operators are used to combine conditions, the following list shows them : 
 
-- AND : and --> both conditions must be true
-- OR : or --> at least one condition must be true
-- NOT : not --> the condition must be false
-- XOR : (A AND NOT B) OR (NOT A AND B) = (A OR B) AND NOT (A AND B) --> only one condition must be true
+- `AND` : and --> both conditions must be true
+- `OR` : or --> at least one condition must be true
+- `NOT` : not --> the condition must be false
+- `XOR` : (A AND NOT B) OR (NOT A AND B) = (A OR B) AND NOT (A AND B) --> only one condition must be true
+
+SQL gives most precedence to `NOT` and then `AND` and finally `OR`.
 
 **Examples**
 
@@ -285,6 +287,8 @@ WHERE (department = 'IT' AND NOT age > 30) OR (NOT department = 'IT' AND age > 3
 .
 .
 
+
+
 #### Visual representation
 
 |Nom|Dept|Âge|IT AND >30|IT OR >30|IT AND NOT >30|IT XOR >30|
@@ -295,13 +299,32 @@ WHERE (department = 'IT' AND NOT age > 30) OR (NOT department = 'IT' AND age > 3
 |Brown|Sales|32|❌|✅|❌|✅|
 |Davis|IT|45|✅|✅|❌|❌|
 
+#### Understand the precedence of the operators
+
+SQL gives most precedence to `NOT` and then `AND` and finally `OR`.
+
+```sql
+SELECT 0 AND 0 OR 1 -- AND First 0 and O = 0 then 0 or 1 = 1
+```
+
+|0 AND 0 OR 1|
+------------
+|1           
+
+```sql
+SELECT 0 AND (0 OR 1) -- 0 or 1 = 1 then O And 1 = 0
+```
+
+|0 AND (0 OR 1)|
+--------------
+|0             
 
 
 <h3 id="nulls-is-is-not">Nulls and IS and IS NOT</h3>
 
-The IS and IS NOT operators are used to check if a value is NULL or not NULL.
+The `IS` and `IS NOT` operators are used to check if a value is NULL or not NULL.
 
-Attention : NULL is not the same as an empty string `''` or 0.
+Attention : `NULL` is not the same as an empty string `''` or `0`.
 **General syntax**
 
 ```sql
@@ -331,6 +354,7 @@ WHERE bonus_percentage IS NULL;
 |3|Michael|Brown|michael.b@company.com|2018-08-05|72000|HR|Chicago|29|NULL|9.2|
 |4|Sarah|Davis|sarah.d@company.com|2018-11-30|68000|Marketing|San Francisco|32|NULL|8.2|
 
+Take care, 'NULL' value in this table are just placeholders, they are not NULL values in the database.
 
 ```sql
 SELECT * 
@@ -340,16 +364,16 @@ WHERE bonus_percentage IS NOT NULL;
 
 |employee_id|first_name|last_name|email|hire_date|salary|department|city|age|bonus_percentage|performance_score|
 |---|---|---|---|---|---|---|---|---|---|---|
-|5|James|Wilson|james.w@company.com|2022-02-15|59000|IT|Seattle|27|NULL|7.5|
-|6|Michael|Brown|michael.b@company.com|2018-08-05|72000|HR|Chicago|29|NULL|9.2|
-|7|Sarah|Davis|sarah.d@company.com|2018-11-30|68000|Marketing|San Francisco|32|NULL|8.2|
+|5|James|Wilson|james.w@company.com|2022-02-15|59000|IT|Seattle|27|12|7.5|
+|6|Michael|Brown|michael.b@company.com|2018-08-05|72000|HR|Chicago|29|10|9.2|
+|7|Sarah|Davis|sarah.d@company.com|2018-11-30|68000|Marketing|San Francisco|32|18|8.2|
 .
 .
 .
 
 <h3 id="in">IN</h3>
 
-The IN operator is used to check if a value is in a list of values.
+The `IN` operator is used to check if a value is in a list of values.
 
 **General syntax**
 

@@ -52,3 +52,7 @@ WHERE (department = 'IT' AND NOT age > 30) OR (NOT department = 'IT' AND age > 3
 SELECT * 
 FROM employees 
 WHERE department IN ('IT', 'HR');
+
+
+SELECT 0 AND 0 OR 1; -- AND First 0 and O = 0 then 0 or 1 = 1
+SELECT 0 AND (0 OR 1); -- 0 or 1 = 1 then O And 1 = 0
