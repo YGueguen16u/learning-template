@@ -18,7 +18,7 @@ Table example for this course:
 You need to run in the terminal this command to create the table, if you are in the root directory:
 
 ```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_001.db < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_001.sql
+sqlite3 courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_001.db < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_001.sql
 ```
 
 If you are in `courses_and_exercises`, you need to write:
@@ -338,4 +338,87 @@ WHERE city != 'New York';
 |Romuald      |Garcia     |Houston      
 |ahmed        |Bengarcia  |Dallas       
 |ahmed        |Bengarcia  |Dallas       
+
+<h2 id="additional_information">Additional Information</h2>
+
+### Projection operation
+
+Projection operation enables to select a subset of attributes from a relation by eliminating the other attributes that are not necessary. 
+
+The projection is generally used to simplify the results of a query or to reduce the size of the data being manipulated.
+Mathematically, the projection of a relation R on a set of attributes A can be defined as follows :
+
+$$\Pi_{\alpha}(R)$$
+
+- $R$ is the original relation, 
+- $A$ is the subset of attributes to be kept. 
+
+The result is a new relation containing only the attributes specified in $A$.
+
+The projection preserves all the rows of the original relation, but only for the attributes present in $A$. 
+
+Attributes not included in $A$ are deleted. 
+
+If the projection results in duplicate rows, they are generally merged to avoid duplicates, since relations are sets in relational algebra.
+
+#### In SQL
+
+In  SQL, the projection operation corresponds to a `SELECT` instruction that chooses certain columns (attributes) of a table (relation), while ignoring the others.
+
+**General syntax**
+
+```sql
+SELECT <column1>, <column2>, ... 
+FROM <table_name>
+```
+
+### Selection operation
+
+The selection operation allows to filter the rows of a relation based on a given condition, by keeping only the rows that satisfy this condition. 
+
+Selection is often used to extract specific information or to limit the results of a query.
+
+Mathematically, the selection of a relation R based on a condition C can be defined as follows :
+
+$$\sigma_{C}(R)$$
+
+- $R$ is the original relation, 
+- $C$ is the condition to be satisfied. 
+
+The result is a new relation containing only the rows of $R$ that satisfy the condition $C$.
+
+#### In SQL
+
+The selection operation in SQL corresponds to the use of the `WHERE` clause to filter rows of a table based on a logical condition.
+
+**General syntax**
+
+```sql
+SELECT <column1>, <column2>, ... 
+FROM <table_name> 
+WHERE <condition>
+```
+
+**Example**
+
+Retrieve the first name, last name, and hire date of employees who were hired on or before January 1, 2021.
+
+```sql
+SELECT first_name, last_name, hire_date 
+FROM employees 
+WHERE hire_date <= '2021-01-01';
+```
+
+|first_name   |last_name  |hire_date |
+|-----------  |---------  |----------|
+|Sarah        |Davis      |2018-11-30|
+|William      |Moore      |2018-08-05|
+|Elizabeth    |Garcia     |2018-05-18|
+|Christopher  |Anderson   |2018-09-25|
+|Nicole       |White      |2018-07-12|
+|Andrew       |Lopez      |2018-12-20|
+|Katherine    |Wright     |2018-10-15|
+|Gregory      |Nelson     |2018-03-30|
+|Julie        |Roberts    |2018-09-08|
+|Peter        |Torres     |2018-07-05|
 
