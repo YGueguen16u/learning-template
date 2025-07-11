@@ -14,6 +14,7 @@
 Structured Query Language (SQL) is the standard language used for interacting with relational databases. It enables users to define, access, and manipulate data stored in entities (tables), their attributes (columns), and the tuples (rows) that hold actual data values.
 
 SQL statements are broadly categorized into two main groups:
+
 1. Data Definition Language (DDL)
 2. Data Manipulation Language (DML)
 
