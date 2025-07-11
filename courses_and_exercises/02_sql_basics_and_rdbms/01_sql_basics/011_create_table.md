@@ -79,7 +79,6 @@ You are developing a data engineering solution for a large industrial facility t
 **Key Features Demonstrated:**
 
 - `PRIMARY KEY` constraint : it is used to identify each row in the table uniquely 
-  - `EventID`
 - `NOT NULL` constraints : it is used to ensure that a column cannot have a null value
 - `CHECK` constraints for data validation : it is used to ensure that a column has a value that satisfies a condition
 - `DEFAULT` values : it is used to set a default value for a column
