@@ -51,28 +51,55 @@ This exercise creates a database for industrial equipment safety monitoring with
      * Notes
    - Despite being a legacy table, new entries should follow current standards with mandatory fields
 
-2. **MaintenanceEvents Table**
-   - Unique identifier for each maintenance event
-   - Links to both equipment and technician
-   - Type of maintenance (preventive/corrective)
-   - Timing and duration information
-   - Cost tracking
-   - Status tracking with default value
+2. **MaintenanceEvents Table** (Active maintenance tracking)
+   - `EventID`: INTEGER PRIMARY KEY (auto-increment)
+   - `EquipmentID`: VARCHAR(10) NOT NULL, FOREIGN KEY to Equipment
+   - `TechnicianID`: VARCHAR(10) NOT NULL, FOREIGN KEY to Technicians
+   - `EventDate`: DATETIME NOT NULL
+   - `Type`: VARCHAR(20) NOT NULL with CHECK constraint
+     * Must be one of: 'PREVENTIVE', 'CORRECTIVE', 'INSPECTION', 'UPGRADE'
+   - `Description`: TEXT NOT NULL
+   - `Duration`: INTEGER NOT NULL (in minutes)
+   - `Cost`: DECIMAL(10,2) NOT NULL
+   - `Status`: VARCHAR(20) NOT NULL DEFAULT 'SCHEDULED'
+     * Must be one of: 'SCHEDULED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED'
+   - `PartsReplaced`: TEXT (can be NULL)
 
-3. **Failures Table**
-   - Unique identifier for each failure
-   - Link to equipment
-   - Timing information (start/end)
-   - Severity and impact assessment
-   - Resolution tracking
-   - Production impact measurement
+3. **Failures Table** (Critical incident tracking)
+   - `FailureID`: INTEGER PRIMARY KEY (auto-increment)
+   - `EquipmentID`: VARCHAR(10) NOT NULL, FOREIGN KEY to Equipment
+   - `StartTime`: DATETIME NOT NULL
+   - `EndTime`: DATETIME (can be NULL if ongoing)
+   - `Category`: VARCHAR(50) NOT NULL
+   - `Severity`: INTEGER NOT NULL with CHECK constraint
+     * Must be between 1 and 5
+   - `Description`: TEXT NOT NULL
+   - `ImpactDescription`: TEXT NOT NULL
+   - `ResolutionTime`: INTEGER (can be NULL if ongoing, in minutes)
+   - `ProductionLoss`: DECIMAL(10,2) (can be NULL if not yet calculated)
+   - `RootCause`: TEXT (can be NULL during investigation)
+   - `PreventiveMeasures`: TEXT (can be NULL during initial response)
 
-4. **Technicians Table**
-   - Unique identifier for each technician
-   - Personal and qualification information
-   - Certification tracking
-   - Contact details
-   - Availability status
+4. **Technicians Table** (Personnel management)
+   - `TechnicianID`: VARCHAR(10) PRIMARY KEY
+   - `FirstName`: VARCHAR(50) NOT NULL
+   - `LastName`: VARCHAR(50) NOT NULL
+   - `Qualification`: VARCHAR(50) NOT NULL
+   - `CertificationLevel`: INTEGER NOT NULL with CHECK constraint
+     * Must be between 1 and 5
+   - `HireDate`: DATE NOT NULL
+   - `Email`: VARCHAR(100) NOT NULL UNIQUE
+   - `Phone`: VARCHAR(20) NOT NULL
+   - `Status`: VARCHAR(20) NOT NULL DEFAULT 'ACTIVE'
+     * Must be one of: 'ACTIVE', 'ON_LEAVE', 'TRAINING', 'INACTIVE'
+
+Key constraints patterns:
+- PRIMARY KEY: Used for unique identification
+- FOREIGN KEY: Ensures referential integrity
+- NOT NULL: Ensures required data is provided
+- CHECK: Validates data ranges or allowed values
+- DEFAULT: Provides fallback values
+- UNIQUE: Prevents duplicate values
 
 #### Implementation Steps
 
@@ -84,6 +111,9 @@ This exercise creates a database for industrial equipment safety monitoring with
 #### Table Creation Script
 
 Create a new file `create_industrial_safety_db.sql` with the following content:
+
+
+
 
 ```sql
 -- Enable column mode and headers for better output
