@@ -353,7 +353,7 @@ ALTER TABLE EquipmentEvents RENAME TO IndustrialEvents;
 
 -- Verify changes
 SELECT * FROM IndustrialEvents;
-````
+```
 
 
 
