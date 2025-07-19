@@ -49,3 +49,7 @@ DROP TABLE EquipmentEvents;
 
 -- 4. Rename new table to original name
 ALTER TABLE EquipmentEvents_new RENAME TO EquipmentEvents;
+
+DELETE FROM EquipmentEvents;
+
+SELECT * FROM EquipmentEvents;
