@@ -4,6 +4,7 @@
 <div class="alert alert-block alert-info" style="margin-top: 20px">
   <ul>
     <li><a href="#preamble">Preamble</a></li>
+    <li><a href="#create_table">CREATE TABLE</a></li>
   </ul>
 </div>
 
@@ -105,7 +106,7 @@ CREATE TABLE EquipmentEvents (
 );
 ```
 
-To run the file, write in the terminal:
+#### To run the file, write in the terminal:
 
 general syntax:
 ```bash
@@ -118,14 +119,22 @@ Here is the command:
 sqlite3 courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_004_industrial_safety.db < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/008_create_table.sql
 ```
 
-Verify the table exists:
+#### Verify the table exists:
+
+general syntax:
+```bash
+sqlite3 <database_name> ".schema <table_name>"
+```
+
+Here is the command:
+
 ```bash
 sqlite3 courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_003.db ".schema EquipmentEvents"
 ```
 
 return :
 
-```
+```sql
 CREATE TABLE EquipmentEvents (
     EventID INTEGER PRIMARY KEY,
     EquipmentCode VARCHAR(50) NOT NULL,

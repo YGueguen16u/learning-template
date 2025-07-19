@@ -17,3 +17,4 @@ CREATE TABLE EquipmentEvents (
     MTBF FLOAT,
     SafetyImpact BOOLEAN NOT NULL DEFAULT FALSE
 );
+
