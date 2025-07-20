@@ -14,49 +14,33 @@
 
 <h2 id="preamble">Preamble</h2>
 
+Before starting, make sure you have PostgreSQL running in Docker and the database is set up. See [PostgreSQL with Docker](../00_annexe/01_postgre_with_docker.md) for setup instructions.
 
-Table example for this course:
+For this course, we'll use the same dataset as the previous chapter. If you haven't created it yet:
 
-You need to run in the terminal this command to create the table, if you are in the root directory:
-
+1. **Copy the database creation script**
 ```bash
-qlite3 courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_002.db < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_002.sql
+docker cp courses_and_exercises/02_sql/02_sql_basics/datasets/sql_scripts/lib_002.sql postgres-db:/tmp/
 ```
 
-If you are in `courses_and_exercises`, you need to write:
-
+2. **Create the tables**
 ```bash
-sqlite3 < 02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_002.db < 02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_002.sql
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/lib_002.sql
 ```
 
-To display the table, columns and rows, you can write it on the top of your .sql file:
+Then, to run the practice queries:
 
-```sql
-.mode column -- display columns in a table
-.headers on -- display column names
-
-.open courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_002.db -- open the database
-```
-
-To run the file, write in the terminal:
-
+1. **Copy the practice file to the container**
 ```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/003_distinct.sql
+docker cp courses_and_exercises/02_sql/02_sql_basics/utils/004_distinct.sql postgres-db:/tmp/
 ```
 
-Take care of the path of the file, where directory you are. For example if you are in the root directory, you need to write:
-
+2. **Execute the file**
 ```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/003_distinct.sql
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/004_distinct.sql
 ```
 
-If ypu are in `courses_and_exercises`, you need to write:
-
-```bash
-sqlite3 < 02_sql_basics_and_rdbms/01_sql_basics/utils/003_distinct.sql
-```
-
-Always take care of the path of the file, where directory you are.
+Each time you modify the practice file, you can run these last two commands again to see the results.
 
 <h2 id="distinct">DISTINCT</h2>
 
@@ -78,15 +62,14 @@ FROM employees;
 
 |city         |
 |-------------|
-|New York     |
-|Chicago      |
-|Los Angeles  |
-|Boston       |
-|Seattle      |
-|Miami        |
-|San Francisco|
-|Houston      |
 |Dallas       |
+|Boston       |
+|Los Angeles  |
+|Chicago      |
+|New York     |
+|Houston      |
+|Miami        |
+|Seattle      |
 
 While 
 
@@ -112,7 +95,7 @@ FROM employees;
 |Seattle      
 |Miami        
 |Chicago      
-|New York     
+|New York     |
 |San Francisco
 |Houston      
 |Boston       
@@ -198,6 +181,8 @@ WHERE salary > 70000 AND (department = 'IT' OR department = 'Sales');
 
 - `DISTINCT` applies to the combination of all columns. This means a row is considered duplicate only if ALL column values are identical (even not displayed ones). That's why we can see the same city multiple times - the rows are different because other columns (first_name, department, or salary) have different values.
 
+**IN SQLite**
+
 - If you want to count the number of unique rows where employees earn more than 70000 and work in IT or Sales, following queries will raise an error: 
 
 ```sql
@@ -236,4 +221,29 @@ FROM (SELECT DISTINCT city, first_name, department, salary
 ---------
 |10      |
 
+**IN POSTGRESQL**
 
+However in PostgreSQL, to count distinct combinations of multiple columns, use this syntax:
+
+```sql
+SELECT COUNT(DISTINCT (city, first_name, department, salary)::text)
+FROM employees
+WHERE salary > 70000 AND (department = 'IT' OR department = 'Sales');
+```
+
+|COUNT(DISTINCT (city, first_name, department, salary)::text)|
+-------------------------------------------------------------
+|10                                                          |
+
+```sql
+SELECT COUNT(*) 
+FROM (
+    SELECT DISTINCT * 
+    FROM employees
+    WHERE salary > 70000 AND (department = 'IT' OR department = 'Sales')
+) as distinct_rows;
+```
+
+|COUNT(*)|
+---------
+|10      |
