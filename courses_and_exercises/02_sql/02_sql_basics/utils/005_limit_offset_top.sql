@@ -1,8 +1,4 @@
-.mode column 
-.headers on 
-
-.open courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_002.db 
-
+/*
 SELECT * 
 FROM employees 
 LIMIT 5 OFFSET 2;
@@ -35,3 +31,5 @@ WHERE age > 30
 
 SELECT TOP 5 * 
 FROM employees;
+*/
+

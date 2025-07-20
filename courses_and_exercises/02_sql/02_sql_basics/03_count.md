@@ -14,49 +14,33 @@
 
 <h2 id="preamble">Preamble</h2>
 
-Table example for this course:
+Before starting, make sure you have PostgreSQL running in Docker and the database is set up. See [PostgreSQL with Docker](../00_annexe/01_postgre_with_docker.md) for setup instructions.
 
-You need to run in the terminal this command to create the table, if you are in the root directory:
+For this course, we'll use a different dataset. First, let's create the tables:
 
+1. **Copy the database creation script**
 ```bash
-qlite3 courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_002.db < cou
-rses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_002.sql
+docker cp courses_and_exercises/02_sql/02_sql_basics/datasets/sql_scripts/lib_002.sql postgres-db:/tmp/
 ```
 
-If you are in `courses_and_exercises`, you need to write:
-
+2. **Create the tables**
 ```bash
-sqlite3 < 02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_001.db < 02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_001.sql
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/lib_002.sql
 ```
 
-To display the table, columns and rows, you can write it on the top of your .sql file:
+Then, to run the practice queries:
 
-```sql
-.mode column -- display columns in a table
-.headers on -- display column names
-
-.open courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_002.db -- open the database
-```
-
-To run the file, write in the terminal:
-
+1. **Copy the practice file to the container**
 ```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/002_count.sql
+docker cp courses_and_exercises/02_sql/02_sql_basics/utils/003_count.sql postgres-db:/tmp/
 ```
 
-Take care of the path of the file, where directory you are. For example if you are in the root directory, you need to write:
-
+2. **Execute the file**
 ```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/002_count.sql
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/003_count.sql
 ```
 
-If ypu are in `courses_and_exercises`, you need to write:
-
-```bash
-sqlite3 < 02_sql_basics_and_rdbms/01_sql_basics/utils/002_count.sql
-```
-
-Always take care of the path of the file, where directory you are.
+Each time you modify the practice file, you can run these last two commands again to see the results.
 
 <h2 id="count">COUNT</h2>
 
@@ -161,6 +145,8 @@ The shapes of the output just don’t match!
 
 Let's try it anyway and see what happens.
 
+**On SQLite**
+
 ```sql
 SELECT first_name, COUNT(*) FROM employees
 ```
@@ -170,6 +156,17 @@ SELECT first_name, COUNT(*) FROM employees
 |John|53|
 
 Databases will try to handle invalid queries by making assumptions. In this case, it returns 'John' because it's the first name from the first row in the table. Different databases might handle this differently, so don't rely on this behavior. If you need the first/last entry, use proper SQL functions instead (though SQLite lacks a built-in `LAST` function).
+
+**On PostgreSQL**
+
+```sql
+SELECT first_name, COUNT(*) FROM employees
+```
+
+```
+psql:/tmp/003_count.sql:31: ERROR:  column "employees.first_name" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 30: SELECT first_name, COUNT(*) FROM employees;
+```
 
 
 
@@ -254,5 +251,3 @@ WHERE performance_score > 8.5;
 |Count(*)|
 --------
 |25      |       
-
-

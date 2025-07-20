@@ -1,8 +1,4 @@
-.mode column
-.headers on
-
-.open courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_002.db
-
+/*
 SELECT DISTINCT city 
 FROM employees;
 
@@ -30,6 +26,11 @@ SELECT DISTINCT first_name, department, salary, city
 FROM employees
 WHERE salary > 70000 AND (department = 'IT' OR department = 'Sales');
 
+-- In PostgreSQL, to count distinct combinations of multiple columns, use this syntax:
+SELECT COUNT(DISTINCT (city, first_name, department, salary)::text)
+FROM employees
+WHERE salary > 70000 AND (department = 'IT' OR department = 'Sales');
+
 SELECT DISTINCT *
 FROM employees
 WHERE salary > 70000 AND (department = 'IT' OR department = 'Sales');
@@ -42,3 +43,13 @@ SELECT COUNT(*)
 FROM (SELECT DISTINCT city, first_name, department, salary 
       FROM employees
       WHERE salary > 70000 AND (department = 'IT' OR department = 'Sales'));
+*/
+
+SELECT COUNT(*) 
+FROM (
+    SELECT DISTINCT * 
+    FROM employees
+    WHERE salary > 70000 AND (department = 'IT' OR department = 'Sales')
+);
+
+
