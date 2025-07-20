@@ -5,7 +5,8 @@
   <ul>
     <li><a href="#preamble">Preamble</a></li>
     <li><a href="#select">SELECT</a></li>
-    <li><a href="#where">The WHERE block</a></li>
+    <li><a href="#where">WHERE</a></li>
+    <li><a href="#limit">LIMIT</a></li>
     <li><a href="#exercises">Exercises</a></li>
   </ul>
 </div>
@@ -13,57 +14,153 @@
 
 <h2 id="preamble">Preamble</h2>
 
-Table example for this course:
+Before starting, make sure you have PostgreSQL running in Docker. See [PostgreSQL with Docker](../00_annexe/01_postgre_with_docker.md) for setup instructions.
 
-You need to run in the terminal this command to create the table, if you are in the root directory:
+**Important Note about SQL Files:**
+In this chapter, we will be working with two main SQL files:
 
+1. **Database Creation File:**
+   - File: `lib_001.sql`
+   - Location: `courses_and_exercises/02_sql/02_sql_basics/datasets/sql_scripts/lib_001.sql`
+   - Purpose: Creates and populates the database tables we'll be using
+
+2. **Practice File:**
+   - File: `001_select_where_limit.sql`
+   - Location: `courses_and_exercises/02_sql/02_sql_basics/utils/001_select_where_limit.sql`
+   - Purpose: Contains all the SQL commands and examples we'll be learning
+   - **This is the main file you'll be editing and running throughout this chapter**
+
+All SQL commands and examples shown in this documentation can be found in `001_select_where_limit.sql`. As you progress through the chapter:
+1. Open this file in your editor
+2. Add or modify the SQL commands as you learn
+3. Run the file to see the results
+4. The examples in this documentation show both the commands and their expected output
+
+**Setup the Database:**
+
+1. **Connect to PostgreSQL**
 ```bash
-sqlite3 courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_001.db < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_001.sql
+docker exec -it postgres-db psql -U postgres
 ```
 
-If you are in `courses_and_exercises`, you need to write:
+2. **Create and connect to the database**
+```sql
+-- Create new database
+CREATE DATABASE sql_basics_01;
 
-```bash
-sqlite3 < 02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_001.db < 02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_001.sql
+-- Connect to the database
+\c sql_basics_01
+
+-- quit the database
+\q
 ```
 
-To display the table, columns and rows, you can write it on the top of your .sql file:
-
+3. **Create tables**
 ```bash
-.mode column -- display columns in a table
-.headers on -- display column names
+# Copy the SQL file to the container
+docker cp courses_and_exercises/02_sql/02_sql_basics/datasets/sql_scripts/lib_001.sql postgres-db:/tmp/
 
-.open courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_001.db -- open the database
+# Execute the SQL file
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/lib_001.sql
 ```
 
-To run the file, write in the terminal:
-
-```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/001_select_where_limit.sql
+4. **Verify the setup**
+```sql
+-- Connect to PostgreSQL
+docker exec -it postgres-db psql -U postgres
 ```
 
-Take care of the path of the file, where directory you are. For example if you are in the root directory, you need to write:
-
-```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/001_select_where_limit.sql
+```sql
+-- Connect to the database
+\c sql_basics_01
 ```
 
-If ypu are in `courses_and_exercises`, you need to write:
-
-```bash
-sqlite3 < 02_sql_basics_and_rdbms/01_sql_basics/utils/001_select_where_limit.sql
+```sql
+-- List all tables
+\dt
 ```
 
-Always take care of the path of the file, where directory you are.
+Example output:
+
+```
+           List of relations
+ Schema |   Name    | Type  |  Owner   
+--------+-----------+-------+----------
+ public | employees | table | postgres
+(1 row)
+```
+
+```sql
+-- View table structure
+\d table_name
+```
+
+Example output:
+
+```
+                      Table "public.employees"
+      Column       |     Type      | Collation | Nullable | Default 
+-------------------+---------------+-----------+----------+---------
+ employee_id       | integer       |           | not null | 
+ first_name        | text          |           | not null | 
+ last_name         | text          |           | not null | 
+ email             | text          |           |          | 
+ hire_date         | date          |           |          | 
+ salary            | numeric(10,2) |           |          | 
+ department        | text          |           |          | 
+ city              | text          |           |          | 
+ age               | integer       |           |          | 
+ bonus_percentage  | numeric(4,2)  |           |          | 
+ performance_score | numeric(3,1)  |           |          | 
+Indexes:
+    "employees_pkey" PRIMARY KEY, btree (employee_id)
+
+(END)
+```
+
+**Note:** PostgreSQL differs from SQLite in several ways:
+- Commands must end with semicolons (;)
+- Table descriptions use `\d` instead of `.schema`
+- Output is automatically formatted (no need for .mode or .headers)
+- Has more data types and features
+
+**Practice File Setup:**
+
+1. **Copy the practice file to the container**
+```bash
+docker cp courses_and_exercises/02_sql/02_sql_basics/utils/001_select_where_limit.sql postgres-db:/tmp/
+```
+
+2. **Execute the file in PostgreSQL**
+```bash
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/001_select_where_limit.sql
+```
+
+Or, if you're already connected to PostgreSQL:
+```sql
+\i /tmp/001_select_where_limit.sql
+```
+
+Each time you modify the file, you can run it again to see the results.
+
+```bash
+docker cp courses_and_exercises/02_sql/02_sql_basics/utils/001_select_where_limit.sql postgres-db:/tmp/
+
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/001_select_where_limit.sql
+```
+
+All examples in this chapter can be found in this file. You can edit it and run it again to try different queries.
 
 <h2 id="select">SELECT</h2>
+
+The SELECT statement retrieves data from a table.
 
 **General syntax**
 
 ```sql
-SELECT <column1>, <column2>, ... FROM <table_name>
+SELECT <column1>, <column2>, ... FROM <table_name>;
 
-SELECT * FROM <table_name>
+SELECT * FROM <table_name>;
 ```
 
 **Example**
@@ -71,7 +168,6 @@ SELECT * FROM <table_name>
 SELECT * 
 FROM employees;
 ```
-
 
 | employee_id  | first_name   | last_name  | email  | hire_date  | salary  | department  | city  | age  | bonus_percentage  | performance_score |
 |-----------  | -----------  | ---------  | ---------------------------  | ----------  | ------  | ----------  | -------------  | ---  | ----------------  | ----------------- |
@@ -89,10 +185,8 @@ FROM employees;
 Your file should look like this:
 
 ```sql
-.mode column -- display columns in a table
-.headers on -- display column names
-
-.open 01_sql_basics/datasets/db/lib_001.db -- open the database
+-- Connect to the database
+\c lib_001
 
 SELECT * FROM employees;
 ```
@@ -170,7 +264,7 @@ SELECT 50 + 2, 51 * 2, 51 / 2
 
 Isn’t it strange that `51 / 2` gives `25` rather than `25.5`? This is because SQL is doing integer division. To do decimal division, at least one of the operands must be a decimal, for instance `51.0 / 2`. A common trick is to multiply one number by `1.0` to convert it into a decimal.
 
-<h2 id="where">The WHERE Block</h2>
+<h2 id="where">WHERE</h2>
 
 The `WHERE` block allows us to filter the table for rows that meet certain conditions. 
 
@@ -209,7 +303,38 @@ WHERE hire_date <= '2019-01-01'
 |Julie        |Roberts    |2018-09-08|
 |Peter        |Torres     |2018-07-05|
 
-<h2 id ="exercises">Exercises</h2>
+<h2 id="limit">LIMIT</h2>
+
+The LIMIT clause is used to limit the number of rows returned in the result set.
+
+**General syntax**
+
+```sql
+SELECT <column1>, <column2>, ... 
+FROM <table_name> 
+WHERE <clause>
+LIMIT <number>
+```
+
+**Example**
+
+Retrieve the first 5 rows of the employees table.
+
+```sql
+SELECT *
+FROM employees
+LIMIT 5;
+```
+
+| employee_id  | first_name   | last_name  | email  | hire_date  | salary  | department  | city  | age  | bonus_percentage  | performance_score |
+|-----------  | -----------  | ---------  | ---------------------------  | ----------  | ------  | ----------  | -------------  | ---  | ----------------  | ----------------- |
+| 1            | John         | Smith      | john.smith@company.com       | 2020-01-15  | 65000   | IT          | New York       | 35   | 15                | 8.5              
+| 2            | Emma         | Johnson    | emma.j@company.com           | 2019-03-20  | 72000   | Sales       | Chicago        | 29   | 20                | 9.2              
+| 3            | Michael      | Brown      | michael.b@company.com        | 2021-06-10  | 55000   | HR          | Los Angeles    | 42   | 10                | 7.8              
+| 4            | Sarah        | Davis      | sarah.d@company.com          | 2018-11-30  | 68000   | Marketing   | Boston         | 31   | 18                | 8.9              
+| 5            | James        | Wilson     | james.w@company.com          | 2022-02-15  | 59000   | IT          | Seattle        | 27   | 12                | 7.5              
+
+<h2 id="exercises">Exercises</h2>
 
 Columns : 
 
@@ -235,31 +360,32 @@ FROM employees
 WHERE department = 'HR' ;
 ```
 
-|first_name   |last_name  |salary|
-|-----------  |---------  |------|
-|Michael      |Brown      |55000 |
-|Robert       |Taylor     |63000 |
-|David        |White      |69000 |
-|Joseph       |Rodriguez  |57000 |
-|Christopher  |Anderson   |74000 |
-|Brian        |Jackson    |59000 |
-|Timothy      |Garcia     |58000 |
-|Mark         |Clark      |70000 |
-|Eric         |Scott      |57000 |
-|Gregory      |Nelson     |74000 |
-|Jeffrey      |Mitchell   |59000 |
-|Edward       |Evans      |61000 |
+|first_name   |last_name  |salary   |
+|-----------  |---------  |---------|
+|Michael      |Brown      |55000.00 |
+|Robert       |Taylor     |63000.00 |
+|David        |White      |69000.00 |
+|Joseph       |Rodriguez  |57000.00 |
+|Christopher  |Anderson   |74000.00 |
+|Brian        |Jackson    |59000.00 |
+|Timothy      |Garcia     |58000.00 |
+|Mark         |Clark      |70000.00 |
+|Eric         |Scott      |57000.00 |
+|Gregory      |Nelson     |74000.00 |
+|Jeffrey      |Mitchell   |59000.00 |
+|Edward       |Evans      |61000.00 |
 
 
 
-1. Retrieve the employees names, first names and cities of employees who arrive after 2022
+1. Retrieve the first 6 employees names, first names and cities of employees who arrive after 2022
 
 **Solution**
 
 ```sql
 SELECT first_name, last_name, city 
 FROM employees 
-WHERE hire_date >= '2022-01-01';
+WHERE hire_date >= '2022-01-01'
+LIMIT 6;
 ```
 
 |first_name  |last_name  |city         |
@@ -270,14 +396,9 @@ WHERE hire_date >= '2022-01-01';
 |Amanda      |Taylor     |Los Angeles  
 |Steven      |Martinez   |San Francisco
 |Rebecca     |Gonzalez   |Miami        
-|Eric        |Scott      |Boston       
-|Christine   |Hill       |New York     
-|Ryan        |Carter     |Seattle      
-|Andrea      |Parker     |Houston      
-|Romuald     |Garcia     |Houston   
 
 
-1. Retrieve the employees names, first names and cities of employees who don't work in New York
+1. Retrieve the first 7 employees names, first names and cities of employees who don't work in New York
 
 - != : not equal
 - = : equal
@@ -287,7 +408,8 @@ WHERE hire_date >= '2022-01-01';
 ```sql
 SELECT first_name, last_name, city 
 FROM employees 
-WHERE city != 'New York';
+WHERE city != 'New York'
+LIMIT 7;
 ```
 
 |first_name   |last_name  |city         |
@@ -298,46 +420,8 @@ WHERE city != 'New York';
 |James        |Wilson     |Seattle      
 |Lisa         |Anderson   |Miami        
 |Robert       |Taylor     |Chicago      
-|William      |Moore      |San Francisco
-|Jennifer     |Jackson    |Houston      
-|David        |White      |Boston       
-|Maria        |Martinez   |Los Angeles  
-|Richard      |Lee        |Seattle      
-|Elizabeth    |Garcia     |Miami        
-|Joseph       |Rodriguez  |Chicago      
-|Daniel       |Gonzalez   |San Francisco
-|Laura        |Wilson     |Houston      
-|Christopher  |Anderson   |Boston       
-|Amanda       |Taylor     |Los Angeles  
-|Kevin        |Thomas     |Seattle      
-|Jessica      |Moore      |Miami        
-|Brian        |Jackson    |Chicago      
-|Steven       |Martinez   |San Francisco
-|Rachel       |Lee        |Houston      
-|Timothy      |Garcia     |Boston       
-|Melissa      |Rodriguez  |Los Angeles  
-|Andrew       |Lopez      |Seattle      
-|Rebecca      |Gonzalez   |Miami        
-|Mark         |Clark      |Chicago      
-|Justin       |King       |San Francisco
-|Katherine    |Wright     |Houston      
-|Eric         |Scott      |Boston       
-|Samantha     |Green      |Los Angeles  
-|Brandon      |Baker      |Seattle      
-|Angela       |Adams      |Miami        
-|Gregory      |Nelson     |Chicago      
-|Stephen      |Ramirez    |San Francisco
-|Catherine    |Campbell   |Houston      
-|Jeffrey      |Mitchell   |Boston       
-|Julie        |Roberts    |Los Angeles  
-|Ryan         |Carter     |Seattle      
-|Amy          |Phillips   |Miami        
-|Edward       |Evans      |Chicago      
-|Peter        |Torres     |San Francisco
-|Andrea       |Parker     |Houston      
-|Romuald      |Garcia     |Houston      
-|ahmed        |Bengarcia  |Dallas       
-|ahmed        |Bengarcia  |Dallas       
+|William      |Moore      |San Francisco   
+
 
 <h2 id="additional_information">Additional Information</h2>
 
@@ -421,4 +505,3 @@ WHERE hire_date <= '2021-01-01';
 |Gregory      |Nelson     |2018-03-30|
 |Julie        |Roberts    |2018-09-08|
 |Peter        |Torres     |2018-07-05|
-
