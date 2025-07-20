@@ -16,48 +16,23 @@
 
 <h2 id="preamble">Preamble</h2>
 
-Table example for this course:
+Before starting, make sure you have PostgreSQL running in Docker and the database is set up. See [PostgreSQL with Docker](../00_annexe/01_postgre_with_docker.md) for setup instructions.
 
-You need to run in the terminal this command to create the table, if you are in the root directory:
+We don't need to create the table for this course, it is already created in the preamble of the [SELECT, WHERE, LIMIT](../01_select_where_limit.md) course.
 
+**Setup and Run SQL Files:**
+
+1. **Copy the practice file to the container**
 ```bash
-sqlite3 courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_001.db < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_001.sql
+docker cp courses_and_exercises/02_sql/02_sql_basics/utils/002_operators.sql postgres-db:/tmp/
 ```
 
-If you are in `courses_and_exercises`, you need to write:
-
+2. **Execute the file**
 ```bash
-sqlite3 < 02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_001.db < 02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_001.sql
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/002_operators.sql
 ```
 
-To display the table, columns and rows, you can write it on the top of your .sql file:
-
-```bash
-.mode column -- display columns in a table
-.headers on -- display column names
-
-.open courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_001.db -- open the database
-```
-
-To run the file, write in the terminal:
-
-```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/002_operators.sql
-```
-
-Take care of the path of the file, where directory you are. For example if you are in the root directory, you need to write:
-
-```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/002_operators.sql
-```
-
-If ypu are in `courses_and_exercises`, you need to write:
-
-```bash
-sqlite3 < 02_sql_basics_and_rdbms/01_sql_basics/utils/002_operators.sql
-```
-
-Always take care of the path of the file, where directory you are.
+Each time you modify the file, you can run these commands again to see the results.
 
 <h2 id="condition-operations">Condition operations</h2>
 
@@ -141,7 +116,8 @@ WHERE age > 40;
 |Gonzalez   |Daniel      |43 
 .
 .
-.
+. 
+
 
 ```sql
 SELECT last_name, age
@@ -304,12 +280,39 @@ WHERE (department = 'IT' AND NOT age > 30) OR (NOT department = 'IT' AND age > 3
 SQL gives most precedence to `NOT` and then `AND` and finally `OR`.
 
 ```sql
+--- On Postgres
+SELECT false AND false OR true; -- AND First true and false = false then false or true = true
+```
+
+1. `false AND false` --> false
+2. `false OR true` --> true
+
+| ?column? |
+|----------|
+| t        |
+
+```sql
+--- On Sqlite
 SELECT 0 AND 0 OR 1 -- AND First 0 and O = 0 then 0 or 1 = 1
 ```
+
+1. `0 AND 0` --> 0
+2. `0 OR 1` --> 1
 
 |0 AND 0 OR 1|
 ------------
 |1           
+
+```sql
+SELECT false AND (false OR true);  -- returns false
+```
+
+1. `false OR true` --> true
+2. `false AND true` --> false
+
+| ?column? |
+----------
+| f        |
 
 ```sql
 SELECT 0 AND (0 OR 1) -- 0 or 1 = 1 then O And 1 = 0
@@ -405,6 +408,3 @@ WHERE department IN ('IT', 'HR');
 .
 .
 .
-
-
-
