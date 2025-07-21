@@ -11,39 +11,35 @@
 
 <h2 id="preamble">Preamble</h2>
 
-Table example for this course:
+Before starting, make sure you have PostgreSQL running in Docker and the database is set up. See [PostgreSQL with Docker](../00_annexe/01_postgre_with_docker.md) for setup instructions.
 
-You need to run in the terminal this command to create the table, if you are in the root directory:
+For this course, we'll use a new dataset. To create it:
 
+1. **Copy the database creation script**
 ```bash
-sqlite3 courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_003.db < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_003.sql
+docker cp courses_and_exercises/02_sql/02_sql_basics/datasets/sql_scripts/lib_003.sql postgres-db:/tmp/
 ```
 
-If you are in `courses_and_exercises`, you need to write:
-
+2. **Create the tables**
 ```bash
-sqlite3 < 02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_003.db < 02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_003.sql
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/lib_003.sql
 ```
 
-To display the table, columns and rows, you can write it on the top of your .sql file:
+Then, to run the practice queries:
 
+1. **Copy the practice file to the container**
 ```bash
-.mode column -- display columns in a table
-.headers on -- display column names
-
-.open courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_003.db -- open the database
+docker cp courses_and_exercises/02_sql/02_sql_basics/utils/007_insert_update_delete.sql postgres-db:/tmp/
 ```
 
-To run the file, write in the terminal:
-
+2. **Execute the file**
 ```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/007_insert_update_delete.sql
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/007_insert_update_delete.sql
 ```
 
-Always take care of the path of the file, where directory you are.
+Each time you modify the practice file, you can run these last two commands again to see the results.
 
 <h2 id="data-presentation">Data presentation</h2>
-
 
 This table `network_events` simulates the collection of network events in a datacenter environment. It records the traffic passing through different routers in several data centers in France. The data allows you to monitor network performance, detect anomalies, and analyze traffic patterns.
 
@@ -130,9 +126,9 @@ This table allows to perform various analyses such as :
 
 <h2 id="update">UPDATE</h2>
 
-`UPDATE` statement is used to modify existing rows in a table.
+The `UPDATE` statement is used to modify existing records in a table. The syntax is the same in both SQLite and PostgreSQL.
 
-General syntax:
+### Basic Syntax
 
 ```sql
 UPDATE <table_name>
@@ -181,7 +177,9 @@ After update :
 SELECT * 
 FROM network_events
 WHERE event_id = 31 OR event_id = 32;
+```
 
+```sql
 UPDATE network_events
 SET packet_size = 2048
 WHERE event_id = 31 OR event_id = 32;
@@ -204,3 +202,11 @@ After update :
 |--------  |-----------|
 |31        |2048       |
 |32        |2048       |
+
+
+### Important Notes
+
+1. If you omit the WHERE clause, the UPDATE will modify ALL rows in the table
+2. Use SELECT first to verify which rows will be affected by your UPDATE
+3. Both SQLite and PostgreSQL support updating multiple columns in a single statement
+4. The WHERE clause can use any valid SQL condition (=, >, <, IN, LIKE, etc.)

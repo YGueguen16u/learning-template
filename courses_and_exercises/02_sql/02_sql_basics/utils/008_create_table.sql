@@ -1,6 +1,3 @@
-.mode column 
-.headers on
-
 DROP TABLE IF EXISTS EquipmentEvents;
 
 CREATE TABLE EquipmentEvents (

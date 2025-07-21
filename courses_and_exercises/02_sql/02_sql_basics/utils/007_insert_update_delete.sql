@@ -1,23 +1,30 @@
-.mode column 
-.headers on 
-
-.open courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_003.db
-
 -- INSERT
 /*
 SELECT * FROM network_events;
 
-INSERT INTO network_events (timestamp, source_ip, destination_ip, protocol, port, packet_size, latency_ms, status_code, router_id, bandwidth_mbps, error_rate, packets_dropped, location)
-VALUES ('2023-06-01 08:30:00', '192.168.1.100', '10.0.0.1', 'TCP', 443, 1500, 25, 'SUCCESS', 'RTR_001', 100, 0.01, 0, 'Paris-DC1');
-
-SELECT * FROM network_events;
-
-INSERT INTO network_events (timestamp, source_ip, destination_ip, protocol, port, packet_size, latency_ms, status_code, router_id, bandwidth_mbps, error_rate, packets_dropped, location)
+INSERT INTO network_events 
+(timestamp, source_ip, destination_ip, protocol, port, packet_size, latency_ms, status_code, router_id, bandwidth_mbps, error_rate, packets_dropped, location)
 VALUES 
 ('2023-06-01 08:30:30', '192.168.1.100', '10.0.0.1', 'TCP', 443, 1500, 25, 'SUCCESS', 'RTR_001', 100, 0.01, 0, 'Paris-DC1'),
-('2023-06-01 08:31:45', '192.168.1.101', '10.0.0.2', 'UDP', 53, 512, 15, 'SUCCESS', 'RTR_002', 100, 0.00, 0, 'Lyon-DC1');
+('2023-06-01 08:30:31', '192.168.1.100', '10.0.0.1', 'TCP', 443, 1500, 25, 'SUCCESS', 'RTR_001', 100, 0.01, 0, 'Paris-DC1'),
+('2023-06-01 08:30:32', '192.168.1.100', '10.0.0.1', 'TCP', 443, 1500, 25, 'SUCCESS', 'RTR_001', 100, 0.01, 0, 'Paris-DC1'),
+('2023-06-01 08:30:33', '192.168.1.100', '10.0.0.1', 'TCP', 443, 1500, 25, 'SUCCESS', 'RTR_001', 100, 0.01, 0, 'Paris-DC1'),
+('2023-06-01 08:30:34', '192.168.1.100', '10.0.0.1', 'TCP', 443, 1500, 25, 'SUCCESS', 'RTR_001', 100, 0.01, 0, 'Paris-DC1'),
+('2023-06-01 08:30:35', '192.168.1.100', '10.0.0.1', 'TCP', 443, 1500, 25, 'SUCCESS', 'RTR_001', 100, 0.01, 0, 'Paris-DC1'),
+('2023-06-01 08:30:36', '192.168.1.100', '10.0.0.1', 'TCP', 443, 1500, 25, 'SUCCESS', 'RTR_001', 100, 0.01, 0, 'Paris-DC1');
 
-SELECT * FROM network_events;
+SELECT * 
+FROM network_events
+ORDER BY event_id DESC
+LIMIT 7;
+
+DELETE FROM network_events
+WHERE event_id = (SELECT max(event_id) FROM network_events);
+
+SELECT * 
+FROM network_events
+ORDER BY event_id DESC
+LIMIT 7;
 */
 
 -- UPDATE
@@ -49,6 +56,7 @@ FROM network_events
 WHERE event_id = 31 OR event_id = 32;
 */
 
+/*
 -- DELETE
 INSERT INTO network_events (event_id, timestamp, source_ip, destination_ip, protocol, port, packet_size, latency_ms, status_code, router_id, bandwidth_mbps, error_rate, packets_dropped, location)
 VALUES 
@@ -64,3 +72,5 @@ WHERE event_id = 36;
 SELECT * 
 FROM network_events
 LIMIT 5 OFFSET 31;
+*/
+

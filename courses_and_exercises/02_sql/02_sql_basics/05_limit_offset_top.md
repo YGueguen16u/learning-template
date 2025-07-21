@@ -46,31 +46,64 @@ Each time you modify the practice file, you can run these last two commands agai
 **General syntax**
 
 ```sql
+-- Supported by: PostgreSQL, MySQL, SQLite, MariaDB
 SELECT <column> 
 FROM <table_name>
 LIMIT <number_limit>;
+```
 
+```sql
+-- Supported by: PostgreSQL, MySQL, SQLite, MariaDB
 SELECT <column> 
 FROM <table_name>
 LIMIT <number_limit> OFFSET <number_offset>;
+```
 
+```sql
+-- Supported by: MySQL, SQLite, MariaDB
+-- NOT supported by: PostgreSQL
 SELECT <column> 
 FROM <table_name>
 LIMIT <number_offset>, <number_limit>;
+```
 
+```sql
+-- Supported by: PostgreSQL, Oracle, SQL Server (2012+)
+-- Standard SQL:2008 syntax
 SELECT <column> 
 FROM <table_name>
 OFFSET <number_offset> ROWS
 FETCH NEXT <number_limit> ROWS ONLY;
 ```
 
-**Syntax support by different DBMS:**
-- SQLite, MySQL, PostgreSQL: Support `LIMIT ... OFFSET ...` and `LIMIT offset, limit`
-- PostgreSQL: Also supports the standard SQL `FETCH NEXT ... ROWS`
-- Oracle: Only supports `FETCH NEXT ... ROWS`
-- SQL Server: Uses `TOP` or `OFFSET ... FETCH` (we'll see `TOP` in the next section)
+### Supported by different DBMS
 
-Note: When writing portable SQL code, be aware of these syntax differences. The most widely supported syntax across modern DBMS is `LIMIT ... OFFSET ...`
+- **PostgreSQL** : 
+  - `LIMIT x`
+  - `LIMIT x OFFSET y`
+  - `OFFSET x ROWS FETCH NEXT y ROWS ONLY`
+  - `LIMIT x, y`
+
+- **MySQL/MariaDB** :
+  - `LIMIT x`
+  - `LIMIT x OFFSET y`
+  - `LIMIT x, y`
+  - `FETCH NEXT`
+
+- **SQLite** :
+  - `LIMIT x`
+  - `LIMIT x OFFSET y`
+  - `LIMIT x, y`
+  - `FETCH NEXT`
+
+- **Oracle** :
+  - `LIMIT`
+  - `OFFSET x ROWS FETCH NEXT y ROWS ONLY`
+
+- **SQL Server** :
+  - `OFFSET x ROWS FETCH NEXT y ROWS ONLY` (SQL Server 2012+)
+  - `TOP x` (all versions)
+  - `LIMIT`
 
 - Retrieve the first 5 employees
 
@@ -78,6 +111,14 @@ Note: When writing portable SQL code, be aware of these syntax differences. The 
 SELECT * 
 FROM employees
 LIMIT 5;
+```
+
+or 
+
+```sql
+SELECT * 
+FROM employees
+FETCH NEXT 5 ROWS ONLY;
 ```
 
 
@@ -99,6 +140,15 @@ LIMIT 5;
 SELECT * 
 FROM employees
 LIMIT 5 OFFSET 2;
+```
+
+or 
+
+```sql
+SELECT * 
+FROM employees
+OFFSET 2 ROWS
+FETCH NEXT 5 ROWS ONLY;
 ```
 
 | employee_id  | first_name  | last_name  | email                   | hire_date   | salary  | department  | city         | age  | bonus_percentage  | performance_score |
@@ -139,6 +189,16 @@ WHERE salary > 70000 AND (department = 'IT' OR department = 'Sales')
 LIMIT 4 OFFSET 5;
 ```
 
+or 
+
+```sql
+SELECT last_name, first_name, department, salary 
+FROM employees
+WHERE salary > 70000 AND (department = 'IT' or department = 'Sales')
+OFFSET 5 ROWS
+FETCH NEXT 4 ROWS ONLY;
+```
+
 |last_name|first_name|department|salary|
 |---------|----------|----------|------|
 |Lee      |Rachel    |Sales     |72000 |
@@ -161,6 +221,19 @@ WHERE age > 30
     AND bonus_percentage > 15 
     AND salary > (SELECT COUNT(DISTINCT city) * 8000 FROM employees)
 LIMIT 3 OFFSET 2;
+```
+
+or 
+
+```sql
+SELECT employee_id, last_name, first_name, department, city, salary 
+FROM employees
+WHERE age > 30 
+    AND (department = 'IT' OR department = 'Sales') 
+    AND bonus_percentage > 15 
+    AND salary > (SELECT COUNT(DISTINCT city) * 8000 FROM employees)
+OFFSET 2 ROWS
+FETCH NEXT 3 ROWS ONLY;
 ```
 
 |employee_id|last_name|first_name|department|city           |salary|
@@ -210,7 +283,7 @@ WHERE age > 30
 
 `TOP` is used to limit the number of rows returned by a query.
 
-Only SQL Server supports `TOP`.
+Only SQL Server supports `TOP`, not SQLite, MySQL, PostgreSQL.
 
 **General syntax**
 
