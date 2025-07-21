@@ -10,36 +10,33 @@
 
 <h2 id="preamble">Preamble</h2>
 
-Table example for this course:
+Before starting, make sure you have PostgreSQL running in Docker and the database is set up. See [PostgreSQL with Docker](../00_annexe/01_postgre_with_docker.md) for setup instructions.
 
-You need to run in the terminal this command to create the table, if you are in the root directory:
+For this course, we'll use the same dataset as the previous chapter. If you haven't created it yet:
 
+1. **Copy the database creation script**
 ```bash
-qlite3 courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_002.db < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_002.sql
+docker cp courses_and_exercises/02_sql/02_sql_basics/datasets/sql_scripts/lib_002.sql postgres-db:/tmp/
 ```
 
-If you are in `courses_and_exercises`, you need to write:
-
+2. **Create the tables**
 ```bash
-sqlite3 < 02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_002.db < 02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_002.sql
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/lib_002.sql
 ```
 
-To display the table, columns and rows, you can write it on the top of your .sql file:
+Then, to run the practice queries:
 
-```sql
-.mode column -- display columns in a table
-.headers on -- display column names
-
-.open courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_002.db -- open the database
-```
-
-To run the file, write in the terminal:
-
+1. **Copy the practice file to the container**
 ```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/006_like.sql
+docker cp courses_and_exercises/02_sql/02_sql_basics/utils/006_like.sql postgres-db:/tmp/
 ```
 
-Always take care of the path of the file, where directory you are.
+2. **Execute the file**
+```bash
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/006_like.sql
+```
+
+Each time you modify the practice file, you can run these last two commands again to see the results.
 
 <h2 id="like">LIKE</h2>
 
@@ -79,9 +76,17 @@ WHERE hire_date <= '2021-01-01' AND last_name LIKE 'S%'
 Retrieve the first name, last name, and hire date of employees who were hired in the 2010's and with a `e` in their first name and last name.
 
 ```sql
+-- SQLite
 SELECT first_name, last_name, hire_date
 FROM employees
 WHERE hire_date LIKE '201%' AND first_name LIKE '%e%' AND last_name LIKE '%e%';
+
+-- PostgreSQL
+SELECT first_name, last_name, hire_date
+FROM employees
+WHERE hire_date::text LIKE '201%' 
+  AND first_name LIKE '%e%' 
+  AND last_name LIKE '%e%';
 ```
 
 |first_name   |last_name  |hire_date |
@@ -100,11 +105,19 @@ WHERE hire_date LIKE '201%' AND first_name LIKE '%e%' AND last_name LIKE '%e%';
 Retrieve the first name, last name, hire date and department of employees who were hired in the 2020's and with a `e` in their first name and a `l` in their last name or were hired in the 2020's and an `a` in the name of the department . 
 
 ```sql
+-- SQLite
 SELECT first_name, last_name, hire_date, department
 FROM employees
 WHERE 
     (hire_date LIKE '202%' AND (first_name LIKE '%e%' AND last_name LIKE '%l%')) 
     OR (hire_date LIKE '202%' AND department LIKE '%a%');
+
+-- PostgreSQL
+SELECT first_name, last_name, hire_date, department
+FROM employees
+WHERE 
+    (hire_date::text LIKE '202%' AND (first_name LIKE '%e%' AND last_name LIKE '%l%')) 
+    OR (hire_date::text LIKE '202%' AND department LIKE '%a%');
 ```
 
 |first_name  |last_name  |hire_date   |department|

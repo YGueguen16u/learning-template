@@ -11,36 +11,33 @@
 
 <h2 id="preamble">Preamble</h2>
 
-Table example for this course:
+Before starting, make sure you have PostgreSQL running in Docker and the database is set up. See [PostgreSQL with Docker](../00_annexe/01_postgre_with_docker.md) for setup instructions.
 
-You need to run in the terminal this command to create the table, if you are in the root directory:
+For this course, we'll use a new dataset. To create it:
 
+1. **Copy the database creation script**
 ```bash
-sqlite3 courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_003.db < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_003.sql
+docker cp courses_and_exercises/02_sql/02_sql_basics/datasets/sql_scripts/lib_003.sql postgres-db:/tmp/
 ```
 
-If you are in `courses_and_exercises`, you need to write:
-
+2. **Create the tables**
 ```bash
-sqlite3 < 02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_003.db < 02_sql_basics_and_rdbms/01_sql_basics/datasets/sql_scripts/lib_003.sql
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/lib_003.sql
 ```
 
-To display the table, columns and rows, you can write it on the top of your .sql file:
+Then, to run the practice queries:
 
+1. **Copy the practice file to the container**
 ```bash
-.mode column -- display columns in a table
-.headers on -- display column names
-
-.open courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/datasets/db/lib_003.db -- open the database
+docker cp courses_and_exercises/02_sql/02_sql_basics/utils/007_insert_update_delete.sql postgres-db:/tmp/
 ```
 
-To run the file, write in the terminal:
-
+2. **Execute the file**
 ```bash
-sqlite3 < courses_and_exercises/02_sql_basics_and_rdbms/01_sql_basics/utils/007_insert_update_delete.sql
+docker exec -it postgres-db psql -U postgres -d sql_basics_01 -f /tmp/007_insert_update_delete.sql
 ```
 
-Always take care of the path of the file, where directory you are.
+Each time you modify the practice file, you can run these last two commands again to see the results.
 
 <h2 id="data-presentation">Data presentation</h2>
 
@@ -48,6 +45,7 @@ This table `network_events` simulates the collection of network events in a data
 
 ### Structure of the table
 
+#### SQLite Version
 ```sql
 CREATE TABLE network_events (
     event_id INTEGER PRIMARY KEY,
@@ -66,6 +64,31 @@ CREATE TABLE network_events (
     location TEXT
 );
 ```
+
+#### PostgreSQL Version
+```sql
+CREATE TABLE network_events (
+    event_id SERIAL PRIMARY KEY,  -- Auto-incrementing ID in PostgreSQL
+    timestamp TIMESTAMP,          -- TIMESTAMP instead of DATETIME
+    source_ip TEXT,
+    destination_ip TEXT,
+    protocol TEXT,
+    port INTEGER,
+    packet_size INTEGER,
+    latency_ms INTEGER,
+    status_code TEXT,
+    router_id TEXT,
+    bandwidth_mbps INTEGER,
+    error_rate DECIMAL(4,2),
+    packets_dropped INTEGER,
+    location TEXT
+);
+```
+
+Key differences between SQLite and PostgreSQL:
+- SQLite uses `INTEGER PRIMARY KEY` for auto-incrementing IDs, PostgreSQL uses `SERIAL PRIMARY KEY`
+- SQLite uses `DATETIME`, PostgreSQL uses `TIMESTAMP`
+- Both support `TEXT`, `INTEGER`, and `DECIMAL` types similarly
 
 #### Identifiers and Time
 
@@ -129,25 +152,38 @@ This table allows to perform various analyses such as :
 
 <h2 id="insert">INSERT</h2>
 
-`INSERT` statement is used to add new rows to a table.
+The `INSERT` statement is used to add new rows to a table. While the basic syntax is similar in both SQLite and PostgreSQL, there are some differences in how they handle auto-incrementing IDs.
 
-General syntax:
+### Basic Syntax
 
 ```sql
 INSERT INTO <table_name> (<column1>, <column2>, ...)
 VALUES (<value1>, <value2>, ...);
 ```
 
-Example:
+### SQLite Example
+In SQLite, you can either specify the `event_id` or let it auto-increment:
+
+```sql
+-- With explicit ID
+INSERT INTO network_events (event_id, timestamp, source_ip, destination_ip, protocol, port, packet_size, latency_ms, status_code, router_id, bandwidth_mbps, error_rate, packets_dropped, location)
+VALUES (31, '2023-06-01 08:30:15', '192.168.1.100', '10.0.0.1', 'TCP', 443, 1500, 25, 'SUCCESS', 'RTR_001', 100, 0.01, 0, 'Paris-DC1');
+
+-- Without ID (auto-increment)
+INSERT INTO network_events (timestamp, source_ip, destination_ip, protocol, port, packet_size, latency_ms, status_code, router_id, bandwidth_mbps, error_rate, packets_dropped, location)
+VALUES ('2023-06-01 08:30:15', '192.168.1.100', '10.0.0.1', 'TCP', 443, 1500, 25, 'SUCCESS', 'RTR_001', 100, 0.01, 0, 'Paris-DC1');
+```
+
+### PostgreSQL Example
+In PostgreSQL, with `SERIAL` type, you typically omit the `event_id` as it's automatically generated:
 
 ```sql
 INSERT INTO network_events (timestamp, source_ip, destination_ip, protocol, port, packet_size, latency_ms, status_code, router_id, bandwidth_mbps, error_rate, packets_dropped, location)
 VALUES ('2023-06-01 08:30:15', '192.168.1.100', '10.0.0.1', 'TCP', 443, 1500, 25, 'SUCCESS', 'RTR_001', 100, 0.01, 0, 'Paris-DC1');
 ```
 
-No need to specify the `event_id` column, as it is an auto-incremented primary key.
-
-You can also insert multiple rows at once:
+### Multiple Row Insert
+Both SQLite and PostgreSQL support inserting multiple rows in a single statement:
 
 ```sql
 INSERT INTO network_events (timestamp, source_ip, destination_ip, protocol, port, packet_size, latency_ms, status_code, router_id, bandwidth_mbps, error_rate, packets_dropped, location)
@@ -156,3 +192,8 @@ VALUES
 ('2023-06-01 08:31:45', '192.168.1.101', '10.0.0.2', 'UDP', 53, 512, 15, 'SUCCESS', 'RTR_002', 100, 0.00, 0, 'Lyon-DC1');
 ```
 
+### Key Differences
+- SQLite allows explicit ID values even with auto-increment
+- PostgreSQL with `SERIAL` type manages IDs automatically
+- PostgreSQL is stricter about data types (e.g., dates must match the `TIMESTAMP` format)
+- Both support multi-row INSERT with the same syntax

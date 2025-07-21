@@ -1,55 +1,41 @@
-.mode column 
-.headers on
-
+/**
 DROP TABLE IF EXISTS EquipmentEvents;
+DROP TABLE IF EXISTS IndustrialEvents;
 
--- Create initial table
+
+-- Initial table creation
 CREATE TABLE EquipmentEvents (
-    EventID INTEGER PRIMARY KEY,
+    EventID SERIAL PRIMARY KEY,
     EquipmentCode VARCHAR(50) NOT NULL,
-    EventTimestamp DATETIME NOT NULL,
-    EventType VARCHAR(20) NOT NULL CHECK (EventType IN ('INCIDENT', 'MAINTENANCE', 'ALERT', 'SHUTDOWN')),
-    Severity INT NOT NULL CHECK (Severity BETWEEN 1 AND 5),
+    EventTimeStamp TIMESTAMP NOT NULL,
+    EventType VARCHAR(20) NOT NULL,
+        CHECK (EventType IN ('INCIDENT', 'MAINTENANCE', 'ALERT', 'SHUTDOWN')),
+    Severity INTEGER NOT NULL,
+        CHECK (Severity BETWEEN 1 AND 5),
     Description TEXT NOT NULL,
     Location VARCHAR(100) NOT NULL,
     OperatorID VARCHAR(10) NOT NULL,
-    MaintenanceStatus VARCHAR(20) NOT NULL DEFAULT 'PENDING',
-    ResolutionTime INT,
-    MTBF FLOAT
+    MaintenanceStatus VARCHAR(20) NOT NULL DEFAULT ('PENDING')
+        CHECK (MaintenanceStatus IN ('PENDING', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED')),
+    ResolutionTime INTEGER,
+    MTBF REAL
 );
 
--- Add SafetyImpact column (this works directly in SQLite)
+-- Multiple alterations in a single statement
 ALTER TABLE EquipmentEvents 
-ADD COLUMN SafetyImpact BOOLEAN NOT NULL DEFAULT FALSE;
+    ADD COLUMN SafetyImpact BOOLEAN NOT NULL DEFAULT FALSE,
+    DROP COLUMN ResolutionTime,
+    ALTER COLUMN MaintenanceStatus TYPE VARCHAR(30),
+    ALTER COLUMN MaintenanceStatus SET DEFAULT 'OPEN',
+    DROP CONSTRAINT IF EXISTS equipmentevents_eventtype_check,
+    ADD CONSTRAINT event_type_check
+        CHECK (EventType IN ('INCIDENT', 'MAINTENANCE', 'ALERT', 'SHUTDOWN', 'FAILURE'));
 
--- To modify MaintenanceStatus and remove ResolutionTime, we need to:
--- 1. Create new table with desired structure
-CREATE TABLE EquipmentEvents_new (
-    EventID INTEGER PRIMARY KEY,
-    EquipmentCode VARCHAR(50) NOT NULL,
-    EventTimestamp DATETIME NOT NULL,
-    EventType VARCHAR(20) NOT NULL CHECK (EventType IN ('INCIDENT', 'MAINTENANCE', 'ALERT', 'SHUTDOWN')),
-    Severity INT NOT NULL CHECK (Severity BETWEEN 1 AND 5),
-    Description TEXT NOT NULL,
-    Location VARCHAR(100) NOT NULL,
-    OperatorID VARCHAR(10) NOT NULL,
-    MaintenanceStatus VARCHAR(30) NOT NULL DEFAULT 'OPEN', -- Modified column
-    MTBF FLOAT,
-    SafetyImpact BOOLEAN NOT NULL DEFAULT FALSE
-);
+-- Rename column (separate statement)
+ALTER TABLE EquipmentEvents 
+RENAME COLUMN EventType TO EventCategory;
 
--- 2. Copy data from old table to new table
-INSERT INTO EquipmentEvents_new 
-SELECT EventID, EquipmentCode, EventTimestamp, EventType, Severity,
-       Description, Location, OperatorID, 'OPEN', MTBF, SafetyImpact
-FROM EquipmentEvents;
-
--- 3. Drop old table
-DROP TABLE EquipmentEvents;
-
--- 4. Rename new table to original name
-ALTER TABLE EquipmentEvents_new RENAME TO EquipmentEvents;
-
-DELETE FROM EquipmentEvents;
-
-SELECT * FROM EquipmentEvents;
+-- Rename table (separate statement)
+ALTER TABLE EquipmentEvents 
+RENAME TO IndustrialEvents;
+*/
