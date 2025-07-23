@@ -1,4 +1,4 @@
-/**
+
 DROP TABLE IF EXISTS EquipmentEvents;
 DROP TABLE IF EXISTS IndustrialEvents;
 
@@ -38,4 +38,4 @@ RENAME COLUMN EventType TO EventCategory;
 -- Rename table (separate statement)
 ALTER TABLE EquipmentEvents 
 RENAME TO IndustrialEvents;
-*/
+
