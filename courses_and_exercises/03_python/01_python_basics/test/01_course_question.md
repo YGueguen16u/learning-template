@@ -185,3 +185,124 @@
     ```
 
 
+
+19. **What is a variable in Python?**
+    - Variables are symbolic names that are references or pointers to objects in memory
+    - They act as containers for storing data values
+    - A variable has three components:
+      - A name
+      - A value
+      - A type
+
+20. **What symbol is used for variable assignment in Python? What are the components of a variable declaration?**
+    - The `=` symbol is used for assignment
+    - Example:
+      ```python
+      age = 25  # 'age' is name, '=' is assignment operator, 25 is value
+      ```
+
+21. **Why doesn't Python require type declaration for variables?**
+    - Python uses dynamic typing:
+      - Variable types are assigned automatically based on their value
+      - The type is determined at runtime
+      - The same variable can hold different types during its lifetime
+    - Example:
+      ```python
+      x = 42        # x is automatically an integer
+      x = "Hello"   # now x is automatically a string
+      ```
+
+22. **Why is it important to store operation results in variables?**
+    - Results must be stored to be reused later
+    - The Python interpreter:
+      1. Executes an operation
+      2. Deletes the result if not stored
+      3. Cannot access the result later unless it was stored in a variable
+    
+    Example:
+    ```python
+    # Result lost after execution
+    2 + 3 * 4
+
+    # Result saved for later use
+    result = 2 + 3 * 4
+    print(result)  # Can use it later
+    ```
+
+23. **What are the rules for variable names in Python? Give examples of valid and invalid names.**
+    
+    Invalid examples:
+    ```python
+    1variable = 10     # Can't start with a number
+    print = "Hello"    # Can't use Python keywords
+    my-var = 20        # Can't use hyphens
+    ```
+
+    Valid examples:
+    ```python
+    my_variable = 10
+    _private = 20
+    camelCase = 30
+    ```
+
+24. **Why shouldn't you use Python keywords as variable names? Show an example of what could go wrong.**
+
+    ```python
+    # This breaks the print function
+    print = "Hello"
+    print("This won't work")  # TypeError: 'str' object is not callable
+    
+    # Correct way
+    message = "Hello"
+    print(message)
+    ```
+
+25. **Show 5 different ways to perform multiple variable assignment in Python.**
+
+    ```python
+    # 1. Direct multiple assignment
+    e, f, g = 2.5, 2, 'hello'
+    print(e, f, g)  # 2.5 2 hello
+
+    # 2. List unpacking
+    a, b, c = [1, 2, 3]
+    print(a, b, c)  # 1 2 3
+
+    # 3. Tuple unpacking
+    x, y, z = (4, 5, 6)
+    print(x, y, z)  # 4 5 6
+
+    # 4. String unpacking
+    s1, s2 = "ab"
+    print(s1, s2)  # a b
+
+    # 5. Dictionary key unpacking
+    k1, k2 = {"a": 1, "b": 2}
+    print(k1, k2)  # a b
+    ```
+
+26. **Practice Exercise: Zoo Food Cost Calculator**
+    
+    Create a program to calculate monthly elephant food costs with these requirements:
+    - Each elephant eats 50 kg of food daily
+    - Food costs 2.5 currency units per kg
+    - The zoo has 3 elephants
+    - Calculate for a 30-day month
+
+    Solution:
+    ```python
+    # Variables
+    daily_food_kg_per_elephant = 50
+    food_cost_per_kg = 2.5
+    number_of_elephants = 3
+    number_of_days = 30
+
+    # Calculate total cost
+    monthly_cost = (daily_food_kg_per_elephant * 
+                   food_cost_per_kg * 
+                   number_of_elephants * 
+                   number_of_days)
+
+    # Print result
+    print(f"The total monthly food cost for the elephants is: {monthly_cost} units")
+    ```
