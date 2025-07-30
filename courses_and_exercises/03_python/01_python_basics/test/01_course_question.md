@@ -187,6 +187,7 @@
 
 
 19. **What is a variable in Python?**
+
     - Variables are symbolic names that are references or pointers to objects in memory
     - They act as containers for storing data values
     - A variable has three components:
@@ -195,6 +196,7 @@
       - A type
 
 20. **What symbol is used for variable assignment in Python? What are the components of a variable declaration?**
+
     - The `=` symbol is used for assignment
     - Example:
       ```python
@@ -202,6 +204,7 @@
       ```
 
 21. **Why doesn't Python require type declaration for variables?**
+
     - Python uses dynamic typing:
       - Variable types are assigned automatically based on their value
       - The type is determined at runtime
@@ -213,6 +216,7 @@
       ```
 
 22. **Why is it important to store operation results in variables?**
+
     - Results must be stored to be reused later
     - The Python interpreter:
       1. Executes an operation
@@ -230,7 +234,7 @@
     ```
 
 23. **What are the rules for variable names in Python? Give examples of valid and invalid names.**
-    
+
     Invalid examples:
     ```python
     1variable = 10     # Can't start with a number
@@ -279,30 +283,4 @@
     # 5. Dictionary key unpacking
     k1, k2 = {"a": 1, "b": 2}
     print(k1, k2)  # a b
-    ```
-
-26. **Practice Exercise: Zoo Food Cost Calculator**
-    
-    Create a program to calculate monthly elephant food costs with these requirements:
-    - Each elephant eats 50 kg of food daily
-    - Food costs 2.5 currency units per kg
-    - The zoo has 3 elephants
-    - Calculate for a 30-day month
-
-    Solution:
-    ```python
-    # Variables
-    daily_food_kg_per_elephant = 50
-    food_cost_per_kg = 2.5
-    number_of_elephants = 3
-    number_of_days = 30
-
-    # Calculate total cost
-    monthly_cost = (daily_food_kg_per_elephant * 
-                   food_cost_per_kg * 
-                   number_of_elephants * 
-                   number_of_days)
-
-    # Print result
-    print(f"The total monthly food cost for the elephants is: {monthly_cost} units")
     ```
