@@ -1,9 +1,7 @@
-def my_function(x):
-    """
-    Add 1 to a
-    """
-    b = a + 1
-    print(a, "if you add one", b)
-    return b
+to_generate = (i**2 for i in [4,5,6])
+print(next(to_generate))
+print(next(to_generate))
+print(next(to_generate))
 
-help(my_function)
+to_generate = (i**2 for i in [4,5,6])
+print(list(to_generate))

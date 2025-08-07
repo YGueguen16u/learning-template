@@ -6,7 +6,27 @@
   <ul>
     <li><a href="#preamble">Preamble</a></li>
     <li><a href="#functions">Functions</a></li>
-    <li><a href="#exercise">Exercise</a></li>
+    <ul>
+        <li><a href="#help">help</a></li>
+        <li><a href="#call_a_function">Call a function</a></li>
+        <li><a href="#type_of_parameters">Type of parameters</a></li>
+        <li><a href="#default-parameters">Default Parameters</a></li>
+    </ul>
+    <li><a href="#variable-scope">Variable Scope</a></li>
+    <ul>
+        <li><a href="#another-example">Another example</a></li>
+    </ul>
+    <li><a href="#if-else-and-loop-in-a-function">If Else and Loop in a Function</a></li>
+    <li><a href="#collections-and-functions">Collections and Functions</a></li>
+    <li><a href="#basic-function-annotations">Basic Function Annotations</a></li>
+    <ul>
+        <li><a href="#type-annotations-in-functions">Type Annotations in Functions</a></li>
+        <li><a href="#basic-function-annotations">Basic Function Annotations</a></li>
+        <li><a href="#functions-that-return-nothing">Functions That Return Nothing</a></li>
+        <li><a href="#type-mismatch">Type Mismatch Issue</a></li>   
+    </ul>
+    <li><a href="#return-vs-no-return-vs-return-none">Return vs no return vs return none</a></li>
+    <li><a href="#generators">Generators</a></li>
   </ul>
 </div>
   
@@ -47,6 +67,23 @@ To define a function, follow these rules:
         return param1 + param2
     ```
 
+
+    - No line is read after the return statement
+
+    ```python
+    def add(a):
+        """
+        Add 1 to a
+        """
+        b = a + 1
+        print(a, "if you add one", b)
+        return b
+        print("this will not be printed")
+    ```
+
+    ```
+    1 if you add one 2
+    ```
 
 ### Example
 
@@ -104,7 +141,7 @@ Python will let you write code with 1, 2, or even 3 spaces…
 But the community standard among developers is :4 spaces per level of indentation!
 
 
-<h3>help</h3>
+<h3 id="help">help</h3>
 
 - Use the built-in `help()` function to get information about a function or module
 
@@ -134,9 +171,9 @@ my_function(x)
 (END)
 ```
 
-<h3>Call a function</h3>
+<h3 id="call_a_function">Call a function</h3>
 
-To call a function, use the function name followed by parentheses ()
+- To call a function, use the function name followed by parentheses ()
 
 ```python
 def my_function():
@@ -145,230 +182,741 @@ def my_function():
 my_function()
 ```
 
-
-
-
-
-
-
+- You can pass arguments to a function
 
 ```python
 def my_function(x):
-    output_string = f"vous avez inséré {x} dans la fonction"
+    output_string = f"This is the return of the function: {x}"
     return output_string
 
-print(my_function("salut"))  # résultat: "vous avez inséré salut dans la fonction"
-
-def double(x):
-    output = x * 2
-    return output
-
-print(double(21))  # résultat: 42
-print(double("abc"))  # résultat: "abcabc"
-
-def fonction_affine_maths(x):
-    y = 4 * x + 2  # A = 4, b = 2
-    return y
-
-resultat = fonction_affine_maths(4)
-print(resultat)  # résultat: 18
-
-def fonction_qui_renvoie_toujours_la_meme_chose():
-    return 42
-
-response = fonction_qui_renvoie_toujours_la_meme_chose()
-print(response)  # résultat: 42
-
+x = "Hey"
+print(my_function(x)) # returns: "This is the return of the function: Hey"
 ```
 
+**example :**
+
+- a function to give the square of a number
+
+```python
+def square(x):
+    return x * x
+```
+
+```python
+v = 2 
+print(square(v))
+
+# Directly enter a number as parameter
+print(square(3))
+```
+
+```
+4
+9
+```
+
+
+
+
+<h3 id="type_of_parameters">Type of parameters</h3>
+
+You don't need to specify the type of parameters in Python. You can pass any type of argument to a function.
+
+**example :**
+
+A function to multiply two numbers.
+
+```python
+def multiply(x, y):
+    return x * y
+```
+
+You can multiply two integers, two floats, or an integer and a float.
+
+```python
+print(multiply(2, 3))
+print(multiply(4.5, 5.9))
+print(multiply(8.8, 3))
+```
+
+```
+6
+26.55
+26.400000000000002
+```
+
+
+You can multiply a string and an integer.
+
+```python
+print(multiply("abc", 3))
+```
+
+```
+abcabcabc
+```
+
+However you need to respect the basic rules of the language.
+
+```python
+print(multiply("abc", "def"))
+```
+
+```
+Traceback (most recent call last):
+  File "/Users/GUEGUEN/CascadeProjects/tech-learning-template/try.py", line 9, in <module>
+    print(multiply("abc", "def"))
+  File "/Users/GUEGUEN/CascadeProjects/tech-learning-template/try.py", line 2, in multiply
+    return x * y
+TypeError: can't multiply sequence by non-int of type 'str'
+```
+
+<h3 id="default-parameters">Default Parameters</h3>
+
+You can set default values for parameters in a function.
+
+```python
+def multiply(x, y=1):
+    return x * y
+```
+
+```python
+print(multiply(2))
+print(multiply(2, 3))
+```
+
+```
+2
+6
+```
+
+<h2 id="variable-scope">Variable Scope</h2>
+
+**Function Parameters**
+A formal parameter is a variable that serves as an input to a function. Think of it as a placeholder that receives a value when the function is called. It's like a mailbox waiting to receive a letter!
+
+**Variable Scopes in Python**
+
+**Local Variables**
+A local variable is declared inside a function
+It only exists within the function's boundaries (from start to end)
+It's like a private room - what happens in the function, stays in the function!
+
+```python
+def my_function():
+    # local variable
+    x = 10
+    print(x)
+
+my_function()
+```
+
+**Global Variables**
+A global variable is declared outside of any function
+It can be accessed and modified throughout the entire program
+Think of it as a public announcement board that everyone can see and use
+
+```python
+# global variable
+x = 10
+
+def my_function(a):
+    # global variable
+    print(a)
+
+my_function(x)
+```
+
+```
+10
+```
+
+**Understanding Global vs Local Variables**
+
+```python
+# First, let's see what happens with regular variables
+message = "Hello World"  # This is a global variable
+
+name = "John"
+
+def greet(name):
+    internal_name = "Alice"      # This is a local variable
+    print(f"{message}, {internal_name}, {name}!")
+
+greet(name)                 # Works fine! We can read global variables
+greet(internal_name)           # Error! Can't access local variable outside function    
+print(internal_name)           # Error! Can't access local variable outside function
+```
+
+```
+Hello World, Alice, John!
+```
+
+**The `global` Keyword**
+To modify a global variable inside a function, we need to declare it using the `global` keyword:
+
+```python
+# global variable
+internal_counter = 0
+
+def increment():
+    global internal_counter    # Tell Python we want to use the 
+    internal_counter += 1      # Now we can modify it
+    print(f"Counter is now: {internal_counter}")
+
+increment()  # Output: Counter is now: 1
+increment()  # Output: Counter is now: 2
+print(internal_counter)  # Output: 2
+```
+
+```
+Counter is now: 1
+Counter is now: 2
+2
+```
+
+**Best Practices**
+While global variables are powerful, use them sparingly! They can make code harder to understand and maintain. Consider passing variables as parameters instead:
+
+```python
+def better_increment(value):
+    return value + 1
+
+number = 5
+number = better_increment(number)  # More explicit and easier to track
+```
+
+```
+6
+```
+
+<h3 id="another-example">Another example</h3>
+
+```python
+# Global variable - accessible everywhere
+favorite_artist = "AC/DC"
+
+def rate_artist(artist_name):
+    if artist_name == favorite_artist:
+        return 10.0    # Big fan!
+    else:
+        return 8.0     # Still good!
+
+# We can use the global variable here
+print(f"Rating for {favorite_artist}: {rate_artist(favorite_artist)}")
+print(f"Rating for Taylor Swift: {rate_artist('Taylor Swift')}")
+```
+
+```
+Rating for AC/DC: 10.0
+Rating for Taylor Swift: 8.0
+```
+
+**Local Variable Example**
+
+```python
+def rate_artist(artist_name):
+    # Local variable - only exists inside this function
+    top_artist = "AC/DC"
+    
+    if artist_name == top_artist:
+        return 10.0
+    else:
+        return 8.0
+
+print(f"Rating for AC/DC: {rate_artist('AC/DC')}")
+# This would cause an error:
+# print(f"Top artist is: {top_artist}")  # Error! top_artist only exists inside the function
+```
+
+```
+Rating for AC/DC: 10.0
+```
+
+When Names Collide
+
+```python
+favorite_band = "AC/DC"  # Global variable
+
+def get_rating(band_name):
+    # Local variable with same name as global
+    favorite_band = "Queen"  # This creates a new local variable
+    
+    if band_name == favorite_band:
+        return 10.0
+    return 8.0
+
+print(f"Rating: {get_rating('AC/DC')}")  # Uses local variable (Queen)
+print(f"My favorite band is still: {favorite_band}")  # Global variable (AC/DC)
+```
+
+```
+Rating: 8.0
+My favorite band is still: AC/DC
+```
+
+<h2 id="if-else-and-loop-in-a-function">IF / ELSE and Loop in a function</h2>
+
+**Control Flow in Functions**
+Functions become truly powerful when combined with control flow statements! Let's explore how to use conditions and loops within functions.
+
+**Conditional Statements in Functions**
+Functions can make decisions using `if/else` statements. The `return` statement is perfect for sending back different results based on conditions:
+
+```python
+def check_temperature(temp):
+    print(f"Checking temperature: {temp}°C")
+    if temp > 30:
+        return "Too hot!"
+    elif temp < 10:
+        return "Too cold!"
+    else:
+        return "Just right!"
+
+# Let's try it
+result = check_temperature(35)
+print(result)  # Output: Too hot!
+```
+
+**Loops in Functions**
+Functions can also process multiple items using loops. Here's how you can work with sequences:
+
+```python
+def process_items(items):
+    print("Processing each item:")
+    for item in items:
+        print(f"-> {item}")
+
+# With a list
+process_items(["apple", "banana", "cherry"])
+# Output:
+# Processing each item:
+# -> apple
+# -> banana
+# -> cherry
+
+# With a string (strings are sequences too!)
+process_items("ABC")
+# Output:
+# Processing each item:
+# -> A
+# -> B
+# -> C
+```
+
+<h2 id="Collections and Functions"> Collections and Functions</h2>
+
+When the number of arguments  are unknown for a function, They can all be packed into a tuple as shown:
+
+```python
+def add_to_playlist(*songs):  # Pack all songs into a tuple
+    print(f"Adding {len(songs)} songs to playlist:")
+    for i, song in enumerate(songs, 1):
+        print(f"{i}. {song}")
+    print("Playlist updated!")
+
+# Adding 3 songs
+add_to_playlist('Thunderstruck', 'Highway to Hell', 'Back in Black')
+
+# Adding 5 songs
+add_to_playlist('Bohemian Rhapsody', 'Stairway to Heaven', 'Sweet Child O Mine', 
+                'Hotel California', 'Smoke on the Water')
+```
+
+```
+Adding 3 songs to playlist:
+1. Thunderstruck
+2. Highway to Hell
+3. Back in Black
+Playlist updated!
+Adding 5 songs to playlist:
+1. Bohemian Rhapsody
+2. Stairway to Heaven
+3. Sweet Child O Mine
+4. Hotel California
+5. Smoke on the Water
+Playlist updated!
+```
+
+The arguments can also be packed into a dictionary as shown:
+
+```python
+def printDictionary(**args):
+    for key in args:
+        print(key + " : " + args[key])
+
+printDictionary(Name='John',Province='Ontario',City='Toronto')
+```
+
+```
+Name : John
+Province : Ontario
+City : Toronto
+```
+
+<h2 id="basic-function-annotations">Basic Function Annotations</h2>
+
+<h3 id="type-annotations-in-functions">Type Annotations in Functions</h3>
+
+
+In many other programming languages, you must explicitly declare the type of each variable. This makes the code more verbose, but also safer.
+
+```python
+int x = 5;
+float y = 3.14;
+String name = "Alice";
+```
+
+Once declared, the type cannot be changed later.
+This helps avoid bugs, especially in large projects or production systems.
+
+Python’s Evolution
+Python is dynamically typed by default:
+
+```python
+x = 10       # int
+x = "hello"  # now a string!
+```
+
+But since Python 3.5, you can add type hints to make your code more robust — without losing flexibility.
+
+
+
+<h3 id="basic-function-annotations">Basic Function Annotations</h3>
+
+
+You can specify the expected type for each argument, and for the return value.
+
+```python
+def multiply(x: int, y: int) -> int:
+    return x * y
+```
+
+	•	x: int → x should be an integer
+	•	y: int → y should be an integer
+	•	-> int → the function returns an integer
+
+Without type annotations (older style):
+
+```python
+def multiply(x, y):
+    return x * y
+```
+
+```python
+def int_list(list_int: list[int]) -> list[int]:
+    return list_int
+```
+
+```python
+int_list([1, 2, 3, 4, 5])
+```
+
+```
+[1, 2, 3, 4, 5]
+```
+
+
+<h3 id="functions-that-return-nothing">Functions That Return Nothing</h3>
+
+If a function doesn’t return anything (for example, if it only prints), annotate it with -> None:
+
+```python
+def greet(name: str) -> None:
+    print(f"Hello, {name}!")
+```
+
+This tells the reader and static analysis tools that the function has no return value.
+
+
+<h3 id="type-mismatch">Type Mismatch Issue</h3>
+
+```python
+def divide_et_impera(x: int, y: int) -> int:
+    return x / y
+
+print(divide_et_impera(4, 3))  # Output: 1.3333333333333333
+```
+
+```
+1.3333333333333333
+```
+
+Notice something interesting? Our function:
+
+Declares it returns an `int` (-> int)
+But actually returns a `float` (1.3333...)
+While Python itself won't complain (it's dynamically typed), this is problematic when:
+
+- Using static type checkers (like mypy or pyright)
+- Working in professional environments
+- Maintaining large codebases
+- Using Union Types
+
+To properly handle multiple possible types, Python provides the Union type syntax using the | operator (pipe):
+
+```python
+def divide_et_impera(x: int | float, y: int | float) -> float:
+    return x / y
+```
+
+This improved version:
+
+- Accepts both integers AND floats as inputs
+- Explicitly declares it returns a float
+- Will pass type checking tools
+
+**Best Practices**
+
+- Be explicit about your return types
+- Use union types when a function can handle multiple types
+- Consider using type checkers in your development workflow:
+
+```bash
+# Using mypy
+mypy your_file.py
+
+# Using pyright
+pyright your_file.py
+```
+
+**Type Checking Benefits**
+
+- Catches errors before runtime
+- Improves code documentation
+- Enhances IDE support (better autocompletion and hints)
+- Makes code maintenance easier
+
+Remember: While Python won't enforce these types at runtime, using type hints makes your code more maintainable and helps catch potential issues early in development.
+
+
+
+
+<h2 id="return-vs-no-return-vs-return-none">Return vs no return vs return none</h2>
+
+If there is no <code>return</code> statement, the function returns <code>None</code>. The following two functions are equivalent:
+
+```python
+# Define functions, one with return value None and other without return value
+
+def MJ():
+    print('Michael Jackson')
+    
+def MJ1():
+    print('Michael Jackson')
+    return(None)
+
+def MJ2():
+    print('Michael Jackson')
+    pass
+```
+
+```python
+MJ()
+MJ1()
+MJ2()
+```
+
+```
+Michael Jackson
+Michael Jackson
+Michael Jackson
+```
+
+```python
+print(MJ())
+```
+
+```
+Michael Jackson
+None
+```
+
+```python
+print(MJ1())
+```
+
+```
+Michael Jackson
+None
+```
+
+```python
+print(MJ2())
+```
+
+```
+Michael Jackson
+None
+```
+
+**Best Practices Summary**
+
+|Pattern|When to Use|Example Use Case|
+|---|---|---|
+|return None|When None is a valid result|Finding an optional value|
+|return|For early function exits|Validation functions|
+|No return|For action-only functions|Logging, printing, saving|
+
+**Example Combining All Patterns:**
+
+```python
+def process_user_data(user_id: int) -> dict | None:
+    # Early exit if invalid ID
+    if user_id < 0:
+        return
         
-💡note pour les lecteurs avancés: il y a bien sûr toujours des exceptions justifiées, mais rappelez-vous que quand vous étiez débutant vous aviez probablement le réflexe de créer une maxi_fonction_qui_fait_tout() avec 9 arguments et 150 lignes de code derrière :)
-
-	
-	
-
-	
-
-# Exercices
-
-- Créer une fonction hello_there() qui ne renvoie rien mais print “hello_there” (et l’utiliser)
-    
-    ```python
-    def hello_there():
-    		print("Hello there !")
-    		
-    hello_there()  # tant que vous n'appelez pas la fonction, il ne se passe rien !
-    ```
-    
-    
-- Rappel f-string: créer une fonction print_bonjour, et lui ajouter un paramètre/argument prenom_a_inserer et faire en sorte que la fonction print: bonjour prenom_a_inserer ! (ex: si on mets Benjamin en input, elle print “bonjour Benjamin”)
-    
-    ```python
-    def print_bonjour(prenom_a_inserer):
-    		print(f"bonjour {prenom_a_inserer } !")
-    	
-    moi = "Benjamin"
-    
-    print_bonjour(moi)
-    ```
-    
-- créez une fonction create_greeting() avec un argument _name_ qui _renvoie_ Hello _name_
-    
-    ```python
-    def create_greeting(name):
-    		return f"Hello {name}"
-    		
-    greeting = create_greeting("Benjamin")
-    print(greeting)
-    ```
-    
-- creéz une fonction jesus avec un argument pains et un deuxième argument chiffre multiplicateur (multipliez le premier argument par le 2e). Cette fonction renvoie le total des pains après multiplication
-    
-    ```python
-    def jesus(pains, multiplicateur):
-    		return pains * multiplicateur
-    		
-    nombre_pains = 3
-    multiple = 2 
-    
-    nombre_final_pains = jesus(nombre_pains, multiple)
-    print(nombre_final_pains)
-    ```
-    
-    
-    Essayez de mettre “trois” dans le nombre_pains et “Judas” dans la variable multiple que vous passez en 2nd paramètre à la fonction Jesus. Que se passe-t’il ?
+    # Get user data
+    user = find_user_by_id(user_id)
+    if user is None:
+        return None  # Explicitly return None for missing user
         
-💡 Quand on explique pas aux utilisateurs de notre code comment ils doivent utiliser nos fonctions, il peut se passer des comportement inattendus comme ça.
-
-C’est pour cette raison que Python permet depuis sa version 3.5 de donner des indications sur ce qu’il faut rentrer comme paramètre, et sur ce qu’on peut attendre de la fonction en sortie.
-
-On appelle ça les type hints, et je vais vous montrer ça dans la partie suivante
-
-
-# Les fonctions “modernes”
-
-En Python, vous pouvez faire:
-
-```python
-x = 5
-x = "whatTheF*ck"
+    # Log activity (no return needed)
+    log_user_activity(user.name, "data processed")
+    
+    # Return processed data
+    return {"id": user_id, "name": user.name}
 ```
 
-Et ça ne pose aucun problème.
+**Another Examples:**
 
-Dans d’autre langages informatiques, vous devez _dire explicitement_ à votre programme que votre variable x sera un int, ou un float, ou une chaine de caractère, et vous ne pouvez plus en changer par la suite:
+1. Explicit return None
 
+Use when None represents a meaningful result:
 
-Ca rend le code plus verbeux. Mais ça évite des bugs en production.
-
-Beaucoup de développeurs ont jugé pratique le fait de pouvoir spécifier dans le code quel type une variable devait avoir, et ça a été introduit en Python 3.5.
-
-Voici comment ça marche:
-
-![[01_06.png]]
-Si la fonction ne renvoie rien (comme nos fonctions hello_there qui ne faisaient que des print() et n’utilisaient pas le keywork _return_), alors il faut utiliser → None:
-
-- Exercice: créez une fonction _multiply_ qui prends deux entiers x et y et les multiplie l’un par l’autre
-    
-    ```python
-    #à l'ancienne
-    def mutiply(x, y):
-    		return x * y
-    
-    # les vrais pros depuis Python 3.5:
-    def multiply(x: int, y: int) -> int:
-    		return x * y
-    ```
-    
-- Exercice: recréez la fonctions jesus en précisant que les argument nombres_pains et multiple doivent être des int
-    
-    ```python
-    def jesus(pains: int, multiplicateur: int) -> int:
-    		return pains * multiplicateur
-    
-    nombre_pains = "trois"
-    multiple = "Judas"
-    
-    nombre_final_pains = jesus(nombre_pains, multiple)
-    print(nombre_final_pains)
-    ```
-    
-- Exercice: créez une fonction divede_et_impera qui prends deux entiers et les divise l’un par l’autre. Puis testez votre fonction avec x = 4 et y = 3. Que remarquez vous ?
-    
-![[Pasted image 20250620134118.png]]    
-    Notre fonction renvoie un float. Pourtant, j’avais précisé que la sortie serait un entier (INTeger).
-    
-💡 Il se s’est rien passé parce que Python vous laisse faire. Mais quand vous serez en entreprise, vous utiliserez surement des outils comme mypy ou pyright qui feront le check de la qualité de votre code et vous alerteront sur le fait que votre sortie peut être un float dans ce cas de figure
-
-> Mais… comment je fais pour laisser l’option entre plusieurs types ?
-    
-Il faut le faire avec un caractère appelé _pipe_ (pas comme dans l’item pour les fumeurs, mais comme dans tuyau en anglais). Le pipe est créé avec AltGR + 6 sur Windows:
-    
-```python
-def divide_et_impera(x: int, y: int) -> int | float:
-		return x / y
+```python   
+def find_user_by_id(user_id: int) -> str | None:
+    if user_id in database:
+        return database[user_id].name
+    return None  # Explicitly indicates no user was found
 ```
-    
-améliorez cette fonction pour qu’elle puisse prendre en argument des float et des ints.
+2. Bare return
 
-- Solution
-	
+Use for early exits without a specific value:
+
 ```python
-def divide_et_impera(x: int | float, y: int | float) -> int | float:
-	return x / y
-
-```
+def validate_password(password: str) -> bool:
+    # Early exits for invalid cases
+    if len(password) < 8:
+        return False
+    if not any(c.isupper() for c in password):
+        return False
         
-
-> Ohlala, c’est hyper pénible d’écrire autant de code pour un truc aussi simple. On est vraiment obligés de faire ça ?
-
-💡 Python 3.5 a été introduit en Septembre 2015. Ca fait déjà 10 ans ! Il n’y a plus aucune excuse pour que les tutoriels en ligne ne présentent pas les type hints et les annotations de fonction… Surtout que c’est indispensable quand on travaille sérieusement en entreprise ;)
-
-C’est pour ça que les tutos gratuits fait en une après-midi sur Youtube, c’est généralement pas la folie:
-
-![Un tuto sur Youtube publié en 2024. Heureusement que c’est gratuit, parce qu’enseigner du code comme ça, c’est franchement pas rendre service aux apprenants…](attachment:b8b98010-30f3-43d9-9d44-4a2b4ebf5b7c:image.png)
-
-Un tuto sur Youtube publié en 2024. Heureusement que c’est gratuit, parce qu’enseigner du code comme ça, c’est franchement pas rendre service aux apprenants…
-
-Mais pourquoi est-ce que c’est aussi utilisé ?
-
-1. meilleure relecture du code. Croyez moi, on dirait pas comme ça, mais le code est plus facile à relire quand son auteur nous dit ce qui entre et ce qui sort de chacune des fonctions
-    
-2. détection d’erreurs: les outils comme mypy et pyright vont détecter des bugs pour vous dans votre code avant même que vous n’ayez besoin d’uploader le code
-    
-3. votre IDE fonctionnera mieux: beaucoup d’Environnements de Développement Intégrés (Integrated Development Envrionments ou IDE) utilisent ces type hints pour vous fournir une meilleure auto-complétion par exemple.
-
-
-# Composition de fonctions
-
-Vous pouvez “englober” le résultat d’une fonction par une autre fonction.
-
-```python
-print(42)
-
-print(type(42))
-
-print(type(str(42)))
-
+    # If we get here, password is valid
+    return True
 ```
 
-Dans ce cas de figure, les fonctions sont exécutées de l’intérieur vers l’extérieur. Voici comment fonctionne la 3e ligne de code:
+3. No return (Implicit None)
 
-1. str(42) est exécuté, ce qui _return_ “42”
-2. type(”42”) est exécuté, ce qui _return_ <class 'str'>
-3. print(”<class 'str'>”) est exécuté, ce qui _affiche_ <class 'str'> dans le terminal
+Use for functions that perform actions but don't need to return values:
 
----
+```python
+def log_user_activity(user: str, action: str) -> None:
+    print(f"User {user} performed {action}")
+    # No return needed - function is used for its effect
+```
 
-Dernier point important !
+<h2 id="generators">Generators</h2>
 
-En python, il y a une distinction entre les types atomiques et les types composites. C’est du verbiage barbare pour distinguer les types qui sont composés d’autres types (une liste peut contenir des int, des floats, etc…, un dictionnaire peut contenir des int, des floats, etc), et les autres ;)
+Generators are a special kind of function in Python that allow you to iterate over values one at a time, without storing the entire sequence in memory.
 
-D’un côté, vous avez int, float, et str qui ne contiennent rien d’autre qu’eux-même (_atomiques_) De l’autre côté vous avez les types qui peuvent contenir autre chose (_composites_)
+They are:
 
-Pourquoi je vous parle de ça ?
+- A more efficient alternative to lists when you don’t need all items at once.
+- Defined using the yield keyword (instead of return).
+- Paused and resumed between calls, preserving their internal state.
+- Iterable : use the operator `next()` to get the next value
+- At the end of the iteration, the generator is empty. 
+- Generators can also be called for all values using `list()` instead of `next()`
+- Generators can be even more efficient when created from list comprehensions
+- The syntax is identical to a list comprehensions, except `()` are used instead of `[]`
 
-![[01_07.png]]
-> Heeuuu Benjamin… C’est quoi ce truc _from typing import List ?!_
+A generator yields one value at a time, and remembers where it left off:
 
-Glad you asked 😄. C’est ce qu’on va voir dans le prochain chapitre.
+```python
+def square_list(list_num : list[int]) :
+    for num in list_num :
+        yield num * num 
+
+list_number = square_list([1, 2, 3, 4, 5])
+
+print(next(list_number))
+print(next(list_number))
+print(next(list_number))
+print(next(list_number))
+print(next(list_number))
+print(next(list_number)) # Error
+```
+
+```
+1
+4
+9
+16
+25
+Traceback (most recent call last):
+  File "/Users/GUEGUEN/CascadeProjects/tech-learning-template/try.py", line 12, in <module>
+    print(next(list_number))
+StopIteration
+```
+
+- At the end of the iteration, an error `StopIteration` is raised.
+
+Use `list()`or `tuple()`to get all values at once:
+
+```python
+list_number = square_list([1, 2, 3, 4, 5])
+print(list(list_number))
+print(tuple(list_number))
+print(set(list_number))
+```
+
+```
+[1, 4, 9, 16, 25]
+(1, 4, 9, 16, 25)
+{1, 4, 9, 16, 25}
+```
+
+Use list comprehension to create a generator:
+
+```python
+to_generate = (i**2 for i in [4,5,6])
+print(next(to_generate))
+print(next(to_generate))
+print(next(to_generate))
+print(list(to_generate))
+```
+
+```
+16
+25
+36
+[16, 25, 36]
+```
+
+Take care, when all values are generated, the generator is empty. 
+Even if you call with the `list()` function, it will return an empty list.
+
+```python
+to_generate = (i**2 for i in [4,5,6])
+print(next(to_generate))
+print(next(to_generate))
+print(next(to_generate))
+print(list(to_generate))
+```
+
+```
+16
+25
+36
+[]
+```
+
+**Why Use Generators?**
+
+- **Memory-efficient**: great for working with large datasets or infinite streams.
+- **Lazy evaluation**: values are computed only when needed.
+- **Cleaner code**: avoids building unnecessary full lists in memory.
+
+
+
