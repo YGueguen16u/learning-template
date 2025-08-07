@@ -16,6 +16,7 @@
       <li><a href="#dynamic-typing">3. Dynamic Typing</a></li>
       <li><a href="#type-comparisons">4. Type Comparisons</a></li>
     </ul> 
+    <li><a href="#atomic-and-composite-types">5. Atomic and Composite Types</a></li>
     </li>
   </ul>
 </div>
@@ -265,3 +266,63 @@ print(type(2.5)==type(3.5))
 print(type(3)==type(4.5))
 print(type(5.5)==type("5.5"))
 ```
+
+
+<h2 id="atomic-and-composite-types">Atomic and Composite Types</h2>
+
+In Python, data types can be categorized into two main groups:
+
+**Atomic Types**
+
+Atomic types are the basic building blocks that can't be broken down further. They hold a single value:
+
+```python
+# Atomic types examples
+age = 25           # int
+height = 1.75      # float
+name = "Alice"     # str
+is_student = True  # bool
+```
+
+**Composite Types**
+
+Composite types can contain other types (both atomic and composite). They're like containers:
+
+```python
+# List can contain multiple types
+student_info = [
+    "Bob",     # str
+    20,        # int
+    3.9,       # float
+    True       # bool
+]
+
+# Dictionary with mixed types
+person = {
+    "name": "Charlie",
+    "age": 22,
+    "grades": [85, 92, 88],
+    "contact": {
+        "email": "charlie@example.com",
+        "phone": "123-456-7890"
+    }
+}
+```
+
+**Why This Matters for Functions**
+
+When writing functions with type hints, understanding this distinction helps you write more precise code:
+
+```python
+from typing import List, Dict
+
+# Function expecting atomic types
+def calculate_bmi(height: float, weight: float) -> float:
+    return weight / (height ** 2)
+
+# Function expecting composite types
+def get_student_average(grades: List[float]) -> float:
+    return sum(grades) / len(grades)
+```
+
+This organization of types helps us write clearer, more maintainable code and catch potential errors before they happen.
