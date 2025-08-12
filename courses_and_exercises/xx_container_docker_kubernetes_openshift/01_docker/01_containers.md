@@ -53,7 +53,7 @@ A container encapsulates an **application and its dependencies into a single uni
 
 ### **Characteristics of Containers**
 
-1. **Lightweight**: Containers are small, often only **tens of megabytes in size**, which makes them fast to deploy and less resource-intensive compared to traditional virtual machines.
+1. **Lightweight**: Containers are small, often only **tens of megabytes in size**, which makes them fast to deploy and less resource-intensive **compared to traditional virtual machines**.
 
 2. **Isolation**: Each container runs in its **own environment, isolated from other containers**. This prevents conflicts between applications running on the same system.
 
