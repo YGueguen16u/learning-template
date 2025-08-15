@@ -1,8 +1,3 @@
-Here’s the rewritten, polished English transcript for the second video while keeping all the original meaning intact:
-
----
-
-**Welcome back!**
 In this part of the course, we’ll focus on two main topics:
 
 1. **Container architecture**
@@ -12,7 +7,6 @@ At this stage, you can think of **containers** and **Docker** as essentially the
 A Docker container is just one type of container, and the differences only matter when we go much deeper into the technology.
 
 
----
 
 ## 1. Recap: Virtual Machine Architecture
 
@@ -43,9 +37,82 @@ Then, on top of the hypervisor, we have **virtual machines**:
 * If you have many identical OS instances, this leads to **massive duplication**.
 * Each VM needs to **boot its own OS**, which adds startup and restart overhead (although still less than physical servers).
 
----
+## 2. Traditional Computing Challenges
 
-## 2. Container Architecture
+Before containerization, software deployment and management faced several obstacles:
+
+### **1. Lack of Isolation**
+
+In traditional environments, applications **run directly on physical servers**, often **sharing resources** such as memory and storage. This lack of isolation can cause **conflicts**, especially when running multiple applications on the same machine.
+
+### **2. Resource Utilization Issues**
+
+Physical servers are often **underutilized or overutilized**, leading to inefficiencies. Proper allocation of resources like CPU and memory is crucial for maximizing performance, but traditional computing environments often fail in this regard.
+
+### **3. Scalability Limitations**
+
+Scaling applications in traditional environments requires complex provisioning and can lead to expensive and slow processes. Physical hardware has **finite capacity**, which can restrict the growth of applications during **peak workloads**.
+
+### **4. Lack of Portability**
+
+Applications developed in traditional computing environments are often **tied to specific platforms and operating systems**, making it difficult to move them across different environments (e.g., development, testing, production).
+
+### **5. Complex Automation**
+
+Automating software deployment and distribution across multiple environments is a challenge in traditional setups, often requiring **manual intervention and significantly increasing time and costs**.
+
+## 3. Container Technology and Characteristics
+
+A **container** is a **lightweight, stand-alone** software package that **encapsulates an application and all its dependencies** (code, runtime, libraries, environment variables, and configuration files) into a single unit. This ensures the application runs reliably across different computing environments, independent of the underlying infrastructure, making it highly **portable and flexible**.
+
+### **Characteristics of Containers**
+
+1. **Lightweight**: Containers are small, often only **tens of megabytes in size**, which makes them fast to deploy and less resource-intensive **compared to traditional virtual machines**.
+
+    * You can run **more containers** on the same hardware compared to VMs.
+    * You can use a **smaller host** to run the same workloads.
+    * This leads to **better utilization** and **more value** for a business.
+
+2. **Isolation**: Each container runs in its **own environment, isolated from other containers**. This prevents conflicts between applications running on the same system.
+
+3. **Portability**: Containers can run on **various platforms** (cloud, desktop, on-premises) and **operating systems** (Windows, Linux, Mac OS), ensuring that software can be moved seamlessly between environments.
+
+4. **Efficiency**: Containers use fewer resources compared to virtual machines because they share the host operating system's kernel and run as isolated processes. This leads to better resource utilization and reduced overhead.
+
+5. **Scalability**: Containers can be easily scaled up or down based on the workload. This makes them ideal for modern applications that need to respond quickly to changing demands.
+
+## 4. Benefits and Challenges of Containers
+
+### **Benefits of Using Containers**
+
+1. **Improved Resource Utilization**: Containers run on **shared resources**, minimizing hardware wastage. Multiple containers can run on a single machine, leading to efficient use of CPU and memory.
+
+![alt text](images/01_01.png)
+
+2. **Portability**: Containers can be moved between **different environments** without modification, ensuring that applications run consistently across development, testing, and production stages.
+
+![alt text](images/01_02.png)
+
+3. **Faster Deployment**: Containers are designed to be deployed **quickly**. This results in reduced deployment times and costs, enabling rapid updates and faster time-to-market.
+
+4. **Support for Microservices**: Containers are perfect for microservices architectures, where applications are divided into smaller, independent services. This approach enables better scalability and easier management of complex applications.
+
+5. **Automation**: Containers make automation simpler by providing a standardized environment for deploying and managing applications. This leads to **easier integration into CI/CD pipelines and other automation tools**.
+
+
+
+### **Challenges of Using Containers**
+
+1. **Security Concerns**: If the underlying host operating system is compromised, all containers running on that host could be at risk. Proper container security practices must be followed to mitigate this risk.
+
+2. **Management Overhead**: Managing thousands of containers can become overwhelming for developers, especially when dealing with large-scale environments. Tools like Kubernetes have been developed to help manage container clusters efficiently.
+
+3. **Migration Complexity**: Converting legacy monolithic applications into **microservices** or **containerized applications** can be complex and time-consuming.
+
+4. **Right-sizing Containers**: Determining the correct size and resource allocation for each container can be challenging, especially for applications with fluctuating resource needs.
+
+
+## 5. Container Architecture
 
 With **containers**, we start with the same physical hardware, but this time we call it a **Docker host** or **container host**.
 
@@ -74,7 +141,7 @@ Because of this:
 
 ![alt text](images/02_02.png)
 
-## 3. Performance & Utilization
+## 6. Performance & Utilization
 
 Since containers are lighter:
 
@@ -83,7 +150,7 @@ Since containers are lighter:
 * This leads to **better utilization** and **more value** for a business.
 
 
-## 4. Summary Points
+## 7. Summary Points
 
 Let’s highlight the main things you need to remember:
 
@@ -94,7 +161,7 @@ Let’s highlight the main things you need to remember:
 5. Not starting a separate OS for each container removes a lot of overhead.
 
 
-## 5. Downsides of Containers
+## 8. Downsides of Containers
 
 Because containers share the **same OS**, they aren’t as **isolated** as VMs:
 
@@ -107,7 +174,7 @@ Think of it like living in an apartment building:
 * Similarly, if one container hogs resources, other containers may suffer.
 
 
-## 6. Why Containers Exist
+## 9. Why Containers Exist
 
 The best explanation I’ve heard is this:
 
@@ -117,7 +184,7 @@ The best explanation I’ve heard is this:
 * Containers are like **shipping your entire working environment** with the application.
 * They bundle the app and everything it needs — including **specific, tested versions of libraries** — so that if it works once, it will work anywhere that container runs.
 
-## 7. Run a Container
+## 10. Run a Container
 
 
 ```bash
@@ -232,7 +299,7 @@ Your container is now running and serving the “Getting Started” tutorial on 
 * In your browser, go to **[http://localhost](http://localhost)** to view it.
 
 
-## 8. `docker`command
+## 11. `docker`command
 
 ```bash
 docker
@@ -334,7 +401,7 @@ For more help on how to use Docker, head to https://docs.docker.com/go/guides/
 GUEGUEN@mac tech-learning-template % 
 ```
 
-## 9. `docker version`
+## 12. `docker version`
 
 ```bash
 docker version
@@ -372,3 +439,26 @@ Server: Docker Desktop 4.39.0 (184744)
   GitCommit:        de40ad0
 GUEGUEN@mac tech-learning-template % 
 ```
+
+
+## 13. Popular Container Vendors
+
+Several companies provide tools and platforms to facilitate the use of containers. Some of the most popular container vendors include:
+
+### **1. Docker**
+
+Docker is the most widely used container platform today. It offers a complete suite of tools for building, shipping, and running containerized applications.
+
+### **2. Podman**
+
+Podman is a daemon-less container engine that is more secure than Docker. It is compatible with Docker commands, making it easy to switch between the two.
+
+### **3. LXC (Linux Containers)**
+
+LXC is often preferred for data-intensive applications that require a more extensive environment. It provides an OS-level virtualization solution for Linux.
+
+### **4. Vagrant**
+
+Vagrant focuses on providing high levels of isolation for applications running on physical machines. It is often used in development and testing environments where consistency is crucial.
+
+
