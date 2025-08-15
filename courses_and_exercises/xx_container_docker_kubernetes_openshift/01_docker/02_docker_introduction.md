@@ -15,7 +15,9 @@
 
 ### Introduction
 
-Docker has emerged as one of the most popular platforms for developing, shipping, and running applications in containers. Since its introduction in 2013, Docker has revolutionized the way developers create and deploy applications, offering a simple and scalable solution for application containerization.
+- The adoption of **container technology** has revolutionized how software is developed, deployed, and managed. Containers address long-standing challenges in traditional computing environments, enabling more efficient, scalable, and portable application delivery. In this course, we will explore the concept of containers, their advantages, challenges, and popular vendors.
+
+- Docker has emerged as one of the most popular platforms for developing, shipping, and running applications in containers. Since its introduction in 2013, Docker has revolutionized the way developers create and deploy applications, offering a simple and scalable solution for application containerization.
 
 
 ## <h2 id="what-is-docker">What is Docker?</h2>
