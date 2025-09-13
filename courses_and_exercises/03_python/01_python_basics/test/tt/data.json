@@ -1,0 +1,966 @@
+{
+    "facilities": [
+        {
+            "site_id": "FR-NPP-01",
+            "name": "Centrale de Valmont",
+            "country": "France",
+            "website_url": "https://www.valmont.fr",
+            "reactors": [
+                {
+                    "reactor_id": "VAL-1",
+                    "reactor_type": "PWR",
+                    "commissioning_date": "2010-05-12",
+                    "status": "Online",
+                    "thermal_power_MWt": 3200,
+                    "electric_power_MWe": 1050,
+                    "design_pressure_bar": 155,
+                    "primary_coolant": "H2O (light water)",
+                    "safety_class": "IEC61508",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        { 
+                            "type": "UO2", 
+                            "enrichment_%": 4.5 
+                        },
+                        { 
+                            "type": "MOX", 
+                            "plutonium_%": 7 
+                        }
+                    ],
+                    "safety_systems": [
+                        [
+                            "Emergency Core Cooling System",
+                            "Reactor Protection System"
+                        ],
+                        [
+                            "Containment Spray System",
+                            "Passive Heat Removal System"
+                        ],
+                        [
+                            "Diesel Generators",
+                            "Emergency Batteries"
+                        ]
+                    ],
+                    "probabilistic_safety": {
+                        "core_damage_frequency_per_reactor_year": 1.5e-5,
+                        "large_early_release_frequency_per_reactor_year": 2.0e-6
+                    },
+                    "events": [
+                        [
+                            { 
+                                "date": "2022-07-15", 
+                                "description": "Inspection périodique", 
+                                "level_INES": 0 
+                            }
+                        ],
+                        [
+                            { 
+                                "date": "2023-02-10", 
+                                "description": "Test de sûreté circuit primaire", 
+                                "level_INES": 1 
+                            }
+                        ]
+                    ],
+                    "maintenance_calendar": [
+                        [
+                            { 
+                                "day": "2023-06-01", 
+                                "task": "Inspection visuelle" 
+                            },
+                            { 
+                                "day": "2023-06-02", 
+                                "task": "Vérification capteurs" 
+                            }
+                        ],
+                        [
+                            { 
+                                "day": "2023-06-08", 
+                                "task": "Test soupapes de sûreté" 
+                            },
+                            { 
+                                "day": "2023-06-09", 
+                                "task": "Contrôle électrique" 
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "reactor_id": "VAL-2",
+                    "reactor_type": "PWR",
+                    "commissioning_date": "2013/11/03",
+                    "status": "Outage",
+                    "thermal_power_MWt": 3200,
+                    "electric_power_MWe": 1050,
+                    "design_pressure_bar": 155,
+                    "primary_coolant": "H2O (light water)",
+                    "safety_class": "IEC61508",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        [
+                            { 
+                                "type": "UO2", 
+                                "enrichment_%": 4.2 
+                            }
+                        ],
+                        [
+                            { 
+                                "type": "UO2", 
+                                "enrichment_%": 4.4 
+                            }
+                        ]
+                    ],
+                    "safety_systems": [
+                        [
+                            "Emergency Core Cooling System",
+                            "Reactor Protection System"
+                        ],
+                        [
+                            "Containment Spray System"
+                        ],
+                        [
+                            "Diesel Generators",
+                            "Station Blackout Mobile DG"
+                        ]
+                    ],
+                    "events": [
+                        [
+                            { 
+                                "date": "2023-11-20", 
+                                "description": "Début arrêt programmé", 
+                                "level_INES": 0 
+                            }
+                        ],
+                        [
+                            { 
+                                "date": "2024-01-12", 
+                                "description": "Remplacement d'assemblages combustibles", 
+                                "level_INES": 0 
+                            }
+                        ]
+                    ],
+                    "maintenance_calendar": [
+                        [
+                            { 
+                                "day": "2024-01-15", 
+                                "task": "Ouverture cuve" 
+                            },
+                            { 
+                                "day": "2024-01-16", 
+                                "task": "Déchargement combustible" 
+                            }
+                        ],
+                        [
+                            { 
+                                "day": "2024-01-22", 
+                                "task": "Rechargement combustible" 
+                            },
+                            { 
+                                "day": "2024-01-23", 
+                                "task": "Essais à froid" 
+                            }
+                        ]
+                    ]
+                }
+            ],
+            "geo": { 
+                "lat": 47.927, 
+                "lon": 1.905, 
+                "elevation_m": 112 
+            }
+        },
+        {
+            "site_id": "SE-RR-02",
+            "name": "Skog Research Reactor",
+            "country": "Sweden",
+            "website_url": "https://www.skogresearchreactor.se",
+            "reactors": [
+                {
+                    "reactor_id": "SKG-R1",
+                    "reactor_type": "RR (pool-type)",
+                    "commissioning_date": "15-09-2002",
+                    "status": "Online",
+                    "thermal_power_MWt": 0.5,
+                    "electric_power_MWe": 0,
+                    "design_pressure_bar": 1,
+                    "primary_coolant": "H2O (demineralized)",
+                    "safety_integrity_level": "SIL-2",
+                    "fuels": [
+                        [
+                            { 
+                                "type": "U3Si2-Al", 
+                                "enrichment_%": 19.75 
+                            }
+                        ],
+                        [
+                            { 
+                                "type": "UMo-Al", 
+                                "enrichment_%": 19.75 
+                            }
+                        ]
+                    ],
+                    "safety_systems": [
+                        [
+                            "Reactor Trip System"
+                        ],
+                        [
+                            "Pool Cooling System",
+                            "Passive Heat Removal Loop"
+                        ],
+                        [
+                            "Radiation Monitoring",
+                            "Emergency Ventilation"
+                        ]
+                    ],
+                    "events": [
+                        [
+                            { 
+                                "date": "2021-05-04", 
+                                "description": "Calibration instruments", 
+                                "level_INES": 0 
+                            }
+                        ],
+                        [
+                            { 
+                                "date": "2023-10-12", 
+                                "description": "Essai d’irradiation échantillons", 
+                                "level_INES": 0 
+                            }
+                        ]
+                    ],
+                    "maintenance_calendar": [
+                        [
+                            { 
+                                "day": "2023-03-07", 
+                                "task": "Nettoyage piscine" 
+                            }
+                        ],
+                        [
+                            { 
+                                "day": "2023-03-14", 
+                                "task": "Vérification grappes" 
+                            }
+                        ]
+                    ]
+                }
+            ],
+            "geo": { 
+                "lat": 59.3326, 
+                "lon": 18.0649, 
+                "elevation_m": 18 
+            }
+        },
+        {
+            "site_id": "US-NPP-03",
+            "name": "Clear River Station",
+            "country": "USA",
+            "reactors": [
+                {
+                    "reactor_id": "CRS-1",
+                    "reactor_type": "BWR",
+                    "commissioning_date": "2001-01-07",
+                    "status": "Derated",
+                    "thermal_power_MWt": 2894,
+                    "electric_power_MWe": 950,
+                    "design_pressure_bar": 75,
+                    "primary_coolant": "H2O (boiling)",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        [
+                            {
+                                "type": "UO2", 
+                                "enrichment_%": 4.0 
+                            }
+                        ],
+                        [
+                            {
+                                "type": "UO2", 
+                                "enrichment_%": 4.2 
+                            }
+                        ]
+                    ],
+                    "safety_systems": [
+                        [
+                            "Reactor Core Isolation Cooling (RCIC)",
+                            "High Pressure Coolant Injection (HPCI)"
+                        ],
+                        [
+                            "Containment Venting"
+                        ],
+                        [
+                            "Diesel Generators",
+                            "Portable Pumps (FLEX)"
+                        ]
+                    ],
+                    "events": [
+                        [
+                            {
+                                "date": "2024-06-30", 
+                                "description": "Réduction de puissance contrôlée", 
+                                "level_INES": 0 
+                            }
+                        ],
+                        [
+                            {
+                                "date": "2024-09-01", 
+                                "description": "Inspection turbine basse pression", 
+                                "level_INES": 0 
+                            }
+                        ]
+                    ],
+                    "maintenance_calendar": [
+                        [   
+                            {
+                                "day": "2024-07-02", 
+                                "task": "Vérif soupapes SRV" 
+                            }
+                        ],
+                        [
+                            {
+                                "day": "2024-07-09", 
+                                "task": "Essais RCIC/HPCI" 
+                            }
+                        ]
+                    ]
+                }
+            ],
+            "geo": { 
+                "lat": 41.734, 
+                "lon": -72.66, 
+                "elevation_m": 45 
+            }
+        },
+        {
+            "site_id": "JP-RR-01",
+            "name": "Tokai Research Complex",
+            "country": "Japan",
+            "reactors": [
+                {
+                    "reactor_id": "TOK-RR1",
+                    "reactor_type": "JRR (pool-type research reactor)",
+                    "commissioning_date": "1998-07-23",
+                    "status": "Online",
+                    "thermal_power_MWt": 10,
+                    "electric_power_MWe": 0,
+                    "design_pressure_bar": 2,
+                    "primary_coolant": "H2O (light water)",
+                    "safety_integrity_level": "SIL-2",
+                    "fuels": [
+                        [
+                            { 
+                                "type": "UMo-Al", 
+                                "enrichment_%": 19.75 
+                            }
+                        ],
+                        [
+                            { 
+                                "type": "U3Si2-Al", 
+                                "enrichment_%": 19.75 
+                            }
+                        ]
+                    ],
+                    "safety_systems": [
+                        [
+                            "Reactor Trip System"
+                        ],
+                        [
+                            "Pool Cooling System"
+                        ],
+                        [
+                            "Radiation Monitoring",
+                            "Emergency Ventilation"
+                        ]
+                    ],
+                    "events": [
+                        [
+                            { 
+                                "date": "2020-10-08", 
+                                "description": "Essai de criticité", 
+                                "level_INES": 0 
+                            }
+                        ],
+                        [
+                            { 
+                                "date": "2023-04-21", 
+                                "description": "Campagne d’irradiation de matériaux", 
+                                "level_INES": 0 
+                            }
+                        ]
+                    ],
+                    "maintenance_calendar": [
+                        [
+                            { 
+                                "day": "2023-05-03", 
+                                "task": "Inspection ponts roulants" 
+                            }
+                        ],
+                        [
+                            { 
+                                "day": "2023-05-10", 
+                                "task": "Étalonnage détecteurs" 
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "reactor_id": "TOK-RR2",
+                    "reactor_type": "Fast Experimental Reactor",
+                    "commissioning_date": "2005-03-18",
+                    "status": "Standby",
+                    "thermal_power_MWt": 40,
+                    "electric_power_MWe": 12,
+                    "design_pressure_bar": 15,
+                    "primary_coolant": "Liquid sodium",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        [
+                            { 
+                                "type": "MOX", 
+                                "plutonium_%": 20 
+                            }
+                        ],
+                        [
+                            { 
+                                "type": "MOX", 
+                                "plutonium_%": 21 
+                            }
+                        ]
+                    ],
+                    "safety_systems": [
+                        [
+                            "Reactor Protection System"
+                        ],
+                        [
+                            "Sodium Leak Detection",
+                            "Decay Heat Removal System"
+                        ],
+                        [
+                            "Inerted Containment",
+                            "Diesel Generators"
+                        ]
+                    ],
+                    "events": [
+                        [
+                            { 
+                                "date": "2022-03-02", "description": "Maintenance sodium loop", "level_INES": 0 }
+                      ],
+                      [
+                        { "date": "2024-02-14", "description": "Essais circuits secondaires", "level_INES": 0 }
+                      ]
+                    ],
+                    "maintenance_calendar": [
+                        [
+                            { 
+                                "day": "2024-03-05", 
+                                "task": "Contrôle détecteurs sodium" 
+                            }
+                        ],
+                        [
+                            { 
+                                "day": "2024-03-12", 
+                                "task": "Inspection échangeurs" 
+                            }
+                        ]
+                    ]
+                }
+            ],
+            "geo": { 
+                "lat": 36.4693, 
+                "lon": 140.5667, 
+                "elevation_m": 35 
+            }
+        },
+        {
+            "site_id": "CA-NPP-04",
+            "name": "Ontario Nuclear Station",
+            "country": "Canada",
+            "reactors": [
+                  {
+                    "reactor_id": "ON-1",
+                    "reactor_type": "CANDU",
+                    "commissioning_date": "1995-10-11",
+                    "status": "Online",
+                    "thermal_power_MWt": 3000,
+                    "electric_power_MWe": 950,
+                    "design_pressure_bar": 103,
+                    "primary_coolant": "H2O (heavy water, D2O)",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        [
+                            { 
+                                "type": "UO2", 
+                                "enrichment_%": 0.7 
+                            }
+                        ],
+                        [
+                            { 
+                                "type": "UO2", 
+                                "enrichment_%": 0.9 
+                            }
+                        ]
+                    ],
+                    "safety_systems": [
+                        [
+                            "Two Independent Shutdown Systems"
+                        ],
+                        [
+                            "Emergency Core Cooling System",
+                            "Containment Local Air Coolers"
+                        ],
+                        [
+                            "Diesel Generators"
+                        ]
+                    ],
+                    "events": [
+                        [
+                            { 
+                                "date": "2023-04-18", 
+                                "description": "Essai système d'arrêt rapide", 
+                                "level_INES": 0 
+                            }
+                        ],
+                        [
+                            { 
+                                "date": "2024-05-09", 
+                                "description": "Inspection canaux caloporteurs", 
+                                "level_INES": 0 
+                            }
+                        ]
+                    ],
+                    "maintenance_calendar": [
+                        [
+                            { 
+                                "day": "2024-05-15", 
+                                "task": "Test SDS1" 
+                            }
+                        ],
+                        [
+                            { 
+                                "day": "2024-05-22", 
+                                "task": "Test SDS2" 
+                            }
+                        ]
+                    ]
+                  },
+                  {
+                    "reactor_id": "ON-2",
+                    "reactor_type": "CANDU",
+                    "commissioning_date": "1998-08-15",
+                    "status": "Online",
+                    "thermal_power_MWt": 3000,
+                    "electric_power_MWe": 950,
+                    "design_pressure_bar": 103,
+                    "primary_coolant": "H2O (heavy water, D2O)",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        [
+                            { 
+                                "type": "UO2", 
+                                "enrichment_%": 0.7 
+                            }
+                        ],
+                        [
+                            { 
+                                "type": "UO2", 
+                                "enrichment_%": 0.9 
+                            }
+                        ]
+                    ],
+                    "safety_systems": [
+                        [
+                            "Two Independent Shutdown Systems"
+                        ],
+                        [
+                            "Emergency Core Cooling System",
+                            "Containment Local Air Coolers"
+                        ],
+                        [
+                            "Diesel Generators"
+                        ]
+                    ],
+                    "events": [
+                        [
+                            { 
+                                "date": "2022-12-09", 
+                                "description": "Inspection canaux de combustible", 
+                                "level_INES": 0 
+                            }
+                        ],
+                        [
+                            { 
+                                "date": "2024-04-03", 
+                                "description": "Essai confinement bâtiment", 
+                                "level_INES": 0 
+                            }
+                        ]
+                    ],
+                    "maintenance_calendar": [
+                        [
+                            { 
+                                "day": "2024-04-10",    
+                                "task": "Contrôle guillotine" 
+                            }
+                        ],
+                        [
+                            { 
+                                "day": "2024-04-17", 
+                                "task": "Vérif refroidisseurs d’air" 
+                            }
+                        ]
+                    ]
+                  }
+                ],
+            "geo": { 
+                "lat": 44.056, 
+                "lon": -78.942, 
+                "elevation_m": 92 
+            }
+        },
+        {
+            "site_id": "KR-RR-03",
+            "name": "Korea Advanced Test Reactor",
+            "country": "South Korea",
+            "reactors": [
+                  {
+                    "reactor_id": "KATR-1",
+                    "reactor_type": "Research Reactor (KATR)",
+                    "commissioning_date": "2012-04-05",
+                    "status": "Online",
+                    "thermal_power_MWt": 30,
+                    "electric_power_MWe": 0,
+                    "design_pressure_bar": 5,
+                    "primary_coolant": "Light water",
+                    "safety_integrity_level": "SIL-2",
+                    "fuels": [
+                        [
+                            { 
+                                "type": "UMo-Al", 
+                                "enrichment_%": 19.75 
+                            }
+                        ],
+                        [
+                            { 
+                                "type": "U3Si2-Al", 
+                                "enrichment_%": 19.75 
+                            }
+                        ]
+                    ],
+                    "safety_systems": [
+                        [
+                            "Reactor Trip System"
+                        ],
+                        [
+                            "Primary Cooling System"
+                        ],
+                        [
+                            "Radiation Monitoring",
+                            "Emergency Power Supply"
+                        ]
+                    ],
+                    "events": [
+                        [
+                            { 
+                                "date": "2021-03-22", 
+                                "description": "Test de flux neutronique", 
+                                "level_INES": 0 
+                            }
+                        ],
+                        [
+                            { 
+                                "date": "2024-01-30", 
+                                "description": "Vérification canaux de mesure", 
+                                "level_INES": 0 
+                            }
+                        ]
+                    ],
+                    "maintenance_calendar": [
+                        [
+                            { 
+                                "day": "2024-02-06", 
+                                "task": "Inspection échangeur primaire" 
+                            }
+                        ],
+                        [
+                            { 
+                                "day": "2024-02-13", 
+                                "task": "Essai groupe électrogène" 
+                            }
+                        ]
+                    ]
+                  }
+                ],
+            "geo": { 
+                "lat": 36.4311, 
+                "lon": 127.3786, 
+                "elevation_m": 72 
+            }
+        },
+        {
+            "site_id": "UK-NPP-02",
+            "name": "Sizewell B Station",
+            "country": "UK",
+            "reactors": [
+                  {
+                    "reactor_id": "SZB-1",
+                    "reactor_type": "PWR",
+                    "commissioning_date": "1995-02-14",
+                    "status": "Online",
+                    "thermal_power_MWt": 3400,
+                    "electric_power_MWe": 1188,
+                    "design_pressure_bar": 155,
+                    "primary_coolant": "H2O (light water)",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        [
+                            { 
+                                "type": "UO2", 
+                                "enrichment_%": 4.5 
+                            }
+                        ],
+                        [
+                            { 
+                                "type": "UO2", 
+                                "enrichment_%": 4.8 
+                            }
+                        ]
+                    ],
+                    "safety_systems": [
+                        [
+                            "Emergency Core Cooling System",
+                            "Reactor Protection System"
+                        ],
+                        [
+                            "Containment Spray System",
+                            "Passive Heat Removal System"
+                        ],
+                        [
+                            "Diesel Generators"
+                        ]
+                    ],
+                    "events": [
+                        [
+                            { 
+                                "date": "2022-09-05", 
+                                "description": "Essais périodiques de sauvegarde", 
+                                "level_INES": 0 
+                            }
+                        ],
+                        [
+                            { 
+                                "date": "2024-03-19", 
+                                "description": "Inspection alternateurs", 
+                                "level_INES": 0 
+                            }
+                        ]
+                    ],
+                    "maintenance_calendar": [
+                        [
+                            { 
+                                "day": "2024-03-22", 
+                                "task": "Test RPS" 
+                            }
+                        ],
+                        [
+                            { 
+                                "day": "2024-03-29", 
+                                "task": "Vérif pompes d’injection" 
+                            }
+                        ]
+                    ]
+                  }
+                ],
+            "geo": { 
+                "lat": 52.214, 
+                "lon": 1.621, 
+                "elevation_m": 15 
+            }
+        }, 
+        {
+            "site_id": "DE-NPP-05",
+            "name": "Neckarwestheim II",
+            "country": "Germany",
+            "reactors": [
+                {
+                    "reactor_id": "NKW-2",
+                    "reactor_type": "PWR",
+                    "commissioning_date": "1989-04-15",
+                    "status": "Online",
+                    "thermal_power_MWt": 3800,
+                    "electric_power_MWe": 1400,
+                    "design_pressure_bar": 155,
+                    "primary_coolant": "H2O (light water)",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        { 
+                            "type": "UO2", 
+                            "enrichment_%": 4.8 
+                        }
+                    ],
+                    "safety_systems": [
+                        "Emergency Core Cooling System",
+                        "Containment Spray System",
+                        "Hydrogen Recombiner System",
+                        "Diesel Generators"
+                    ],
+                    "events": [
+                        { 
+                            "date": "2021-08-10", 
+                            "description": "Test système d’arrêt d’urgence", 
+                            "level_INES": 0 
+                        }
+                    ]
+                }
+            ],
+            "geo": { 
+                "lat": 49.055, 
+                "lon": 9.167, 
+                "elevation_m": 180 
+            }
+        },
+        {
+            "site_id": "IN-NPP-06",
+            "name": "Kudankulam Nuclear Power Plant",
+            "country": "India",
+            "reactors": [
+                {
+                    "reactor_id": "KKNPP-1",
+                    "reactor_type": "VVER-1000 (PWR russe)",
+                    "commissioning_date": "2014-12-31",
+                    "status": "Online",
+                    "thermal_power_MWt": 3000,
+                    "electric_power_MWe": 1000,
+                    "design_pressure_bar": 160,
+                    "primary_coolant": "H2O (light water)",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        { 
+                            "type": "UO2", 
+                            "enrichment_%": 4.5 
+                        }
+                    ],
+                    "safety_systems": [
+                        "Passive Heat Removal System",
+                        "Core Catcher",
+                        "Diesel Generators",
+                        "Reactor Protection System"
+                    ],
+                    "events": [
+                        { 
+                            "date": "2022-05-01", 
+                            "description": "Inspection annuelle", 
+                            "level_INES": 0 
+                        }
+                    ]
+                },
+                {
+                    "reactor_id": "KKNPP-2",
+                    "reactor_type": "VVER-1000 (PWR russe)",
+                    "commissioning_date": "2017-08-29",
+                    "status": "Online",
+                    "thermal_power_MWt": 3000,
+                    "electric_power_MWe": 1000,
+                    "design_pressure_bar": 160,
+                    "primary_coolant": "H2O (light water)",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        { 
+                            "type": "UO2", 
+                            "enrichment_%": 4.5 
+                        }
+                    ],
+                    "safety_systems": [
+                        "Passive Heat Removal System",
+                        "Core Catcher",
+                        "Diesel Generators",
+                        "Reactor Protection System"
+                    ],
+                    "events": [
+                        { 
+                            "date": "2023-09-14", 
+                            "description": "Arrêt planifié de courte durée", 
+                            "level_INES": 0 
+                        }
+                    ]
+                }
+            ],
+            "geo": { 
+                "lat": 8.169, 
+                "lon": 77.711, 
+                "elevation_m": 20 
+            }
+        },
+        {
+            "site_id": "RU-NPP-07",
+            "name": "Akademik Lomonosov (Floating NPP)",
+            "country": "Russia",
+            "reactors": [
+                {
+                    "reactor_id": "KLT-40S-1",
+                    "reactor_type": "KLT-40S (marine PWR)",
+                    "commissioning_date": "2020-05-22",
+                    "status": "Online",
+                    "thermal_power_MWt": 150,
+                    "electric_power_MWe": 35,
+                    "design_pressure_bar": 120,
+                    "primary_coolant": "H2O (light water)",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        { 
+                            "type": "UO2", 
+                            "enrichment_%": 14 
+                        }
+                    ],
+                    "safety_systems": [
+                        "Emergency Core Cooling",
+                        "Radiation Monitoring",
+                        "Diesel Generators",
+                        "Marine Containment Barriers"
+                    ],
+                    "events": [
+                        { 
+                            "date": "2021-11-30", 
+                            "description": "Inspection portuaire annuelle", 
+                            "level_INES": 0 
+                        }
+                    ]
+                },
+                {
+                    "reactor_id": "KLT-40S-2",
+                    "reactor_type": "KLT-40S (marine PWR)",
+                    "commissioning_date": "2020-05-22",
+                    "status": "Online",
+                    "thermal_power_MWt": 150,
+                    "electric_power_MWe": 35,
+                    "design_pressure_bar": 120,
+                    "primary_coolant": "H2O (light water)",
+                    "safety_integrity_level": "SIL-3",
+                    "fuels": [
+                        { 
+                            "type": "UO2", 
+                            "enrichment_%": 14 
+                        }
+                    ],
+                    "safety_systems": [
+                        "Emergency Core Cooling",
+                        "Radiation Monitoring",
+                        "Diesel Generators",
+                        "Marine Containment Barriers"
+                    ],
+                    "events": [
+                        { 
+                            "date": "2022-04-17", 
+                            "description": "Essai d’alimentation en électricité locale", 
+                            "level_INES": 0 
+                        }
+                    ]
+                }
+            ],
+            "geo": { 
+                "lat": 69.7, 
+                "lon": 170.313, 
+                "elevation_m": 5 
+            }
+        }
+    ]
+}
+ 
+  

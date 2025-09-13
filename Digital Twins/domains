@@ -1,0 +1,360 @@
+Super liste 👇 — voici, pour **chaque domaine**, les **formats de fichiers / schémas d’échange** les plus utilisés pour des jumeaux numériques (par familles : 3D/BIM & CAO, simulation/échange de modèles, données opérationnelles & sémantique, et formats vraiment « métier » du domaine).
+
+1. **Industrie / manufacturing (discret & process)**
+
+* **3D/CAO & qualité** : STEP **AP242** (*.stp/*.step, PMI), JT (\*.jt), QIF (XML) pour la métrologie. ([ISO][1], [Siemens Digital Industries Software][2], [The Library of Congress][3], [DMSC][4])
+* **Simulation / co-simulation** : FMI / **FMU** (\*.fmu). ([fmi-standard.org][5])
+* **Données machine & atelier** : **OPC UA** (NodeSet2 XML, UA Binary/JSON), **MTConnect** (XML/JSON). ([reference.opcfoundation.org][6], [OPC Foundation][7], [MTConnect][8])
+
+2. **Énergie & réseaux (électrique, stockage, V2G)**
+
+* **Modèles réseau** : **CIM** (IEC 61970/61968 – RDF/XML), **CGMES** (profils CIM, RDF/XML). ([entsoe.eu][9], [IEC Webstore][10])
+* **Sous-stations** : **IEC 61850 SCL** (*.icd/*.cid/*.scd/*.ssd/*.iid/*.sed – XML). ([Wikipedia][11])
+* **Comptage** : **DLMS/COSEM** (IEC 62056 – structures d’objets, échanges fichier/trace chez les fabricants). ([Schneider Electric Product Information][12], [Itron][13])
+* **V2G** : **ISO 15118** (échanges XML/ASN.1 dans la pile comm.) pour charge bidirectionnelle. ([ISO][14])
+
+3. **Bâtiments & data centers**
+
+* **BIM & collaboration** : **IFC** (*.ifc/*.ifcZIP), **BCF** (*.bcfzip), **gbXML** (*.xml) pour l’énergétique. ([buildingSMART Technical][15], [gbxml.org][16])
+* **Sémantique bâtiment** : **Brick** (RDF/TTL, JSON-LD), **Project Haystack** (Zinc/ZJSON). ([Brick Ontology][17], [Brickschema Docs][18], [Project Haystack][19])
+* **Simulation énergétique** (souvent couplée au jumeau) : **EnergyPlus** *.idf/*.epw (référence de fait via gbXML). ([Autodesk Help][20])
+
+4. **Chaîne logistique & opérations (end-to-end)**
+
+* **Traçabilité & événements** : **GS1 EPCIS 2.0** (JSON/JSON-LD et XML). ([GS1][21], [Medium][22])
+* **Échanges B2B** : **UN/EDIFACT** (*.edi/*.txt) et **ANSI X12** (*.x12/*.edi) pour commandes/ASN/factures. ([UNECE][23], [EDI Basics][24], [X12][25])
+
+5. **Réseaux & télécoms / IT (Network Digital Twin)**
+
+* **Modèles de config/topologie** : **YANG** (\*.yang) sérialisé en **XML** (NETCONF) ou **JSON** (RESTCONF) ; modèles **OpenConfig** ; topologies IETF (**RFC 8345/8346/8944**). ([IETF Datatracker][26], [rfc-editor.org][27], [openconfig.net][28])
+* **Captures trafic** (références d’essais) : PCAP/PCAPNG (*.pcap/*.pcapng).
+
+6. **Automobile & mobilité électrique**
+
+* **Ingénierie véhicule** : **AUTOSAR** *.arxml ; mesures & logs : **ASAM MDF/MF4** (*.mf4). ([autosar.readthedocs.io][29], [ASAM][30])
+* **Scénarios & routes ADAS/AD** : **OpenDRIVE** (*.xodr), **OpenSCENARIO** v1.x (*.xosc XML) / v2.x DSL (\*.osc). ([ASAM][31])
+* **Bus & diagnostic** : **DBC** (CAN database). ([CSS Electronics][32])
+* **Co-simulation** : **FMI/FMU**. ([fmi-standard.org][5])
+* **V2G** : **ISO 15118** (messages XML). ([ISO][14])
+
+7. **Infrastructures publiques & transport (routes, rails, eau)**
+
+* **Géo & 3D** : **GeoPackage** (*.gpkg), **GeoJSON/JSON-FG** (*.geojson), **CityGML 3.0** (*.gml/*.xml), **3D Tiles** (tileset.json + tuiles binaires). ([Open Geospatial Consortium][33], [docs.ogc.org][34])
+* **Hydraulique urbaine** : **EPANET** \*.inp ; **SWMM** \*.inp. ([epanet22.readthedocs.io][35], [US EPA][36])
+* **Transport public** : **GTFS** (fichiers \*.txt CSV packagés). ([gtfs.org][37])
+
+— **En forte montée (3–5 ans)** —
+
+**Santé / biomédical (patient/organ-spécifique)**
+
+* **Imagerie & dossiers** : **DICOM** (\*.dcm, + DICOMweb), **HL7 FHIR** (JSON/XML). ([DICOM][38], [HL7][39])
+* **Modèles biophysiques** : **SBML** (*.xml), **CellML** (*.cellml). ([SBML.org][40], [Wikipedia][41], [physiomeproject.org][42])
+
+**Villes & territoires (urban twins)**
+
+* **Modèles urbains** : **CityGML 3.0**, **CityJSON** (variante JSON), **IndoorGML** (XML), **3D Tiles** pour le streaming 3D ; **SensorThings API** (JSON/OGC) pour séries IoT ; **NGSI-LD** (JSON-LD) pour graphe de contexte. ([docs.ogc.org][43], [Open Geospatial Consortium][44], [ogcapi.ogc.org][45], [ETSI][46])
+
+**Aérospatial**
+
+* **Ingénierie & PLM** : **STEP AP242** (*.stp/*.step), **JT** (\*.jt). ([ISO][1], [The Library of Congress][3])
+* **Simulation & systèmes** : **FMI/FMU** ; docs techniques **S1000D** (XML). ([fmi-standard.org][5], [s1000d.org][47])
+
+— **Formats transverses très présents dans les jumeaux 3D** —
+
+* **OpenUSD / USD** (*.usd/*.usda/*.usdc) pour scènes 3D composites ; **glTF 2.0** (*.gltf/\*.glb) pour actifs runtime. ([openusd.org][48], [Pixar Animation Studios][49], [The Khronos Group][50])
+* **Sémantique / graphes** : **JSON-LD** (*.jsonld), **RDF/Turtle** (*.ttl). ([W3C][51])
+
+Si tu veux, je peux te livrer ça en **tableau comparatif** (colonnes « Domaine », « Cas d’usage », « Formats », « Extensions », « Où ça s’imbrique dans le jumeau ») ou en **poster A3** prêt à imprimer.
+
+[1]: https://www.iso.org/standard/84300.html?utm_source=chatgpt.com "ISO 10303-242 - Industrial automation systems and ..."
+[2]: https://plm.sw.siemens.com/en-US/plm-components/jt/?utm_source=chatgpt.com "JT file format | Siemens Software"
+[3]: https://loc.gov/preservation/digital/formats/fdd/fdd000562.shtml?utm_source=chatgpt.com "Jupiter Tessellation (JT) - Library of Congress"
+[4]: https://qifstandards.org/overview/?utm_source=chatgpt.com "Overview of the Quality Information Framework QIF Standard"
+[5]: https://fmi-standard.org/?utm_source=chatgpt.com "Functional Mock-up Interface"
+[6]: https://reference.opcfoundation.org/Core/Part1/v105/docs/?utm_source=chatgpt.com "OPC 10000-1: UA Part 1: Overview and Concepts"
+[7]: https://opcfoundation.org/about/opc-technologies/opc-ua/?utm_source=chatgpt.com "Unified Architecture - Landingpage"
+[8]: https://www.mtconnect.org/?utm_source=chatgpt.com "MTConnect"
+[9]: https://www.entsoe.eu/digital/common-information-model/?utm_source=chatgpt.com "Common Information Model (CIM)"
+[10]: https://webstore.iec.ch/en/publication/62698?utm_source=chatgpt.com "IEC 61970-301:2020"
+[11]: https://en.wikipedia.org/wiki/Substation_Configuration_Language?utm_source=chatgpt.com "Substation Configuration Language"
+[12]: https://www.productinfo.schneider-electric.com/ion7400/5a995ced46e0fb000199a201/DLMS/COSEM%20and%20ION%20technology%20Technical%20Note/English/BM_TechnicalNoteDLMS-COSEMIONtechnology_0000166217.ditamap/%24/C_Communications_DLMS-COSEMOverview_0000166226?utm_source=chatgpt.com "DLMS/COSEM overview - ION7400 - Schneider Electric"
+[13]: https://na.itron.com/w/dlms-cosem-explained-the-backbone-of-interoperability-for-modern-utilities?utm_source=chatgpt.com "DLMS/COSEM Explained: The Backbone of Interoperability for Modern ..."
+[14]: https://www.iso.org/standard/69113.html?utm_source=chatgpt.com "ISO 15118-1:2019 - Vehicle to grid communication interface"
+[15]: https://technical.buildingsmart.org/standards/ifc/?utm_source=chatgpt.com "Industry Foundation Classes (IFC) - buildingSMART Technical"
+[16]: https://www.gbxml.org/About_GreenBuildingXML_gbXML?utm_source=chatgpt.com "About gbXML Green Building XML Schema"
+[17]: https://brickschema.org/?utm_source=chatgpt.com "Introduction | Brick Ontology"
+[18]: https://docs.brickschema.org/?utm_source=chatgpt.com "Introduction — Brick Ontology Documentation"
+[19]: https://project-haystack.org/doc/appendix/tags?utm_source=chatgpt.com "tags"
+[20]: https://help.autodesk.com/cloudhelp/2016/ENU/Revit-DocumentPresent/files/GUID-586B9574-64DA-47BC-B8EC-DEF2D565928F.htm?utm_source=chatgpt.com "Exporting to gbXML"
+[21]: https://www.gs1.org/standards/epcis?utm_source=chatgpt.com "EPCIS & CBV - Standards"
+[22]: https://domguinard.medium.com/epcis-2-0-the-web-language-for-supply-chain-data-interoperability-a85f457d2aa7?utm_source=chatgpt.com "EPCIS 2.0 — The Web language for supply chain data ..."
+[23]: https://unece.org/trade/uncefact/introducing-unedifact?utm_source=chatgpt.com "Introducing UN/EDIFACT"
+[24]: https://www.edibasics.com/edi-resources/document-standards/edifact/?utm_source=chatgpt.com "EDIFACT EDI Document Standard"
+[25]: https://x12.org/?utm_source=chatgpt.com "X12: Home"
+[26]: https://datatracker.ietf.org/doc/html/rfc7950?utm_source=chatgpt.com "RFC 7950 - The YANG 1.1 Data Modeling Language"
+[27]: https://www.rfc-editor.org/info/rfc7950?utm_source=chatgpt.com "Information on RFC 7950"
+[28]: https://www.openconfig.net/projects/models/?utm_source=chatgpt.com "Data models"
+[29]: https://autosar.readthedocs.io/en/latest/basics.html?utm_source=chatgpt.com "Basic Concepts — AUTOSAR 0.4.0 documentation"
+[30]: https://www.asam.net/standards/detail/mdf/?utm_source=chatgpt.com "ASAM MDF"
+[31]: https://www.asam.net/standards/detail/opendrive/?utm_source=chatgpt.com "ASAM OpenDRIVE®"
+[32]: https://www.csselectronics.com/pages/can-dbc-file-database-intro?utm_source=chatgpt.com "CAN DBC File Explained - A Simple Intro [+Editor ..."
+[33]: https://www.ogc.org/publications/standard/geopackage/?utm_source=chatgpt.com "GeoPackage Standard | OGC Publications"
+[34]: https://docs.ogc.org/cs/22-025r4/22-025r4.html?utm_source=chatgpt.com "3D Tiles Specification"
+[35]: https://epanet22.readthedocs.io/_/downloads/en/latest/pdf/?utm_source=chatgpt.com "EPANET 2.2 User Manual"
+[36]: https://www.epa.gov/system/files/documents/2022-04/swmm-users-manual-version-5.2.pdf?utm_source=chatgpt.com "Storm Water Management Model User's Manual Version 5.2"
+[37]: https://gtfs.org/documentation/schedule/reference/?utm_source=chatgpt.com "General Transit Feed Specification Reference"
+[38]: https://www.dicomstandard.org/about?utm_source=chatgpt.com "About DICOM: Overview"
+[39]: https://www.hl7.org/fhir/overview.html?utm_source=chatgpt.com "HL7 FHIR Overview - HL7 International"
+[40]: https://sbml.org/documents/what-is-sbml/?utm_source=chatgpt.com "What is SBML?"
+[41]: https://en.wikipedia.org/wiki/SBML?utm_source=chatgpt.com "SBML"
+[42]: https://physiomeproject.org/software/cellml?utm_source=chatgpt.com "CellML"
+[43]: https://docs.ogc.org/guides/20-066.html?utm_source=chatgpt.com "OGC City Geography Markup Language (CityGML) 3.0 ..."
+[44]: https://www.ogc.org/standards/indoorgml/?utm_source=chatgpt.com "IndoorGML Standard | OGC Publications"
+[45]: https://ogcapi.ogc.org/sensorthings/overview.html?utm_source=chatgpt.com "OGC SensorThings API - Overview"
+[46]: https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.05.01_60/gs_cim009v010501p.pdf?utm_source=chatgpt.com "GS CIM 009 - V1.5.1"
+[47]: https://s1000d.org/?page_id=101&utm_source=chatgpt.com "About S1000D"
+[48]: https://openusd.org/docs/?utm_source=chatgpt.com "Introduction to USD"
+[49]: https://www.pixar.com/openusd?utm_source=chatgpt.com "OPENUSD - Pixar Animation Studios"
+[50]: https://www.khronos.org/gltf/?utm_source=chatgpt.com "glTF Overview"
+[51]: https://www.w3.org/TR/json-ld11/?utm_source=chatgpt.com "JSON-LD 1.1"
+
+# Digital Twins – Data Engineering Tasks by Domain (Field Manual)
+
+> What exactly a **data engineer** must deliver for a twin, per domain. Concrete tasks, acceptance criteria, and hand‑off artifacts.
+
+---
+
+## 🧱 Core responsibilities (all domains)
+
+**Identity & semantics**
+
+* Create an **asset registry** (unique IDs, versioning, relationships). Map vendor IDs → canonical IDs.
+* Define **canonical schemas** (Avro/Protobuf/JSON) and **data contracts** per topic/API.
+* Establish **time base & sync**: choose authoritative time source (NTP/PTP), store source timestamp + gateway ingest timestamp, compute drift.
+
+**Pipelines & storage**
+
+* Build **streaming ingestion** (MQTT/AMQP/Kafka/gNMI/REST) with idempotency, dedup, ordering, back‑pressure.
+* Implement **batch backfills** and replay for late/out‑of‑order data.
+* Choose and implement **storage tiering**: hot (TSDB/columnar), warm (object + parquet/iceberg), cold (archive), plus **graph** for semantics, **blob** for heavy assets (3D, images).
+* Partitioning strategy (time + asset/site), **TTL** and compaction policies.
+
+**Quality, observability & governance**
+
+* **DQ checks**: completeness, range/unit, timeliness, uniqueness, schema drift; automate with Great Expectations/dbt tests.
+* **Lineage & catalog**: OpenLineage/Marquez, data catalog entries, tags for PII/PHI/safety‑critical.
+* **Monitoring**: pipeline lag, consumer lags, drop rates, p95/p99 latencies; alerts with runbooks.
+
+**Security & compliance**
+
+* Secrets in vault, **RBAC/ABAC**, network segmentation (OT/IT), encryption in transit/at rest.
+* Audit logs, retention, **soa** (separation of duties). Handle PII/PHI if present (minimization, consent, de‑identification).
+
+**Delivery & SLOs**
+
+* Publish **SLIs/SLOs** (latency, availability, DQ pass‑rate). Provide **mock data** & **sandbox**.
+* CI/CD with infra‑as‑code, reproducible environments, blue/green or canary for pipeline changes.
+
+---
+
+## 1) Manufacturing (discrete & process)
+
+**Sources**: OPC UA/Modbus/MTConnect, PLC/SCADA historians, MES/ERP orders, QIF/vision, vibration/temperature sensors.
+
+**Tasks**
+
+1. **Connectors**: build collectors for OPC UA/MTConnect; define topic hierarchy (site/line/machine/signal); implement QoS & dead‑letter queue.
+2. **Schema & units**: standardize signal names/units; attach calibration metadata; create machine→asset mapping table.
+3. **Streaming features**: windowed KPIs (cycle time, OEE, utilization), spectral features (FFT) for vibration; heartbeats & machine state model.
+4. **Joins**: correlate telemetry with **work orders**/batches; part genealogy joins (lot/serial).
+5. **Storage**: TSDB for signals; columnar lakehouse (Parquet/Iceberg) for history; graph for *part‑of/feeds‑from*; blob for QIF/images.
+6. **APIs**: `/assets/{id}/state`, `/oee`, `/alerts`; webhooks for FMEA‑based alerts.
+7. **DQ & tests**: detect flat‑liners, spikes, missing cycles; enforce schema via registry; golden datasets for each machine family.
+
+**Acceptance/KPIs**: ingest >99% signals, end‑to‑end p95 < 2s, OEE vs MES delta < 2%, backfill 30 days within 6h, error budget defined.
+
+---
+
+## 2) Energy & grids (electricity, storage, V2G)
+
+**Sources**: SCADA/EMS/DMS, PMU synchrophasors, CGMES/CIM network models, IEC‑61850 SCL, AMI smart meters, charger sessions.
+
+**Tasks**
+
+1. **Model ingestion**: parse CGMES/CIM (RDF/XML) → **topology graph** (substations, feeders, switches). Version and diff models by timestamp.
+2. **Telemetry**: PMU & SCADA stream → resample/align, quality flags, bad‑data identification, clock‑drift monitoring.
+3. **Smart meters**: batch ingest reads (COSEM), harmonize tariffs & time zones, aggregate to feeder/transformer.
+4. **Topology‑aware joins**: attach measurements to network elements; compute derived states (loading %, losses).
+5. **Storage**: graph DB for topology; TSDB for phasors/measurements; lakehouse for meter history; object store for SCL files.
+6. **APIs/events**: `/grid/topology`, `/grid/feeder/{id}/state`, event topics for outages/DER curtailment.
+7. **DQ**: topology consistency checks (islands, loops), measurement plausibility, meter read gaps; CGMES profile validation.
+
+**Acceptance/KPIs**: model load < 15 min, PMU skew < 0.5 ms, data completeness > 99.5%, outage event fan‑out < 1 s.
+
+---
+
+## 3) Buildings & data centers
+
+**Sources**: BMS (BACnet/IP, Modbus, OPC UA), IoT sensors (temp/CO₂/VOC), IFC/BCF, Brick/Haystack tags, EnergyPlus/gbXML, power meters.
+
+**Tasks**
+
+1. **Point discovery**: crawl BMS, auto‑tag with Brick/Haystack; build zone/equipment registry from **IFC**; map points ↔ assets ↔ spaces.
+2. **Normalization**: unit conversion (°C/°F, l/s, W), sensor health checks, occupancy signals.
+3. **KPIs**: energy baseline models, **PUE** (DC), comfort (PMV/PPD), ventilation effectiveness, fault detection features.
+4. **3D & semantics**: expose zone geometry & relations; optional 3D tiles for visualization; bind telemetry to spaces.
+5. **Storage**: TSDB for points, semantic graph (Brick), lakehouse for historical; blob for IFC/BCF.
+6. **APIs**: `/zones/{id}/comfort`, `/equip/{id}/faults`, `/energy/baseline`; publish alarms to webhooks.
+7. **DQ**: stale sensor detection, cross‑sensor sanity (supply > return temp), completeness per zone.
+
+**Acceptance/KPIs**: >95% points auto‑tagged, p95 latency < 3 s, PUE computed hourly with <1% gap vs meters, fault precision > 80% (labeled set).
+
+---
+
+## 4) Supply chain & operations
+
+**Sources**: EPCIS 2.0 events (commission/ship/receive/transform), WMS/TMS/OMS, EDI (EDIFACT/X12), RFID readers, IoT.
+
+**Tasks**
+
+1. **Event capture**: implement EPCIS 2.0 capture API (JSON‑LD), validate vocabulary; persist immutable event log.
+2. **Canonicalization**: transform EDI/X12/CSV partner feeds → canonical shipment/order schemas; identity resolution (GTIN/SSCC/GLN).
+3. **Sequencing & gaps**: detect missing steps (ship without receive), duplicates, clock skew across partners.
+4. **Joins**: link events to inventory position, network model, risk data (ETA/weather/incidents).
+5. **Storage**: append‑only event store + lakehouse; key‑value for latest inventory snapshots.
+6. **APIs**: `/track/{id}`, `/inventory/{site}`, `/eta/{shipment}`; publish exceptions as events.
+7. **DQ**: event ordering, referential integrity (unknown asset/location), SLA conformance checks.
+
+**Acceptance/KPIs**: event ingest p95 < 1 s, event completeness > 99%, ETA error MAE < X hours (defined per lane), inventory snapshot freshness < 5 min.
+
+---
+
+## 5) Networks & telecom (Network Digital Twin)
+
+**Sources**: YANG models via NETCONF/RESTCONF, gNMI streaming telemetry, flow logs/pcap, IGP/BGP tables, lab sims.
+
+**Tasks**
+
+1. **Config snapshots**: schedule device pulls; parse YANG → JSON; store in git‑like store with diffs.
+2. **Topology build**: synthesize network graph (nodes/links/te, VRFs); correlate with routing tables.
+3. **Telemetry**: ingest gNMI/gRPC metrics; normalize counters; detect flaps & anomalies.
+4. **Compliance & intent**: encode policy rules; compute drift (running vs intended) and raise events.
+5. **Storage**: graph DB for topology; TSDB for metrics; object store for pcaps.
+6. **APIs**: `/topology`, `/path/{src}/{dst}`, `/compliance/violations`.
+7. **DQ**: schema validation against YANG, unknown leaves, device inventory reconciliation.
+
+**Acceptance/KPIs**: full network snapshot < 10 min, config/intent drift detection < 60 s, metric drop rate < 0.1%.
+
+---
+
+## 6) Automotive & e‑mobility
+
+**Sources**: CAN/LIN/FlexRay logs (MF4), DBC, AUTOSAR ARXML, charger sessions (ISO 15118), GPS/IMU, test track metadata, battery telemetry.
+
+**Tasks**
+
+1. **Log conversion**: MF4 → Parquet with index; decode via DBC; align multi‑bus timestamps.
+2. **Feature pipelines**: derive drive cycles, SOH/SOC features; resample & synchronize with GPS/IMU.
+3. **Catalogs**: manage DBC/ARXML versions per vehicle variant; governance of decoding rules.
+4. **Charging/V2G**: capture ISO‑15118 session metadata; correlate with battery state & tariff.
+5. **Storage**: TSDB for high‑rate signals; lakehouse for raw logs; feature store for ML.
+6. **APIs**: `/drive/{id}`, `/battery/{id}/health`, `/charge/{session}`.
+7. **DQ**: plausibility (speed/accel bounds), sensor dropouts, GPS tunnel handling, duplicate frames.
+
+**Acceptance/KPIs**: decode coverage > 98% signals, time alignment error < 20 ms, ingestion throughput ≥ N MB/s/vehicle.
+
+---
+
+## 7) Public infrastructure & transport (roads/rails/water)
+
+**Sources**: CityGML/CityJSON, 3D Tiles, GTFS/GTFS‑RT, traffic counters, EPANET/SWMM inputs, IoT sensors (flow/pressure), weather.
+
+**Tasks**
+
+1. **Geodata ETL**: parse CityGML → canonical city DB; generate vector/3D tiles; maintain CRS consistency.
+2. **Transit**: ingest GTFS static + realtime; build stop/route graph; compute headways & delays.
+3. **Water networks**: stream SCADA sensors; align with EPANET models; detect leaks via pressure transients.
+4. **Routing graph**: build multimodal network (car/bike/ped), restrictions; update with roadworks events.
+5. **Storage**: graph DB for networks; TSDB for sensors; tile store for maps.
+6. **APIs**: `/tiles`, `/route`, `/alerts/leak`, `/transit/{line}/kpi`.
+7. **DQ**: topology continuity, GTFS referential checks, sensor calibration & range.
+
+**Acceptance/KPIs**: tile generation < 24 h for city‑wide, realtime transit lag < 10 s, leak detection alert < 60 s.
+
+---
+
+## 8) Healthcare & biomedical (patient/organ twins)
+
+**Sources**: DICOM imaging, HL7 FHIR resources, device vitals, lab results, consents.
+
+**Tasks**
+
+1. **Consent & access**: enforce consent model; tag PHI; de‑identify/anonymize where lawful; audit trails.
+2. **Ingestion**: DICOM → object store + index; FHIR bundles → canonical tables; device streams with time sync.
+3. **Linkage**: link studies/series to encounters/observations; maintain provenance.
+4. **Derivations**: imaging pre‑processing pipelines (headers/metadata), vitals resampling.
+5. **Storage**: PACS‑like blobs + metadata index; relational for FHIR; TSDB for vitals.
+6. **APIs**: `/patient/{id}/twin` (scoped), `/study/{uid}`, event subscriptions.
+7. **DQ**: UID uniqueness, PHI leakage scans, clock drift between modalities.
+
+**Acceptance/KPIs**: zero PHI violations, study availability SLA ≥ 99.9%, lineage 100% for derived artifacts.
+
+---
+
+## 9) Urban twins (cities & territories)
+
+**Sources**: CityGML/CityJSON, SensorThings/NGSI‑LD, traffic/energy datasets, cadastral layers, weather, DEM/DSM rasters.
+
+**Tasks**
+
+1. **Canonical city model**: unify building/road/utility layers; maintain entity registry; handle updates & versioning.
+2. **Sensor fusion**: subscribe to SensorThings/NGSI‑LD; normalize units; geospatial joins to assets/zones.
+3. **Tiling & visualization**: generate 3D tiles; precompute LODs; link semantics to geometry.
+4. **Scenario inputs**: extract demand profiles, mobility matrices, energy baselines for simulators.
+5. **Storage**: graph for semantics; raster store for DEM/heatmaps; TSDB for sensors.
+6. **APIs**: `/context/entities`, `/buildings/{id}`, subscriptions for zone events.
+7. **DQ**: CRS mismatches, duplicate geometries, sensor coverage gaps.
+
+**Acceptance/KPIs**: ingest delta updates < 4 h, sensor join success > 97%, tile latency p95 < 200 ms (CDN‑backed).
+
+---
+
+## 10) Aerospace
+
+**Sources**: STEP AP242/JT, S1000D docs, telemetry/flight test data, FMU models, maintenance logs.
+
+**Tasks**
+
+1. **PLM connectors**: extract BOM & CAD metadata; map to asset instances; maintain configuration states (as‑built/as‑maintained).
+2. **Telemetry pipeline**: high‑rate sensor ingest; compress & chunk; align with flight events; compute derived measures.
+3. **Docs & provenance**: index S1000D; link procedures to parts/serials.
+4. **Simulation artifacts**: manage FMU registry; capture model inputs/outputs and seeds for reproducibility.
+5. **Storage**: TSDB + object for telemetry; graph for configuration; doc store for S1000D.
+6. **APIs**: `/aircraft/{tail}/state`, `/component/{serial}/history`, `/test/{id}`.
+7. **DQ**: sensor dropout handling, unit harmonization, configuration consistency.
+
+**Acceptance/KPIs**: lossless ingest at target rate, configuration drift zero, reproducible sim runs with checksum‑verified inputs.
+
+---
+
+## 🔧 Starter stacks (agnostic & swappable)
+
+* **Ingestion/streaming**: Kafka/Flink or Pulsar; MQTT bridge; REST/GraphQL gateways.
+* **Storage**: Timescale/ClickHouse/Druid for TS; Iceberg/Delta on Parquet; Neo4j/JanusGraph for graph; S3‑compatible object store.
+* **Orchestration**: Airflow + dbt; Terraform/IaC; GitHub Actions.
+* **Quality & lineage**: Great Expectations, OpenLineage/Marquez, Amundsen/DataHub.
+* **APIs**: FastAPI/GraphQL; Async consumers; Webhooks.
+* **Observability**: Prometheus/Grafana/Loki; OpenTelemetry.
+
+---
+
+## ✅ Deliverables checklist (per project)
+
+* [ ] Asset & topic registry (IDs, schemas, contracts)
+* [ ] Streaming + batch pipelines (code, IaC, CI/CD)
+* [ ] Storage layers with retention & partitioning
+* [ ] DQ suite + lineage + catalog entries
+* [ ] Security (RBAC, secrets, audits) & compliance notes
+* [ ] SLIs/SLOs + runbooks + dashboards
+* [ ] Sample data + sandbox + API docs
+
