@@ -1,7 +1,4 @@
-to_generate = (i**2 for i in [4,5,6])
-print(next(to_generate))
-print(next(to_generate))
-print(next(to_generate))
+reactor_name = "Skog Research Reactor"
+reactor_name[-1] = "X"
 
-to_generate = (i**2 for i in [4,5,6])
-print(list(to_generate))
+""

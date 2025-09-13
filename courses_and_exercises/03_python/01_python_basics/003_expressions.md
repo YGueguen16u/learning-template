@@ -82,8 +82,24 @@ x = 9
 print(57.678 * 1.60934) 
 ```
 
+<h2 id="operators-of-assignment">Operators of assignment</h2>
 
----
+| Symbole | Opération |
+| --- | --- |
+| += | Addition |
+| -= | Soustraction |
+| *= | Multiplication |
+| /= | Division réelle |
+| //= | Division entière |
+| **= | Puissance |
+| %=	| Modulo |
+
+```python
+x = 10
+x += 5
+print(x) # output: 15
+```
+
 <h2 id="order-of-operations">Order of Operations (PEMDAS)</h2>
 
 Python respects the mathematical order:
@@ -97,3 +113,77 @@ Python respects the mathematical order:
 result = (30 + 2) * 60
 print(result)   # 1920
 ```
+
+<h2 id="operators-of-comparison">Operators of comparison</h2>
+
+| Symbole | Opération |
+| --- | --- |
+| == | Égal |
+| != | Différent |
+| > | Supérieur |
+| < | Inférieur |
+| >= | Supérieur ou égal |
+| <= | Inférieur ou égal |
+
+```python
+x = 10
+y = 20
+print(x == y) # False
+print(x != y) # True
+print(x > y) # False
+print(x < y) # True
+print(x >= y) # False
+print(x <= y) # True
+```
+
+<h2 id="operators-of-appartenance">Operators of appartenance</h2>
+
+- Operators of appartenance allow to test if a value is absent or present in a sequence like a list or a tuple. 
+- The operator that determines if a value is present in a sequence is the operator `in` 
+- The operator that determines if a value is absent is `not in` :
+
+```python
+x = [1, 2, 3, 4, 5]
+print(3 in x) # True
+print(6 in x) # False
+print(3 not in x) # False
+print(6 not in x) # True
+```
+
+<h2 id="operators-of-logic">Operators of logic</h2>
+
+- Operators of logic allow to do what we call Boolean arithmetic.
+Typically, when we have several Boolean expressions, the operators of logic allow us to determine if :
+
+  - All the expressions are true.
+  - At least one of the expressions is true.
+
+- The operator that determines if all the expressions are true is the operator `and`.
+
+- The operator that determines if at least one of the expressions is true is the operator `or`.
+
+- The operator that determines if at least one of the expressions is false is the operator `not`.
+
+```python
+x, y = 3, 5
+
+print(x < y and x % y == 0) # False
+print(x < y or x % y == 0) # True
+print(not x < y) # False
+print(x % y == 0) # False
+print(not x % y == 0) # True
+```
+
+
+<h2 id="exercises">Exercises</h2>
+
+**Exercise 1: Calculate the time needed for a walker to cover a distance of 750 km at a speed of 4.8 km/h, give the result in days and hours**
+
+```python
+distance = 750
+speed = 4.8
+day_hours_tuple = distance / speed //24, distance / speed % 24
+
+print(f"The walker would need {day_hours_tuple[0]} days and {day_hours_tuple[1]} hours to cover the distance of {distance} km at a speed of {speed} km/h")
+```
+

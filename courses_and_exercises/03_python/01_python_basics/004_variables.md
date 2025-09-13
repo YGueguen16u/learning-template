@@ -132,6 +132,10 @@ total_hour = total_min / 60    # Now 3.0
 |Camel case|totalTime|Sometimes used in JS or classes|
 |Uppercase|TOTAL_TIME|Constants (by convention only)|
 
+- The name of a variable must start with a letter or an underscore (_).
+- The name of a variable cannot start with a number.
+- The name of a variable can only contain letters, numbers, and underscores (_).
+- Variable names are case-sensitive. une_variable, Une_variable and UNE_VARIABLE are three different variables.
 
 <h2 id="another-way-to-write-x-x-1">Another way to write x = x + 1</h2>
 
