@@ -177,104 +177,9 @@ print(arr[-1])  # 50
 
 
 
-<h3 id="boolean-indexing">Indexation booléenne</h3>
-
-```python
-# Indexation booléenne
-arr = np.array([10, 20, 30, 40, 50])
-mask = arr > 25
-print(mask)        # [False False  True  True  True]
-print(arr[mask])   # [30 40 50]
-
-# 2. Indexation avec une liste
-X = np.array([3, -7, -10, 3, 6, 5, 2, 9])
-y = np.array([0, 1, 1, 1, 0, 1, 0, 0])
-print(X[y])  # [3 -7 -10 6 2]
-X_2 = X.copy()
-X_2[y == 1] = -1
-print(X_2)  # [3 -1 -10 6 2]
-```
-
-<h3 id="slicing">Découpage (Slicing)</h3>
-
-<h4>Syntaxe générale</h4>
-
-```python
-array[start:stop:step]
-```
-
-![alt text](image-1.png)
-
-![alt text](image-2.png)
-
-```python
-arr_2 = np.array([[1, 2, 3, 4], [4, 5, 6, 7], [7, 8, 9, 10]])
-print(arr_2[0, 0])  # 1
-print(arr_2[-1, -1])  # 6
-print(arr_2[0, -1])  # 3
-print(arr_2[0, ::-1])
 
 
-arr_2[0, 0] = 10
-print(arr_2)
-print(arr_2[0, 1:3])
-print(arr_2[1:3, 1:3])
 
-arr_4 = np.array([[[[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]]]])
-print(arr_4[0, 0, 0, 0])  # 1
-print(arr_4[-1, -1, -1, -1])  # 6
-print(arr_4[0, 0, -1, -1])  # 6
-print(arr_4[0, -1, -1, -1])  # 6
-print(arr_4[0, 0, 0, ::-1])
-
-arr_4[0, 0, 0, 0] = 10
-print(arr_4)
-print(arr_4[0, 1, 1:4, 1:3])
-```
-
-<h4>Slicing avancé</h4>
-
-```python
-arr = np.arange(10)
-print(arr[::2])    # [0 2 4 6 8]
-print(arr[1::2])   # [1 3 5 7 9]
-```
-
-<h3 id='copy'>Copie</h3>
-
-- `copy` : Returns a `deep copy` of the array.
-  - copy the value of the array to a new array.
-    - ids of the new array and its elements are different from the original array.
-  - `ndarray.copy()` returns a copy of the array.
-    - attribute
-    - return : `ndarray`
-  - `np.copy(ndarray)` returns a copy of the array.
-    - function
-      - arg : `ndarray`
-      - return : `ndarray`
-
-- `ndarray[:]` : Returns a `view` of the array.
-  - different id from the original array, however the elements id are the same.
-
-```python
-arr = np.array([1, 2, 3, 4, 5])
-arr_2 = arr.copy()
-arr_3 = arr[:]
-
-arr_2[0] = 10
-arr_3[0] = 20
-print(arr)    # [20 2 3 4 5]
-print(arr_2)  # [10 2 3 4 5]
-print(arr_3)  # [20 2 3 4 5]
-
-print(id(arr))  # 4339060624
-print(id(arr_2))  # 4339122416
-print(id(arr_3))  # 4349672976
-
-for i in range(arr.shape[0]):
-    print(f"first element : id(arr[{i}]) = {id(arr[i])}, id(arr_2[{i}]) = {id(arr_2[i])}, id(arr_3[{i}]) = {id(arr_3[i])}")
-    
-```
 
 
 ## <h2 id="operations">Opérations mathématiques et vectorisation</h2>
@@ -751,13 +656,21 @@ En effet, les fonctions pour afficher des images ne peuvent traiter que des matr
 
 Pour afficher les images contenues dans `X`, nous allons redimensionner `X` pour obtenir un array de dimensions 1797x8x8.
 
-- **(c)** Stocker la matrice `X` redimensionnée avec la shape `(1797, 8, 8)` dans un array nommé **`X_reshaped`**.
+- **(c)** Stocker la matrice X redimensionnée avec la shape (1797, 8, 8) dans un array nommé **X_reshaped**.
 
-- **(d)** Stocker l'image contenue à l'indice `1100` de `X_reshaped` dans un array nommé `img`.
+- **(d)** Stocker l'image contenue à l'indice 1100 de X_reshaped dans un array nommé img.
+
+- **(e)** Lancer la cellule suivante pour afficher img. De quel chiffre s'agit-il ?
 
 ```python
 X_reshaped = X.reshape((1797, 8, 8))
 img = X_reshaped[1100]
+
+import matplotlib.pyplot as plt
+
+_ = plt.imshow(img, cmap = 'gray')
+_ = plt.axis("off")
+plt.show()
 ```
 
 ## **4. Concaténation d'arrays**

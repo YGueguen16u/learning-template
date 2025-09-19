@@ -93,6 +93,9 @@ df = pd.DataFrame(
 - `style`
     - Returns a Styler object.
 
+- sum([axis, skipna, numeric_only, min_count])
+    - Return the sum of the values over the requested axis.
+
 - `values`
     - Return a Numpy representation of the DataFrame.
 
@@ -554,9 +557,6 @@ df = pd.DataFrame(
 
 - subtract(other[, axis, level, fill_value])
     - Get Subtraction of dataframe and other, element-wise (binary operator sub).
-
-- sum([axis, skipna, numeric_only, min_count])
-    - Return the sum of the values over the requested axis.
 
 - swapaxes(axis1, axis2[, copy])
     - (DEPRECATED) Interchange axes and swap values axes appropriately.

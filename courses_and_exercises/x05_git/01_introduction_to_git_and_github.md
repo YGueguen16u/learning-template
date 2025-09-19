@@ -20,24 +20,13 @@
 
   
 
-A **Version Control System (VCS)** tracks changes to files over time, allowing you to:
+Git est le système de gestion de versions (_Version Control System_ ou VCS) le plus populaire. Il a été développé par Linus Torvalds, créateur du noyau Linux. Il offre un type de gestion de versions très différent, car il s'agit d'un système de gestion de versions distribué. Avec un système de gestion de versions distribué, il n'y a pas une base de code centralisée d'où tirer le code. Vous observerez cela plus en détail avec les dépôts locaux et distants (grâce à GitHub).
 
-- Revert to earlier versions
-    
-- See who changed what and when
-    
-- Collaborate without overwriting each other’s work
-    
+D'autres systèmes de gestion de versions, tels que SVN et CVS, reposent sur un système centralisé, ce qui signifie qu'une seule copie maîtresse du logiciel est utilisée. Ces systèmes nécessitent donc une connectivité réseau pour toute action au contraire de git qui va utiliser le réseau seulement lors d'une mise à jour entre le dépôt local et le dépôt distant.
 
-  
+C'est un gestionnaire de version qui est utilisé aussi bien pour des projets publics que des projets privés. Initialement, git permet de versionner des fichiers de code (python, C, C++...), mais il peut également servir pour tout type de fichier (txt, md, csv...).
 
-**Example**:
-
-You’re editing a shared shopping list with roommates.
-
-- Without VCS → Chaos
-    
-- With VCS → Clear history of edits
+L'intérêt de la gestion de versions (ou _versioning_) est de pouvoir revenir en arrière si besoin, et la capacité de voir qui a modifié quoi, a quel moment, ce qui apportera une meilleure gestion des participants du projet.
     
 
 ---
@@ -131,28 +120,25 @@ The Linux community needed a fast, distributed, free alternative.
 
 <h2 id="what-is-github">What is GitHub?</h2>
 
-- **GitHub** is a cloud platform to **host Git repositories**
-    
-- Adds collaboration tools: **Pull Requests**, **Issues**, **Code Reviews**
-    
-- Owned by **Microsoft**, with **free**, **Pro**, and **Enterprise** tiers
-    
-- Supports integrations: **CI/CD**, **project boards**, GitHub Desktop
+### Qu'est-ce que GitHub ?
 
-- > In 2019, GitHub surpassed **100M repositories**
-    
+[GitHub](https://github.com/) est une plateforme en ligne de développement collaboratif lancée le 10 avril 2008. Exploitant le logiciel de gestion de versions décentralisé **Git**, la plateforme permet à tout utilisateur d'y héberger ses projets et de les rendre accessibles au développement coopératif grâce à un système de **dépôts**, en anglais, **repository**, retraçant les avancées et modifications apportées aux projets. Outre ses facettes techniques qui attirent les développeurs, l'un des aspects majeurs de GitHub est son **caractère social prononcé**. Avec plus de 50 millions d'utilisateurs inscrits, le site met l'accent sur les interactions entre ceux-ci en proposant des fonctionnalités de suivi d'utilisateurs, suivi de projets, de discussions et bien d'autres encore, le tout dans une optique de laisser la vaste communauté s'approprier la plateforme.
 
+Comme toute plateforme gratuite, elle comporte son lot de limitations. En effet, la partie gratuite de GitHub est principalement orientée autour du développement de projets de particuliers. Dès lors qu'une entreprise ou une équipe privée de développeurs cherche à intégrer GitHub à leur mode de fonctionnement, la version **gratuite n'est plus suffisante** et les organisations sont poussées vers des forfaits payants. Les fonctionnalités ajoutées sont multiples, et peuvent aller d'une simple augmentation de l'espace d'hébergement par utilisateur, à l'ajout de Wikis et de branches protégées. Le détail de ces différents forfaits sont retrouvables [ici](https://github.com/pricing).
 
-**Analogy:**
+### Le marché de la gestion de code
 
-- Git = The engine
-    
-- GitHub = The garage with collaboration tools
-    
+Naturellement, GitHub n'a pas le monopole absolu du développement collaboratif en ligne. Également construit autour de **Git**, [**GitLab**](https://about.gitlab.com/) est sans doute la meilleure alternative à GitHub. Open source, l'outil est privilégié par les entreprises pour son approche DevOps et ses outils d'administration organisationnelle. À d'autres niveaux, on peut également citer les plateformes de gestion de code proposées par Google et Amazon : [Cloud Source](https://cloud.google.com/source-repositories/) et [AWS CodeCommit](https://aws.amazon.com/fr/codecommit/), pouvant également être de bonnes alternatives si l'organisation choisie se base déjà autour des services cloud de Google ou AWS.
 
-**Example**:
+### Se lancer sur GitHub
 
-https://github.com/your-username/my-project
+Pour utiliser la plateforme, il faut avant tout se créer un compte sur ce [lien](https://github.com/join). Vous n'aurez qu'à vérifier votre compte à l'aide du lien qui vous sera envoyé à l'adresse mail renseignée.
+
+Une fois que cette étape est faite, deux options se présentent à vous pour interagir avec la plateforme : **Git** ou **GitHub Desktop**. Dans la continuité de ce cours, nous ne nous intéresserons qu'à l'approche avec Git. Il reste intéressant de dire quelques mots sur GitHub Desktop.
+
+[GitHub Desktop](https://desktop.github.com/) est un outil visant à simplifier les interactions avec GitHub en permettant aux utilisateurs de s'affranchir des lignes de commandes Git tout en gardant une vision d'ensemble claire de l'état des projets administrés. Pour les moins férus de `shell` c'est l'alternative idéale, en revanche d'autres plus expérimentés diront que l'application limite les possibilités de part son interface _trop simplifiée_.
+
+**Comme dit précédemment, nous ne présenterons dans ce cours que l'approche de GitHub par Git, assurez vous qu'il est bien installé de votre côté.**
 
 ---
 

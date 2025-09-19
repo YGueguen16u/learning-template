@@ -1,3 +1,5 @@
+<h1>Création de tableaux</h1>
+
 <h3 id="from-list">2. Depuis une liste Python</h3>
 
 ```python
@@ -15,11 +17,16 @@ arr_2 = np.array(
 print(arr_2) # [[1 2 3] [4 5 6]]
 print(type(arr_2))  # <class 'numpy.ndarray'>
 
-arr_2_bis = np.array([[1, 2, 3], [4, 5, 6]], 
+arr_2_bis = np.array(
+  object=[
+    [1, 2, 3], 
+    [4, 5, 6]
+  ], 
   dtype=np.int64,
   ndmin=4
 )
-print(arr_2_bis) # [[[[1 2 3] [4 5 6]]]]
+print(arr_2_bis) # [[[[1 2 3] [4 5 6]]]] 
+# 4 [[[[]]]] because ndmin=4
 print(type(arr_2_bis))
 ```
 
@@ -47,7 +54,9 @@ Ce tuple de dimensions est ce qu'on appelle la****shape****d'un array.
 
 ```python
 zeros = np.zeros(5)
-zeros_bis = np.zeros(shape=(5,))
+zeros_bis = np.zeros(
+  shape=(5,)
+)
 print(zeros)  # [0. 0. 0. 0. 0.]
 print(zeros_bis)  # [0. 0. 0. 0. 0.]
 
@@ -56,7 +65,10 @@ print(zeros.dtype)  # float64
 print(zeros.ndim)  # 1
 print(zeros.size)  # 5
 
-zeros_2 = np.zeros(shape=(5, 3), dtype=np.int64)
+zeros_2 = np.zeros(
+  shape=(5, 3),
+  dtype=np.int64
+)
 print(zeros_2.shape)  # (5, 3)
 print(zeros_2.dtype)  # int64
 print(zeros_2.ndim)  # 2
@@ -73,10 +85,16 @@ print(zeros_like)  # [[0. 0. 0.] [0. 0. 0.]]
 <h4 id="ones">b) Tableaux remplis de uns</h4>
 
 ```python
-ones = np.ones(shape=(5,), dtype=np.int64)
+ones = np.ones(
+  shape=(5,), 
+  dtype=np.int64
+)
 print(ones)  # [1 1 1 1 1]
 
-ones_2 = np.ones(shape=(5, 3), dtype=np.complex128)
+ones_2 = np.ones(
+  shape=(5, 3), 
+  dtype=np.complex128
+)
 print(ones_2)  # [[1.+0.j 1.+0.j 1.+0.j] [1.+0.j 1.+0.j 1.+0.j] ...]
 print(ones_2.shape)  # (5, 3)
 ```
@@ -84,8 +102,17 @@ print(ones_2.shape)  # (5, 3)
 <h4 id="ones_like">c) Tableaux remplis de uns de la même forme que un autre tableau</h4>
 
 ```python
-ones3 = np.array([[[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]]], dtype=np.int64)
-ones_like = np.ones_like(a = ones3, dtype=np.float64)
+ones3 = np.array(
+  object=[
+    [[1, 2, 3], [4, 5, 6]], 
+    [[1, 2, 3], [4, 5, 6]]
+  ], 
+  dtype=np.int64
+)
+ones_like = np.ones_like(
+  a = ones3, 
+  dtype=np.float64
+)
 print(ones_like)  # [[[1. 1. 1.] [1. 1. 1.]] [[1. 1. 1.] [1. 1. 1.]]]
 ```
 
@@ -122,7 +149,10 @@ print(type(eye))  # <class 'numpy.ndarray'>
   - `dtype` : the data type of the array.
 
 ```python
-arr_empty = np.empty(shape=(5,), dtype=int)
+arr_empty = np.empty(
+  shape=(5,), 
+  dtype=int
+)
 print(arr_empty)  # valeurs aléatoires de la mémoire
 ```
 
